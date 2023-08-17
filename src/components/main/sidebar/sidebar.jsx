@@ -17,4 +17,4 @@ return <div className="main__sidebar sidebar">
             </div>
           </div>;
         }
-        export default Sidebar;
+export default Sidebar;
