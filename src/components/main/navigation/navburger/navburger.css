@@ -19,3 +19,6 @@
     height: 1px;
     background-color: #d3d3d3;
   }
+  .nav__burger:hover{
+    cursor: pointer;
+  }

@@ -2,8 +2,8 @@ import React from 'react';
 import './navmenu.css';
 import Navitem from './navitem/navitem';
 
-function Navmenu(){
-    return <div className="nav__menu menu">
+function Navmenu({isActive}){
+    return isActive ? <div className="nav__menu menu">
       <ul className="menu__list">        
         
         <Navitem address = '#' content='Главное'/>
@@ -11,7 +11,7 @@ function Navmenu(){
         <Navitem address = '../signin.html' content='Войти'/>
         
       </ul>
-    </div>;  
+    </div> :"";  
 }
 
 export default Navmenu;
