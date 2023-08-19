@@ -8,7 +8,7 @@ function Navmenu({isActive}){
         
         <Navitem address = '#' content='Главное'/>
         <Navitem address = '#' content='Мой плейлист'/>
-        <Navitem address = '../signin.html' content='Войти'/>
+        <Navitem address = '#' content='Войти'/>
         
       </ul>
     </div> :"";  
