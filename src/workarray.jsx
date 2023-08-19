@@ -16,7 +16,7 @@ const trackInfo =[
     { id:14, 'track title': 'Knives n Cherries','track comment':'','track author': 'minthaze','track album': 'Captivating', 'track time': '1:48'},
     { id:15, 'track title': 'How Deep Is Your Love','track comment':'','track author': 'Calvin Harris, Disciples','track album': 'How Deep Is Your Love', 'track time': '3:32'},
     { id:16, 'track title': 'Morena','track comment':'','track author': 'Tom Boxer','track album': 'Soundz Made in Romania', 'track time': '3:36'},
-    { id:17, 'track title': 'Опа...Опа...','track comment':'kkk','track author': 'Сергей Минаев','track album': 'kkk', 'track time': 'kkk'},
+    { id:17, 'track title': 'Опа...Опа...','track comment':'хит 80-х','track author': 'Сергей Минаев','track album': 'Опа...Опа...', 'track time': '2:15'},
   ];
   
   export  function workArray(){ return trackInfo}
