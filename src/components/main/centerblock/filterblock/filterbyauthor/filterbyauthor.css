@@ -6,7 +6,7 @@
 .filter__author-list{
     position: absolute;
     top: 50px;
-    width: 248px;
+    width: 448px;
     height: 305px;
     background-color: #313131;
     z-index: 1;
@@ -16,7 +16,7 @@
     justify-content: center;
 }
 .filter__author-container{
-    width: 180px;
+    width: 380px;
     height: 237px;
     background-color: #313131;
     overflow-y: scroll;
