@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './filterbygenre.css';
 
-function FilterByGenre(){
-    const [active, setActive] =useState(false);
-    // console.log(active);
-    const openClass = active ? "filter__button button-genre _btn-text _btn-text-open  " : "filter__button button-genre _btn-text";
+function FilterByGenre({isActive, onShow }){
+    
+    const openClass = isActive===3 ? "filter__button button-genre _btn-text _btn-text-open  " : "filter__button button-genre _btn-text";
     return   <div className='filter__genre-block'>
-                <div className={openClass} onClick={()=>setActive(!active)}>
+                <div className={openClass} onClick={onShow}>
                  жанру
                 </div>
-                { !active ? "": <div className='filter__genre-list'>
+                { isActive!==3 ? "": <div className='filter__genre-list'>
                     <div className='filter__genre-container'>
                         <a href='#' className='filter__genre-items'>Хип-Хоп</a>
                         <a href='#' className='filter__genre-items'>Техно</a>

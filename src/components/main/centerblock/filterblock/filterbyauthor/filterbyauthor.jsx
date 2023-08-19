@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './filterbyauthor.css';
 
-function FilterByAuthor(){
-    const [active, setActive] =useState(false);
-    // console.log(active);
-    const openClass = active ? "filter__button button-author _btn-text _btn-text-open  " : "filter__button button-author _btn-text";
+function FilterByAuthor({isActive, onShow }){
+    // console.log(isActive);
+    const openClass = isActive===1 ? "filter__button button-author _btn-text _btn-text-open  " : "filter__button button-author _btn-text";
     return   <div className='filter__author-block'>
-                <div className={openClass} onClick={()=>setActive(!active)}>
+                <div className={openClass} onClick={onShow}>
                  исполнителю
                 </div>
-                { !active ? "": <div className='filter__author-list'>
+                { isActive!==1 ? "": <div className='filter__author-list'>
                     <div className='filter__author-container'>
                         <a href='#' className='filter__author-items'>DDDD DDDD</a>
                         <a href='#' className='filter__author-items'>DDDD DDDD</a>

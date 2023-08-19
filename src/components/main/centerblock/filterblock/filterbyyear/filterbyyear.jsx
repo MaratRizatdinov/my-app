@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './filterbyyear.css';
 
-function FilterByYear(){
-    const [active, setActive] =useState(false);
-    console.log(active);
-    const openClass = active ? "filter__button button-year _btn-text _btn-text-open  " : "filter__button button-year _btn-text";
+function FilterByYear({isActive, onShow }){
+    
+    const  openClass = isActive===2 ? "filter__button button-year _btn-text _btn-text-open  " : "filter__button button-year _btn-text";
     return   <div className='filter__year-block'>
-                <div className={openClass} onClick={()=>setActive(!active)}>
+                <div className={openClass} onClick={onShow}>
                  году выпуска
                 </div>
-                { !active ? "": <div className='filter__year-list'>
+                { isActive!==2 ? "": <div className='filter__year-list'>
                     <div className='filter__year-container'>
                         <a href='#' className='filter__year-items'>2000</a>
                         <a href='#' className='filter__year-items'>2005</a>
