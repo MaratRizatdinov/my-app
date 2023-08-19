@@ -5,7 +5,7 @@ import TrackPlayLikeDiz from './TrackPlayLikeDiz/trackplaylikediz';
 import Volumeblock from './Volumeblock/volumeblock';
 import './bar.css';
 
-function Bar(){
+function Bar({loading}){
     return <div className="bar">
           <div className="bar__content">
             <div className="bar__player-progress"></div>
@@ -15,7 +15,7 @@ function Bar(){
                 <ControlPanel/>
 
                 <div className="player__track-play track-play">
-                <TrackPlayContain />
+                <TrackPlayContain loading={loading}/>
                 <TrackPlayLikeDiz />            
 
                   

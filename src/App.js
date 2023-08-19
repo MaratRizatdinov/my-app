@@ -18,7 +18,7 @@ function App() {
      <div className="wrapper">
       <div className="container">
         <Main loading={loading}/>        
-        <Bar />    
+        <Bar loading={loading}/>    
         <Footer/>          
         
       </div>

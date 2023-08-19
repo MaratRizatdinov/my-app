@@ -1,7 +1,8 @@
 import React from 'react';
 import './trackplaycontain.css';
+import Skeleton from '../../skeleton/skeleton';
 
-function TrackPlayContain(){
+function TrackPlayContain({loading}){
     return <div className="track-play__contain">
     <div className="track-play__image">
       <svg className="track-play__svg" alt="music">
@@ -9,12 +10,14 @@ function TrackPlayContain(){
       </svg>
     </div>
     <div className="track-play__author">
-      <a className="track-play__author-link" href="http://"
+      { loading ? <Skeleton width='59px' height='15px' />:<a className="track-play__author-link" href="http://"
         >Ты та...</a
-      >
+      >}
+      
     </div>
     <div className="track-play__album">
-      <a className="track-play__album-link" href="http://">Баста</a>
+      { loading ? <Skeleton width='59px' height='15px' /> : <a className="track-play__album-link" href="http://">Баста</a>}
+      
     </div>
   </div>;
 }
