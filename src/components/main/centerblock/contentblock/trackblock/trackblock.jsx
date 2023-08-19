@@ -53,7 +53,8 @@ function Trackblock({loading}){
           <svg className="track__time-svg" alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
           </svg>
-          <span className="track__time-text">{elem['track time']}</span>
+          { loading ? <span className="track__time-text">0:00</span> : <span className="track__time-text">{elem['track time']}</span>}
+          
         </div>
       </div>
     </div>
