@@ -59,7 +59,7 @@ function Trackblock({loading}){
       </div>
     </div>
 );
-    console.log(loading ? 'yes': 'no');
+    
     return <div className="content__playlist playlist">{listItems}</div>;
 }
 

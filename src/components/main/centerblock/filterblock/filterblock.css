@@ -38,16 +38,13 @@
   border-radius: 60px;
   padding: 6px 20px;
 }
-
-.filter__button:not(:last-child) {
-  margin-right: 10px;
-}
 ._btn-text:hover {
   border-color: #d9b6ff;
   color: #d9b6ff;
   cursor: pointer;
 }
-._btn-text:active {
+._btn-text:active,
+._btn-text-open{
   border-color: #ad61ff;
   color: #ad61ff;
   cursor: pointer;
