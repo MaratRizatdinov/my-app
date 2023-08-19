@@ -4,12 +4,12 @@ import Filterblock from './filterblock/filterblock';
 import Contentblock from './contentblock/contentblock';
 import "./centerblock.css"
 
-function Centerblock(){
+function Centerblock({loading}){
 
 return <div className="main__centerblock centerblock">
             <Searchblock/>  
             <Filterblock/>    
-            <Contentblock/>                  
+            <Contentblock loading={loading}/>                  
             
           </div>;
           }

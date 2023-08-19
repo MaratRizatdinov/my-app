@@ -4,11 +4,11 @@ import Centerblock from './centerblock/centerblock';
 import Sidebar from './sidebar/sidebar';
 import './main.css';
 
-function Main(){
+function Main({loading}){
 return <main className="main">
           <Navigation/>          
-          <Centerblock/>          
-          <Sidebar/>
+          <Centerblock loading ={loading}/>          
+          <Sidebar loading ={loading}/>
           
 </main>;
 }

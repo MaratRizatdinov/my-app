@@ -3,11 +3,11 @@ import './contentblock.css';
 import Titleblock from './titleblock/titleblock';
 import Trackblock from './trackblock/trackblock';
 
-function Contentblock(){
+function Contentblock({loading}){
 
 return <div className="centerblock__content">
               <Titleblock/>
-              <Trackblock/>             
+              <Trackblock loading={loading}/>             
               
             </div>;
           }

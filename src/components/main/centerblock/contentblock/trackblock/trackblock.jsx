@@ -1,7 +1,7 @@
 import React from 'react';
 import "./trackblock.css";
 
-function Trackblock(){
+function Trackblock({loading}){
     
     const trackInfo =[
       { id:1, 'track title': 'Guild','track comment':'','track author': 'Nero','track album': 'Welcome Reality', 'track time': '4:44'},
@@ -32,19 +32,21 @@ function Trackblock(){
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
             </svg>
           </div>
-          <div className="track__title-text">
-            <a className="track__title-link" href="http://"
+          <div className="track__title-text">{loading ? <Skeleton width='356px' height='19px' /> : (<a className="track__title-link" href="http://"
               >{elem['track title']} <span className="track__title-span">{elem['track comment']}</span
-            ></a>
+            ></a>)}            
           </div>
         </div>
         <div className="track__author">
-          <a className="track__author-link" href="http://">{elem['track author']}</a>
+          {loading ? <Skeleton width='271px' height='19px' /> : (<a className="track__author-link" href="http://">{elem['track author']}</a>)}
+          
+          
         </div>
         <div className="track__album">
-          <a className="track__album-link" href="http://"
+          {loading ? <Skeleton width='205px' height='19px' /> : (<a className="track__album-link" href="http://"
             >{elem['track album']}</a
-          >
+          >)}
+          
         </div>
         <div className="track__time">
           <svg className="track__time-svg" alt="time">
@@ -55,8 +57,17 @@ function Trackblock(){
       </div>
     </div>
 );
-
+    console.log(loading ? 'yes': 'no');
     return <div className="content__playlist playlist">{listItems}</div>;
+}
+
+function Skeleton (props){
+  const container ={
+    width:props.width,
+    height:props.height,
+    background: '#313131',
+  };
+  return <div className='skelet' style={container}></div>
 }
 
 export default Trackblock;                
