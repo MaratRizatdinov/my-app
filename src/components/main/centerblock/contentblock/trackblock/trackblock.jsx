@@ -1,5 +1,6 @@
 import React from 'react';
 import "./trackblock.css";
+import Skeleton from '../../../../skeleton/skeleton';
 
 function Trackblock({loading}){
     
@@ -61,14 +62,7 @@ function Trackblock({loading}){
     return <div className="content__playlist playlist">{listItems}</div>;
 }
 
-function Skeleton (props){
-  const container ={
-    width:props.width,
-    height:props.height,
-    background: '#313131',
-  };
-  return <div className='skelet' style={container}></div>
-}
+
 
 export default Trackblock;                
                 
