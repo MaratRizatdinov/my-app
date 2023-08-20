@@ -1,23 +1,24 @@
 import React from 'react';
-import './filterbygenre.css';
+import * as S from './filterbygenre.style'
+
+
 
 function FilterByGenre({isActive, onShow }){
     
-    const openClass = isActive===3 ? "filter__button button-genre _btn-text _btn-text-open  " : "filter__button button-genre _btn-text";
-    return   <div className='filter__genre-block'>
-                <div className={openClass} onClick={onShow}>
+    // const openClass = isActive===3 ? "filter__button button-genre _btn-text _btn-text-open  " : "filter__button button-genre _btn-text";
+    return   <S.FilterGenreBlock>
+                <S.FilterButtonGenre primary={isActive} onClick={onShow}>
                  жанру
-                </div>
-                { isActive!==3 ? "": <div className='filter__genre-list'>
-                    <div className='filter__genre-container'>
-                        <a href='#' className='filter__genre-items'>Хип-Хоп</a>
-                        <a href='#' className='filter__genre-items'>Техно</a>
-                        <a href='#' className='filter__genre-items'>Поп-музыка</a>
-                        <a href='#' className='filter__genre-items'>Инди</a>                                                
-                    </div>                    
-                </div>}
-                
-            </div>
+                </S.FilterButtonGenre>
+                { isActive!==3 ? "": <S.FilterGenreList>
+                    <S.FilterGenreContainer>
+                        <S.FilterGenreItems href='#'>Хип-Хоп</S.FilterGenreItems>
+                        <S.FilterGenreItems href='#'>Техно</S.FilterGenreItems>
+                        <S.FilterGenreItems href='#'>Поп-музыка</S.FilterGenreItems>
+                        <S.FilterGenreItems href='#'>Инди</S.FilterGenreItems>                                                
+                    </S.FilterGenreContainer>                    
+                </S.FilterGenreList>}                
+            </S.FilterGenreBlock>
             
             
 }

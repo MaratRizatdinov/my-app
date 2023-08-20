@@ -1,9 +1,10 @@
 import React from 'react';
-import './logotype.css';
+import * as S from './logotype.style'
+
 
 function Logotype(){
-    return <div className="nav__logo logo">
-            <img className="logo__image" src="img/logo.png" alt="logo" />
-            </div>;    
+    return <S.NavLogo>
+                <S.LogoImage src="img/logo.png" alt="logo" />
+            </S.NavLogo>;    
 }
 export default Logotype;

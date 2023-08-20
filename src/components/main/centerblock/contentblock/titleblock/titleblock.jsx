@@ -1,18 +1,17 @@
-
 import React from 'react';
-import './titleblock.css';
+import * as S from './titleblock.style';
 
 function Titleblock(){
-    return <div className="content__title playlist-title">
-    <div className="playlist-title__col col01">Трек</div>
-    <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-    <div className="playlist-title__col col03">АЛЬБОМ</div>
-    <div className="playlist-title__col col04">
-      <svg className="playlist-title__svg" alt="time">
-        <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
-      </svg>
-    </div>
-  </div>;
+    return <S.ContentTitle>
+            <S.PlayListColumn01>Трек</S.PlayListColumn01>
+            <S.PlayListColumn02>ИСПОЛНИТЕЛЬ</S.PlayListColumn02>
+            <S.PlayListColumn03>АЛЬБОМ</S.PlayListColumn03>
+            <S.PlayListColumn04>
+              <S.PlayListTitleSvg alt="time">
+                <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+              </S.PlayListTitleSvg>
+            </S.PlayListColumn04>
+          </S.ContentTitle>;
 }
 
 export default Titleblock;

@@ -1,53 +1,50 @@
 import React from 'react';
-import "./trackblock.css";
+import * as S from './trackblock.style';
 import Skeleton from '../../../../skeleton/skeleton';
-import { workArray } from '../../../../../workarray';
+import { workArray } from '../../../../../workarray'; 
 
 
 const trackInfo=workArray();
 
-
 function Trackblock({loading}){
     
-    
 
-    const listItems = trackInfo.map((elem) =>
-  <div className="playlist__item" key={elem.id}>
-      <div className="playlist__track track">
-        <div className="track__title">
-          <div className="track__title-image">
-            <svg className="track__title-svg" alt="music">
+
+  const listItems = trackInfo.map((elem) =>
+  <S.PlayListItem key={elem.id}>
+      <S.PlayListTrack>
+        <S.TrackTitle>
+          <S.TrackTitleImage>
+            <S.TrackTitleSvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-            </svg>
+            </S.TrackTitleSvg>
+          </S.TrackTitleImage>
+          <div>{loading ? <Skeleton width='356px' height='19px' /> : (<S.TrackTitleLink href="http://"
+              >{elem['track title']} <S.TrackTitleSpan>{elem['track comment']}</S.TrackTitleSpan
+            ></S.TrackTitleLink>)}            
           </div>
-          <div className="track__title-text">{loading ? <Skeleton width='356px' height='19px' /> : (<a className="track__title-link" href="http://"
-              >{elem['track title']} <span className="track__title-span">{elem['track comment']}</span
-            ></a>)}            
-          </div>
-        </div>
-        <div className="track__author">
-          {loading ? <Skeleton width='271px' height='19px' /> : (<a className="track__author-link" href="http://">{elem['track author']}</a>)}
-          
-          
-        </div>
-        <div className="track__album">
-          {loading ? <Skeleton width='205px' height='19px' /> : (<a className="track__album-link" href="http://"
-            >{elem['track album']}</a
-          >)}
-          
-        </div>
-        <div className="track__time">
-          <svg className="track__time-svg" alt="time">
+        </S.TrackTitle>
+        <S.TrackAuthor>
+          {loading ? <Skeleton width='271px' height='19px' /> : (<S.TrackAuthorLink href="http://">{elem['track author']}</S.TrackAuthorLink>)}
+        </S.TrackAuthor>
+        <S.TrackAlbum>
+          {loading ? <Skeleton width='205px' height='19px' /> : (<S.TrackAlbumLink href="http://"
+            >{elem['track album']}</S.TrackAlbumLink>)}          
+        </S.TrackAlbum>
+        <div>
+          <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-          </svg>
-          { loading ? <span className="track__time-text">0:00</span> : <span className="track__time-text">{elem['track time']}</span>}
+          </S.TrackTimeSvg>
+          { loading ? <S.TrackTimeText>0:00</S.TrackTimeText> : <S.TrackTimeText>{elem['track time']}</S.TrackTimeText>}
           
         </div>
-      </div>
-    </div>
+      </S.PlayListTrack>
+    </S.PlayListItem>
 );
     
-    return <div className="content__playlist playlist">{listItems}</div>;
+    return <S.ContentPlaylist>
+              {listItems}
+            </S.ContentPlaylist>;
 }
 
 

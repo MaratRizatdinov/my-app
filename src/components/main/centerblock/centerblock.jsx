@@ -2,15 +2,17 @@ import React from 'react';
 import Searchblock from './searchblock/searchblock';
 import Filterblock from './filterblock/filterblock';
 import Contentblock from './contentblock/contentblock';
-import "./centerblock.css"
+import * as S from './centerblock.style'
+
+
 
 function Centerblock({loading}){
 
-return <div className="main__centerblock centerblock">
+return <S.MainCenterBlock>
             <Searchblock/>  
             <Filterblock/>    
             <Contentblock loading={loading}/>                  
             
-          </div>;
+          </S.MainCenterBlock>;
           }
 export default Centerblock;

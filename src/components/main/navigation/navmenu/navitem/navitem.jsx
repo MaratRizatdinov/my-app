@@ -1,13 +1,13 @@
 import React from 'react';
-import './navitem.css'
+import * as S from './navitem.style'
+
 
 
 function Navitem(props){
 
-    return  <li className="menu__item">
-          <a href={props.address} className="menu__link">{props.content}</a>
-        </li>;
-        
+    return  <S.MenuItem>
+              <S.MenuLink href={props.address} >{props.content}</S.MenuLink>
+            </S.MenuItem>;        
 }
 
 

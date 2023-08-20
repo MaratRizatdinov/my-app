@@ -1,17 +1,20 @@
 import React from 'react';
-import './navmenu.css';
+import * as S from'./navmenu.style';
 import Navitem from './navitem/navitem';
 
+
+
+
 function Navmenu({isActive}){
-    return isActive ? <div className="nav__menu menu">
-      <ul className="menu__list">        
+    return isActive ? <S.NavMenu>
+      <S.MenuList>        
         
         <Navitem address = '#' content='Главное'/>
         <Navitem address = '#' content='Мой плейлист'/>
         <Navitem address = '#' content='Войти'/>
         
-      </ul>
-    </div> :"";  
+      </S.MenuList>
+    </S.NavMenu> :"";  
 }
 
 export default Navmenu;

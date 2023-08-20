@@ -21,10 +21,10 @@ export default ControlPanel;
 
 function ControlButton(props){
     return <div className={props.class}>
-    <svg className={props.svg} alt={props.alt}>
-      <use xlinkHref={props.img}></use>
-    </svg>
-  </div>;
+            <svg className={props.svg} alt={props.alt}>
+              <use xlinkHref={props.img}></use>
+            </svg>
+          </div>;
 }
           
           

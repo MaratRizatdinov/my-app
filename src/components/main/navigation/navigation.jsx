@@ -2,7 +2,9 @@ import React , {useState} from 'react';
 import Logotype from './logotype/logotype';
 import Navburger from './navburger/navburger';
 import Navmenu from './navmenu/navmenu';
-import './navigation.css';
+import * as S from './navigation.style'
+
+
 
 function Navigation(){
 
@@ -10,11 +12,11 @@ function Navigation(){
 
 
 
-return <nav className="main__nav nav">
+return <S.MainNav>
 
             <Logotype/>  
             <Navburger isActive ={activeIndex} clickBurger ={()=>setActiveIndex(!activeIndex)} />    
             <Navmenu isActive ={activeIndex}/>                                        
-          </nav>;
+          </S.MainNav>;
 }
 export default Navigation;

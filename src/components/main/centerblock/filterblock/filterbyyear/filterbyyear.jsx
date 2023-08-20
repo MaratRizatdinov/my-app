@@ -1,26 +1,27 @@
 import React from 'react';
-import './filterbyyear.css';
+import * as S from './filterbyyear.style'
+
+
 
 function FilterByYear({isActive, onShow }){
     
-    const  openClass = isActive===2 ? "filter__button button-year _btn-text _btn-text-open  " : "filter__button button-year _btn-text";
-    return   <div className='filter__year-block'>
-                <div className={openClass} onClick={onShow}>
+    
+    return   <S.FilerYearBlock>
+                <S.FilterButtonYear primary={isActive} onClick={onShow}>
                  году выпуска
-                </div>
-                { isActive!==2 ? "": <div className='filter__year-list'>
-                    <div className='filter__year-container'>
-                        <a href='#' className='filter__year-items'>2000</a>
-                        <a href='#' className='filter__year-items'>2005</a>
-                        <a href='#' className='filter__year-items'>2010</a>
-                        <a href='#' className='filter__year-items'>2015</a>
-                        <a href='#' className='filter__year-items'>2020</a>
-                        <a href='#' className='filter__year-items'>2023</a>                        
-                    </div>                    
-                </div>}
+                </S.FilterButtonYear>
+                { isActive!==2 ? "": <S.FilerYearList>
+                    <S.FilerYearContainer>
+                        <S.FilerYearItems href='#'>2000</S.FilerYearItems>
+                        <S.FilerYearItems href='#'>2005</S.FilerYearItems>
+                        <S.FilerYearItems href='#'>2010</S.FilerYearItems>
+                        <S.FilerYearItems href='#'>2015</S.FilerYearItems>
+                        <S.FilerYearItems href='#'>2020</S.FilerYearItems>
+                        <S.FilerYearItems href='#'>2023</S.FilerYearItems>                        
+                    </S.FilerYearContainer>                    
+                </S.FilerYearList>}
                 
-            </div>
-            
+            </S.FilerYearBlock>         
             
 }
 
