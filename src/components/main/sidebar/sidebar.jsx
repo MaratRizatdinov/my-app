@@ -11,9 +11,9 @@ return <S.MainSidebar>
             
             <S.SidebarBlock>
               <S.SidebarList>                
-                <SidebarItem url="img/playlist01.png" loading={loading}/>
-                <SidebarItem url="img/playlist02.png" loading={loading}/>
-                <SidebarItem url="img/playlist03.png" loading={loading}/>                
+                <SidebarItem id ='1' url="img/playlist01.png" loading={loading}/>
+                <SidebarItem id ='2' url="img/playlist02.png" loading={loading}/>
+                <SidebarItem id ='3' url="img/playlist03.png" loading={loading}/>                
               </S.SidebarList>
             </S.SidebarBlock>
           </S.MainSidebar>;
