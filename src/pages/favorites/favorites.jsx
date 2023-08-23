@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FavoritesPage(){
+export const FavoritesPage = () =>{
     return (
         <div>
             <h1>Страница подборок</h1>
@@ -8,4 +8,3 @@ function FavoritesPage(){
         );
 }
 
-export default FavoritesPage;

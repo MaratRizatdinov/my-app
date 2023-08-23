@@ -1,6 +1,6 @@
 import React from 'react';
 
-function RegistrationPage(){
+export const RegistrationPage = () =>{
     return (
         <div>
             <h1>Страница регистрации</h1>
@@ -8,4 +8,3 @@ function RegistrationPage(){
         );
 }
 
-export default RegistrationPage;

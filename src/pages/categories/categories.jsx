@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CategoriesPage(){
+export const CategoriesPage = () =>{
     return (
         <div>
             <h1>Страница категорий</h1>
@@ -8,4 +8,3 @@ function CategoriesPage(){
         );
 }
 
-export default CategoriesPage;

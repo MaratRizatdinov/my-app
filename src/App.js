@@ -1,30 +1,13 @@
-
-import React, {useState, useEffect} from 'react';
-import Main from './components/main/main'
-import Bar from './components/bar/bar';
-import Footer from './components/footer/footer';
-import * as S from './App.style';
-
-
-
+import React from 'react';
+import {GlobalStyle} from './App.style';
+import {AppRoutes} from './routes'; 
 function App() {
-
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 2000)
-  });
-
+ 
   return (
     <div className="App">
-      <S.GlobalStyle />
-      <S.Wrapper>
-        <S.Container>
-          <Main loading={loading}/>        
-          <Bar loading={loading}/>    
-          <Footer/>                    
-        </S.Container>
-      </S.Wrapper>      
+      <GlobalStyle />
+      <AppRoutes />
+      
     </div>
   );
 }

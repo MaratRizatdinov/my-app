@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NotFoundPage(){
+export const NotFoundPage =() => {
     return (
         <div>
             <h1>Страница не найдена</h1>
@@ -8,4 +8,3 @@ function NotFoundPage(){
         );
 }
 
-export default NotFoundPage;

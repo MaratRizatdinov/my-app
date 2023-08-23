@@ -1,25 +1,26 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import {LoginPage} from "./pages/login";
-import {RegistrationPage} from "./pages/registration";
-import {CategoriesPage} from "./pages/categories";
-import {FavoritesPage} from "./pages/favorites";
-import {MainPage} from "./pages/mainpage";
-import {NotFound} from "./pages/notfound";
+import {LoginPage} from "./pages/login/login";
+import {RegistrationPage} from "./pages/registration/registration";
+import {CategoriesPage} from "./pages/categories/categories";
+import {FavoritesPage} from "./pages/favorites/favorites";
+import {MainPage} from "./pages/mainpage/mainpage";
+import {NotFoundPage} from './pages/notfound/notfound'
 
 
-function AppRoutes(){
+
+export const AppRoutes = () => {
     return (
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />        
         <Route path="/categories" element={<CategoriesPage />} />        
         <Route path="/categories" element={<CategoriesPage />} />        
         <Route path="/favorites" element={<FavoritesPage />} />        
-        <Route path="/favorites" element={<MainPage />} />    
-        <Route path="*" element={<NotFound />} />    
+        <Route path="/" element={<MainPage />} />    
+        <Route path="*" element={<NotFoundPage />} />    
       </Routes>
     );
   }
 
- export default AppRoutes; 
+ 

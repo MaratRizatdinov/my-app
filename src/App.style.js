@@ -1,5 +1,6 @@
 import {createGlobalStyle, styled}  from 'styled-components';
 
+
 export const GlobalStyle = createGlobalStyle `
   * {
     margin: 0;
@@ -35,6 +36,7 @@ export const GlobalStyle = createGlobalStyle `
     src: local("StratosSkyeng"), local("StratosSkyeng"),
       url("../public/fonts/StratosSkyeng.woff2") format("woff2"),
       url("../public/fonts/StratosSkyeng.woff") format("woff");
+      
     font-weight: 400;
     font-style: normal;
   }
@@ -62,6 +64,10 @@ export const GlobalStyle = createGlobalStyle `
     stroke: #ffffff;
     cursor: pointer;
   }
+  h1{
+    color:#000000;
+  }
+
 `
 export const Wrapper =styled.div`
   width: 100%;
