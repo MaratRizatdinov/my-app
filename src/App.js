@@ -1,6 +1,7 @@
 import React from 'react';
 import {GlobalStyle} from './App.style';
 import {AppRoutes} from './routes'; 
+
 function App() {
  
   return (
@@ -11,5 +12,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
