@@ -1,5 +1,6 @@
+import {styled} from 'styled-components';
 
-.track-play__like-dis {
+export const TrackPlayLikeDis =styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,27 +12,23 @@
   -ms-flex-align: center;
   align-items: center;
   margin-left: 26%;
-}
-
-.track-play__like,
-.track-play__dislike {
+`
+export const TrackPlayLike =styled.div`
   padding: 5px;
-}
-
-.track-play__like-svg {
+`
+export const TrackPlayDis =styled.div`
+  padding: 5px;
+  margin-left: 28.5px;
+`
+export const TrackPlayLikeSvg =styled.svg`
   width: 14px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
-}
-
-.track-play__dislike {
-  margin-left: 28.5px;
-}
-
-.track-play__dislike-svg {
-  width: 14.34px;
-  height: 13px;
-  fill: transparent;
-  stroke: #696969;
-}
+`
+export const TrackPlayDisSvg =styled.svg`
+width: 14.34px;
+height: 13px;
+fill: transparent;
+stroke: #696969;
+`

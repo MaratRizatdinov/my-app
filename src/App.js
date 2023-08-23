@@ -1,9 +1,12 @@
-//import logo from './logo.svg';
+
 import React, {useState, useEffect} from 'react';
 import "./App.css";
 import Main from './components/main/main'
 import Bar from './components/bar/bar';
 import Footer from './components/footer/footer';
+import * as S from './App.style';
+
+
 
 function App() {
 
@@ -15,15 +18,14 @@ function App() {
 
   return (
     <div className="App">
-     <div className="wrapper">
-      <div className="container">
-        <Main loading={loading}/>        
-        <Bar loading={loading}/>    
-        <Footer/>          
-        
-      </div>
-    </div>
-      
+      <S.GlobalStyle />
+      <S.Wrapper>
+        <S.Container>
+          <Main loading={loading}/>        
+          <Bar loading={loading}/>    
+          <Footer/>                    
+        </S.Container>
+      </S.Wrapper>      
     </div>
   );
 }

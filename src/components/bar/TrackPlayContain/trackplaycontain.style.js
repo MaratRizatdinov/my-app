@@ -1,4 +1,6 @@
-.track-play__contain {
+import {styled} from 'styled-components';
+
+export const TrackPlayContain =styled.div`
   width: auto;
   display: -ms-grid;
   display: grid;
@@ -8,9 +10,8 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.track-play__image {
+`
+export const TrackPlayImage =styled.div`
   width: 51px;
   height: 51px;
   background-color: #313131;
@@ -30,46 +31,41 @@
   -ms-grid-column: 1;
   grid-column: 1;
   grid-area: image;
-}
-
-.track-play__svg {
+`
+export const TrackPlaySvg =styled.svg`
   width: 18px;
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
-}
-
-.track-play__author {
+`
+export const TrackPlayAuthor =styled.div`
   -ms-grid-row: 1;
   grid-row: 1;
   -ms-grid-column: 2;
   grid-column: 2;
   grid-area: author;
   min-width: 49px;
-}
-
-.track-play__author-link {
+`
+export const TrackPlayAuthorLink =styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #ffffff;
   white-space: nowrap;
-}
-
-.track-play__album {
+`
+export const TrackPlayAlbum =styled.div`
   -ms-grid-row: 2;
   grid-row: 2;
   -ms-grid-column: 2;
   grid-column: 2;
   grid-area: album;
   min-width: 49px;
-}
-
-.track-play__album-link {
+`
+export const TrackPlayAlbumLink =styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
   color: #ffffff;
-}
+`

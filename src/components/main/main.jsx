@@ -2,15 +2,15 @@ import React from 'react';
 import Navigation from './navigation/navigation';
 import Centerblock from './centerblock/centerblock';
 import Sidebar from './sidebar/sidebar';
-import './main.css';
+
+import * as S from './main.style'
 
 function Main({loading}){
-return <main className="main">
+return <S.Main>
           <Navigation/>          
           <Centerblock loading ={loading}/>          
-          <Sidebar loading ={loading}/>
-          
-</main>;
+          <Sidebar loading ={loading}/>          
+        </S.Main>;
 }
 
 export default Main;

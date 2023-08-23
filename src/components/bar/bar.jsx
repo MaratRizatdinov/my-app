@@ -3,27 +3,24 @@ import ControlPanel from './ControlPanel/controlpanel';
 import TrackPlayContain from './TrackPlayContain/trackplaycontain';
 import TrackPlayLikeDiz from './TrackPlayLikeDiz/trackplaylikediz';
 import Volumeblock from './Volumeblock/volumeblock';
-import './bar.css';
+
+import * as S from './bar.style'
 
 function Bar({loading}){
-    return <div className="bar">
-          <div className="bar__content">
-            <div className="bar__player-progress"></div>
-            <div className="bar__player-block">
-              <div className="bar__player player">
-
-                <ControlPanel/>
-
-                <div className="player__track-play track-play">
-                <TrackPlayContain loading={loading}/>
-                <TrackPlayLikeDiz />            
-
-                  
-                </div>
-              </div>
-              <Volumeblock />              
-            </div>
-          </div>
-        </div>;
-        }
+    return <S.Bar>
+              <S.BarContent>
+                <S.BarPlayerProgress></S.BarPlayerProgress>
+                <S.BarPlayerBlock>
+                  <S.BarPlayer>
+                    <ControlPanel/>
+                    <S.PlayerTrackPlay>
+                      <TrackPlayContain loading={loading}/>
+                      <TrackPlayLikeDiz />                              
+                    </S.PlayerTrackPlay>
+                  </S.BarPlayer>
+                  <Volumeblock />              
+                </S.BarPlayerBlock>
+              </S.BarContent>
+            </S.Bar>;
+            }
         export default Bar;

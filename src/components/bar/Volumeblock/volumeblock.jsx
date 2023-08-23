@@ -1,23 +1,23 @@
 import React from 'react';
-import './volumeblock.css';
- 
+import * as S from './volumeblock.style'
+
  function Volumeblock(){
-    return <div className="bar__volume-block volume">
-    <div className="volume__content">
-      <div className="volume__image">
-        <svg className="volume__svg" alt="volume">
+    return <S.BarVolumeBlock>
+    <S.VolumeContent>
+      <S.VolumeImage>
+        <S.VolumeSvg alt="volume">
           <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-        </svg>
-      </div>
-      <div className="volume__progress _btn">
-        <input
-          className="volume__progress-line _btn"
+        </S.VolumeSvg>
+      </S.VolumeImage>
+      <S.VolumeProgress className="_btn">
+        <S.VolumeProgressLine
+          className="_btn"
           type="range"
           name="range"
         />
-      </div>
-    </div>
-  </div>;
+      </S.VolumeProgress>
+    </S.VolumeContent>
+  </S.BarVolumeBlock>;
  }
  
  export default Volumeblock;

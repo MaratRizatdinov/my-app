@@ -1,6 +1,6 @@
 
 
-* {
+/* * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -44,9 +44,9 @@ body {
   height: 100%;
   font-family: "StratosSkyeng", sans-serif;
   color: #ffffff;
-}
+} */
 
-.wrapper {
+/* .wrapper {
   width: 100%;
   min-height: 100%;
   overflow: hidden;
@@ -59,10 +59,10 @@ body {
   margin: 0 auto;
   position: relative;
   background-color: #181818;
-}
+} */
 
 
-._btn-icon:hover svg {
+/* ._btn-icon:hover svg {
   fill: transparent;
   stroke: #acacac;
   cursor: pointer;
@@ -82,4 +82,4 @@ body {
   stroke: #ffffff;
   cursor: pointer;
 }
-
+ */

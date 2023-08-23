@@ -1,4 +1,6 @@
-.main {
+import {styled} from 'styled-components';
+
+export const Main =styled.div`
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -10,4 +12,4 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-}
+`

@@ -1,5 +1,6 @@
+import {styled} from 'styled-components';
 
-.bar__volume-block {
+export const BarVolumeBlock =styled.div`
   width: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8,8 +9,8 @@
   -ms-flex-align: center;
   align-items: center;
   padding: 0 92px 0 0;
-}
-.volume__content {
+`
+export const VolumeContent =styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -23,25 +24,20 @@
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: end;
-}
-
-.volume__image {
+`
+export const VolumeImage =styled.div`
   width: 13px;
   height: 18px;
   margin-right: 17px;
-}
-
-.volume__svg {
+`
+export const VolumeSvg =styled.svg`
   width: 13px;
   height: 18px;
   fill: transparent;
-}
-
-.volume__progress {
+`
+export const VolumeProgress =styled.div`
   width: 109px;
-}
-
-.volume__progress-line {
+`
+export const VolumeProgressLine =styled.input`
   width: 109px;
-}
-
+`
