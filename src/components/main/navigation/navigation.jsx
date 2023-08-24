@@ -16,7 +16,7 @@ return <S.MainNav>
 
             <Logotype/>  
             <Navburger isActive ={activeIndex} clickBurger ={()=>setActiveIndex(!activeIndex)} />    
-            <Navmenu isActive ={activeIndex}/>                                        
+            <Navmenu isActive ={activeIndex} />                                        
           </S.MainNav>;
 }
 export default Navigation;

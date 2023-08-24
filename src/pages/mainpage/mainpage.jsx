@@ -15,7 +15,7 @@ export const MainPage = () =>{
     return (
         <Wrapper>
             <Container>
-            <Main loading={loading}/>        
+            <Main loading={loading} />        
             <Bar loading={loading}/>    
             <Footer/>                    
             </Container>

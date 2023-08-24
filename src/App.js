@@ -1,14 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {GlobalStyle} from './App.style';
 import {AppRoutes} from './routes'; 
 
 function App() {
- 
+  const token = localStorage.getItem('token');
+  const [user, setUser] = useState(false);
+
+  const loginButtonClick=()=>{
+      setUser(!user);
+      user ? delete localStorage.token : localStorage.setItem('token', 'token');   
+      console.log('hi');   
+  }
+
   return (
     <div className="App">
       <GlobalStyle />
-      <AppRoutes />
-      
+      <AppRoutes func={loginButtonClick} token={token} user={user}/>      
     </div>
   );
 }

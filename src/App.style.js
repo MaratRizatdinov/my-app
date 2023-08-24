@@ -67,6 +67,10 @@ export const GlobalStyle = createGlobalStyle `
   h1{
     color:#000000;
   }
+  .login_button{
+    width : 150px;
+    height :30px;
+  }
 
 `
 export const Wrapper =styled.div`

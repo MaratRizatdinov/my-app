@@ -7,7 +7,7 @@ import * as S from './main.style'
 
 function Main({loading}){
 return <S.Main>
-          <Navigation/>          
+          <Navigation />          
           <Centerblock loading ={loading}/>          
           <Sidebar loading ={loading}/>          
         </S.Main>;

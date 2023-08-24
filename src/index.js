@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+delete localStorage.token;
 root.render(
   <React.StrictMode>
     <BrowserRouter>
