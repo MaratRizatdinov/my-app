@@ -8,14 +8,3 @@ export async function getAllTracks(){
     const data = response.json();
     return data;
 }
-
-export async function getTrackByID(id){
-    const response = await fetch( `https://painassasin.online/catalog/track/${id}`);
-
-    if(!response.ok){
-        throw new Error('Ошибка сервера');
-    }
-
-    const data = response.json();
-    return data;
-}

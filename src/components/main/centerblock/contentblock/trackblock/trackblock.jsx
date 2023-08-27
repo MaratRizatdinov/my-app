@@ -20,7 +20,7 @@ function Trackblock({loading, tracks , setTrackSelect}){
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <div>{loading ? <Skeleton width='356px' height='19px' /> :
-              (<S.TrackTitleLink onClick={()=>setTrackSelect(elem.id)}>
+              (<S.TrackTitleLink onClick={()=>setTrackSelect(elem)}>
                 {elem.name}
               </S.TrackTitleLink>)}            
           </div>
