@@ -6,12 +6,14 @@ import * as S from './centerblock.style'
 
 
 
-function Centerblock({loading, tracks, setTrackSelect}){
+function Centerblock({loading, tracks, setTrackSelect,addError}){
 
 return <S.MainCenterBlock>
             <Searchblock/>  
             <Filterblock/>    
-            <Contentblock loading={loading} tracks={tracks} setTrackSelect={setTrackSelect}/>                  
+            {!addError ?
+            <Contentblock loading={loading} tracks={tracks} setTrackSelect={setTrackSelect}/> 
+            : <p>Извините, сервис временно недоступен</p>}            
             
           </S.MainCenterBlock>;
           }
