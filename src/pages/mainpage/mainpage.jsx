@@ -3,19 +3,29 @@ import Main from '../../components/main/main'
 import Bar from '../../components/bar/bar';
 import Footer from '../../components/footer/footer';
 import {Wrapper, Container} from '../../App.style';
+import { workArray } from '../../workarray';
+import { getAllTracks } from '../../api';
 
 export const MainPage = () =>{
 
-    const [loading, setLoading] = useState(true)
-
+    const [ loading, setLoading ] = useState(true);
+    const [ trackList, setTrackList] =useState(workArray);
+    
+    
+    
     useEffect(() => {
-        setTimeout(() => setLoading(false), 2000)
-    });
+        
+        getAllTracks().then((track)=>{
+            setLoading(false);
+            setTrackList(track);                
+          });
+        
+    },[]);
 
     return (
         <Wrapper>
             <Container>
-            <Main loading={loading} />        
+            <Main loading={loading} tracks={trackList} />        
             <Bar loading={loading}/>    
             <Footer/>                    
             </Container>

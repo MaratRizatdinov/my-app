@@ -9,7 +9,7 @@ function App() {
   const loginButtonClick=()=>{
       setUser(!user);
       user ? delete localStorage.token : localStorage.setItem('token', 'token');   
-      console.log('hi');   
+    
   }
 
   return (

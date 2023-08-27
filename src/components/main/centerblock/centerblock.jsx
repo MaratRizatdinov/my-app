@@ -6,12 +6,12 @@ import * as S from './centerblock.style'
 
 
 
-function Centerblock({loading}){
+function Centerblock({loading, tracks}){
 
 return <S.MainCenterBlock>
             <Searchblock/>  
             <Filterblock/>    
-            <Contentblock loading={loading}/>                  
+            <Contentblock loading={loading} tracks={tracks}/>                  
             
           </S.MainCenterBlock>;
           }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Outlet } from "react-router-dom";
 
 export const ProtectedRoute = ({  redirectPath = "/login", isAllowed }) => {
-    console.log(isAllowed);
+    
   if (isAllowed !=='token') {
     return  <Navigate to={redirectPath} replace={true} />;
   }
