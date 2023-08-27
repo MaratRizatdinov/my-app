@@ -5,11 +5,11 @@ import Sidebar from './sidebar/sidebar';
 
 import * as S from './main.style'
 
-function Main({loading, tracks}){
+function Main({loading, tracks, setTrackSelect}){
   
 return <S.Main>
           <Navigation />          
-          <Centerblock loading ={loading} tracks={tracks}/>          
+          <Centerblock loading ={loading} tracks={tracks} setTrackSelect={setTrackSelect}  />          
           <Sidebar loading ={loading}/>          
         </S.Main>;
 }

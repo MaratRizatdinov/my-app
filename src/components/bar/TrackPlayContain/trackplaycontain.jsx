@@ -1,8 +1,11 @@
 import React from 'react';
 import Skeleton from '../../skeleton/skeleton';
 import * as S from './trackplaycontain.style';
+import {getTrackByID} from '..//..//..//api'
 
-function TrackPlayContain({loading}){
+function TrackPlayContain({loading, trackSelect}){
+    console.log(getTrackByID);
+    console.log(trackSelect);
     return  <S.TrackPlayContain>
               <S.TrackPlayImage>
                 <S.TrackPlaySvg alt="music">

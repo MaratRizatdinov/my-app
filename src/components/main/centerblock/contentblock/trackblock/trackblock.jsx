@@ -6,7 +6,7 @@ import Skeleton from '../../../../skeleton/skeleton';
 
 
 
-function Trackblock({loading, tracks}){
+function Trackblock({loading, tracks , setTrackSelect}){
   
 
 
@@ -19,8 +19,10 @@ function Trackblock({loading, tracks}){
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
-          <div>{loading ? <Skeleton width='356px' height='19px' /> : (<S.TrackTitleLink href="http://"
-              >{elem.name} </S.TrackTitleLink>)}            
+          <div>{loading ? <Skeleton width='356px' height='19px' /> :
+              (<S.TrackTitleLink onClick={()=>setTrackSelect(elem.id)}>
+                {elem.name}
+              </S.TrackTitleLink>)}            
           </div>
         </S.TrackTitle>
         <S.TrackAuthor>

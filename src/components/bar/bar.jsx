@@ -6,7 +6,7 @@ import Volumeblock from './Volumeblock/volumeblock';
 
 import * as S from './bar.style'
 
-function Bar({loading}){
+function Bar({loading , trackSelect}){
     return <S.Bar>
               <S.BarContent>
                 <S.BarPlayerProgress></S.BarPlayerProgress>
@@ -14,7 +14,7 @@ function Bar({loading}){
                   <S.BarPlayer>
                     <ControlPanel/>
                     <S.PlayerTrackPlay>
-                      <TrackPlayContain loading={loading}/>
+                      <TrackPlayContain loading={loading} trackSelect={trackSelect}/>
                       <TrackPlayLikeDiz />                              
                     </S.PlayerTrackPlay>
                   </S.BarPlayer>
