@@ -1,8 +1,35 @@
-import React from 'react';
+import {React, useRef, useState} from 'react';
 import * as S from './controlpanel.style';
 
-function ControlPanel(){
+function ControlPanel({trackSelect}){
+
+      const [isPlaying, setIsPlaying] = useState(false);
+      const audioRef = useRef(null);
+      const handleStart = () => {
+        audioRef.current.play();
+        setIsPlaying(true);        
+      }
+      const handleStop = () => {
+        audioRef.current.pause();
+        setIsPlaying(false);        
+      };
+      const togglePlay = isPlaying ? handleStop : handleStart;   
+
+      const [isLoop, setIsLoop] = useState(false);
+      
+      const toggleLoop =()=>{
+        setIsLoop(!isLoop);        
+      }
+
+      
+
+      
+
+
     return  <S.PlayerControls>
+                <audio controls ref={audioRef} loop={isLoop}> 
+                  <source src={trackSelect.track_file} type="audio/mpeg" />
+                </audio>
                 <ControlButton component = "player__btn-prev" 
                               class=" _btn" 
                               svg="player__btn-prev-svg" 
@@ -12,7 +39,8 @@ function ControlPanel(){
                               class=" _btn"
                               svg="player__btn-play-svg"
                               alt="play"
-                              img = "img/icon/sprite.svg#icon-play" />              
+                              img = {!isPlaying ? "img/icon/sprite.svg#icon-play" : "img/icon/sprite.svg#icon-pause"} 
+                              click = {togglePlay}/>              
                 <ControlButton component = "player__btn-next"
                               class="_btn"
                               svg="player__btn-next-svg"
@@ -22,7 +50,10 @@ function ControlPanel(){
                               class="_btn-icon"
                               svg="player__btn-repeat-svg"
                               alt="repeat"
-                              img = "img/icon/sprite.svg#icon-repeat" />              
+                              img = "img/icon/sprite.svg#icon-repeat"
+                              click ={toggleLoop}
+                              button_color = {isLoop ? 'white' : 'grey'}/>  
+                              
                 <ControlButton component = "player__btn-shuffle"
                               class="_btn-icon"
                               svg="player__btn-shuffle-svg"
@@ -44,7 +75,7 @@ function ControlButton({...props}){
     
     const Func=buttonCollection[props.component];  
 
-    return(<Func className={props.class}>          
+    return(<Func className={props.class} onClick={props.click}>          
             <ControlButtonSVG props={props}></ControlButtonSVG>
           </Func>);    
 }
@@ -61,7 +92,7 @@ function ControlButtonSVG({props}){
     
     const Func=buttonCollectionSvg[props.svg];
     
-    return <Func alt={props.alt}>
+    return <Func alt={props.alt} button_color={props.button_color} >
               <use xlinkHref={props.img}></use>
           </Func>
 }

@@ -12,7 +12,7 @@ function Bar({loading , trackSelect}){
                 <S.BarPlayerProgress></S.BarPlayerProgress>
                 <S.BarPlayerBlock>
                   <S.BarPlayer>
-                    <ControlPanel/>
+                    <ControlPanel trackSelect={trackSelect}/>
                     <S.PlayerTrackPlay>
                       <TrackPlayContain loading={loading} trackSelect={trackSelect}/>
                       <TrackPlayLikeDiz />                              

@@ -21,8 +21,7 @@ padding: 5px;
   align-items: center;
 `
 export const PlayerButtonPrev =styled(PlayerButton)`
-  margin-right: 23px;
-  color:red;
+  margin-right: 23px;  
 `
 export const PlayerButtonPlay =styled(PlayerButton)`
   margin-right: 23px;
@@ -63,7 +62,7 @@ export const PlayerButtonRepeatSvg =styled.svg`
   width: 18px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke:${props=> props.button_color=='white' ? '#ffffff' : "#696969"}
 `
 export const PlayerButtonShuffleSvg =styled.svg`
   width: 19px;

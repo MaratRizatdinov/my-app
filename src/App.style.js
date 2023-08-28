@@ -64,6 +64,8 @@ export const GlobalStyle = createGlobalStyle `
     stroke: #ffffff;
     cursor: pointer;
   }
+  
+
   h1{
     color:#000000;
   }
