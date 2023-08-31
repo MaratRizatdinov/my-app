@@ -1,10 +1,10 @@
-import {React, useEffect, useRef, useState} from 'react';
+import {React,  useState, useEffect} from 'react';
 import * as S from './controlpanel.style';
 
-function ControlPanel({trackSelect}){
+function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef}){
 
       const [isPlaying, setIsPlaying] = useState(false);
-      const audioRef = useRef(null);
+      // const audioRef = useRef(null);
 
       const handleStart = () => {
         audioRef.current.play();
@@ -16,19 +16,14 @@ function ControlPanel({trackSelect}){
         setIsPlaying(false);        
       };
       
-      const togglePlay = isPlaying ? handleStop : handleStart;   
-
-      const [isLoop, setIsLoop] = useState(false);
-      
-      const toggleLoop =()=>{
-        setIsLoop(!isLoop);        
-      }
-
+      const togglePlay = isPlaying ? handleStop : handleStart;         
 
       useEffect(()=>{        
         audioRef.current.load();        
       },[trackSelect]);
 
+
+      
 
 
       
@@ -37,9 +32,7 @@ function ControlPanel({trackSelect}){
 
 
     return  <S.PlayerControls>
-                <audio controls ref={audioRef} loop={isLoop} autoPlay> 
-                  <source src={trackSelect.track_file} type="audio/mpeg" />
-                </audio>
+                
                 <ControlButton component = "player__btn-prev" 
                               class=" _btn" 
                               svg="player__btn-prev-svg" 
