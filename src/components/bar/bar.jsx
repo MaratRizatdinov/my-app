@@ -34,7 +34,7 @@ function Bar({loading , trackSelect}){
 
   const togglePlay = isPlaying ? handleStop : handleStart;  
 
-  // Блок отвечает за логику Bar
+  // Блок отвечает за логику Bar и Volume
 
   const [currentTime, setCurrentTime]=useState(0);
   const [ duration, setDuration] =useState(0);
