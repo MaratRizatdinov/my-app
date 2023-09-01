@@ -58,4 +58,11 @@ export const PlayerTrackPlay =styled.div`
   -ms-flex-direction: row;
   flex-direction: row;
 `
-
+export const TimerBlock=styled.div`
+  display:flex;
+  justify-content:flex-end;
+`
+export const Timer=styled.div`
+  color:#696969;
+  
+`

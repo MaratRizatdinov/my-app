@@ -1,32 +1,7 @@
-import {React,  useState, useEffect} from 'react';
+import { React } from 'react';
 import * as S from './controlpanel.style';
 
-function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef}){
-
-      const [isPlaying, setIsPlaying] = useState(false);
-      // const audioRef = useRef(null);
-
-      const handleStart = () => {
-        audioRef.current.play();
-        setIsPlaying(true);        
-      }
-
-      const handleStop = () => {
-        audioRef.current.pause();
-        setIsPlaying(false);        
-      };
-      
-      const togglePlay = isPlaying ? handleStop : handleStart;         
-
-      useEffect(()=>{        
-        audioRef.current.load();        
-      },[trackSelect]);
-
-
-      
-
-
-      
+function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef, isPlaying, togglePlay}){      
 
       
 
