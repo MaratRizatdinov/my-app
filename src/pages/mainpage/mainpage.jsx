@@ -1,4 +1,4 @@
- import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Main from '../../components/main/main'
 import Bar from '../../components/bar/bar';
 import Footer from '../../components/footer/footer';
@@ -33,11 +33,10 @@ export const MainPage = () =>{
 
     return (
         <Wrapper>
-            <Container>
-            
-            <Main loading={loading} tracks={trackList} setTrackSelect={setTrackSelect} addError={addError} />        
-            {trackSelect ? <Bar loading={loading} trackSelect={trackSelect} /> : null}
-            <Footer/>                    
+            <Container>            
+              <Main loading={loading} tracks={trackList} setTrackSelect={setTrackSelect} addError={addError} />        
+              {trackSelect ? <Bar loading={loading} trackSelect={trackSelect} /> : null}
+              <Footer/>                    
             </Container>
         </Wrapper>      
         );

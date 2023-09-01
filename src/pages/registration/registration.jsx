@@ -1,16 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Authpage from '..//..//components/authpages/authpage'
 
 export const RegistrationPage = () =>{
     return (
-        <div>
-            <h1>Страница регистрации</h1>
-            <br/>
-            <br/>
-            <Link to="/login">
-                Переход на страницу авторизации 
-            </Link>
-        </div>
+        <Authpage isLoginMode={false}></Authpage>
         );
 }
 
