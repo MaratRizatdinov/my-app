@@ -2,9 +2,10 @@ import React from 'react';
 import * as S from './volumeblock.style'
 
  function Volumeblock({audioRef, volume, setVolume}){
+
   const handleVolumeChange =(newVolume)=>{
     setVolume(newVolume);
-    audioRef.current.volume=newVolume;    
+    audioRef.current.volume=newVolume;        
   }
 
 

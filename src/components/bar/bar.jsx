@@ -45,7 +45,7 @@ function Bar({loading , trackSelect}){
     audioRef.current.volume=0.2;
     setVolume(audioRef.current.volume);
     const timeUpdate =(event)=>{
-      if(audioRef.current.currentTime && audioRef.current.duration){
+      if(audioRef.current?.currentTime && audioRef.current.duration){
         setCurrentTime(audioRef.current.currentTime);
         setDuration(audioRef.current.duration);
       } else{
@@ -58,7 +58,7 @@ function Bar({loading , trackSelect}){
     audioRef.current.addEventListener('timeupdate', timeUpdate);
 
     return ()=>{
-      audioRef.current.removeEventListener('timeupdate', timeUpdate);
+      audioRef.current?.removeEventListener('timeupdate', timeUpdate);
     }
   },[])
 
@@ -80,7 +80,7 @@ function Bar({loading , trackSelect}){
 
 
     return <S.Bar>
-              <audio style={{display:'block'}} controls ref={audioRef} loop={isLoop} autoPlay> 
+              <audio style={{display:'none'}} controls ref={audioRef} loop={isLoop} autoPlay> 
                 <source src={trackSelect.track_file} type="audio/mpeg" />
               </audio>
               <S.BarContent>
@@ -99,10 +99,8 @@ function Bar({loading , trackSelect}){
                 <S.BarPlayerBlock>
                   <S.BarPlayer>
                     <ControlPanel 
-                      trackSelect={trackSelect}
                       isLoop={isLoop}
                       toggleLoop={toggleLoop}
-                      audioRef={audioRef}
                       isPlaying={isPlaying}                      
                       togglePlay ={togglePlay}
                     />

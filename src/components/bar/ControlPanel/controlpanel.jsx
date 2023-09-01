@@ -1,9 +1,11 @@
 import { React } from 'react';
 import * as S from './controlpanel.style';
 
-function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef, isPlaying, togglePlay}){      
+function ControlPanel({ toggleLoop, isLoop, isPlaying, togglePlay}){      
 
-      
+      const alertMessage=()=>{
+        alert('не реализован');
+      }
 
 
     return  <S.PlayerControls>
@@ -12,7 +14,9 @@ function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef, isPlaying, tog
                               class=" _btn" 
                               svg="player__btn-prev-svg" 
                               alt="prev"
-                              img = "img/icon/sprite.svg#icon-prev" />              
+                              img = "img/icon/sprite.svg#icon-prev" 
+                              click={alertMessage}
+                              />              
                 <ControlButton component = "player__btn-play"
                               class=" _btn"
                               svg="player__btn-play-svg"
@@ -23,7 +27,8 @@ function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef, isPlaying, tog
                               class="_btn"
                               svg="player__btn-next-svg"
                               alt="next"
-                              img = "img/icon/sprite.svg#icon-next" />              
+                              img = "img/icon/sprite.svg#icon-next"
+                              click={alertMessage} />              
                 <ControlButton component = "player__btn-repeat" 
                               class="_btn-icon"
                               svg="player__btn-repeat-svg"
@@ -36,7 +41,8 @@ function ControlPanel({trackSelect, toggleLoop, isLoop, audioRef, isPlaying, tog
                               class="_btn-icon"
                               svg="player__btn-shuffle-svg"
                               alt="shuffle"
-                              img = "img/icon/sprite.svg#icon-shuffle" />                
+                              img = "img/icon/sprite.svg#icon-shuffle"
+                              click={alertMessage} />                
             </S.PlayerControls>;
 }
 export default ControlPanel;
