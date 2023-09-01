@@ -38,8 +38,12 @@ function Bar({loading , trackSelect}){
 
   const [currentTime, setCurrentTime]=useState(0);
   const [ duration, setDuration] =useState(0);
+  const [volume,setVolume]=useState(1);
   
   useEffect(()=>{
+
+    audioRef.current.volume=0.2;
+    setVolume(audioRef.current.volume);
     const timeUpdate =(event)=>{
       if(audioRef.current.currentTime && audioRef.current.duration){
         setCurrentTime(audioRef.current.currentTime);
@@ -71,9 +75,7 @@ function Bar({loading , trackSelect}){
     const timerMin=Math.floor(timer/60);
     const timerSec=Math.floor(timer%60);
     const timerZero= Math.floor(timer%60)<10 ? '0' : '';
-    return '0'+timerMin+':'+timerZero+timerSec;
-
-    
+    return '0' + timerMin+ ':' + timerZero + timerSec;    
   }
 
 
@@ -109,7 +111,11 @@ function Bar({loading , trackSelect}){
                       <TrackPlayLikeDiz />                              
                     </S.PlayerTrackPlay>
                   </S.BarPlayer>
-                  <Volumeblock />              
+                  <Volumeblock 
+                    audioRef={audioRef}
+                    volume = {volume}
+                    setVolume = {setVolume}
+                  />              
                 </S.BarPlayerBlock>
               </S.BarContent>
             </S.Bar>;

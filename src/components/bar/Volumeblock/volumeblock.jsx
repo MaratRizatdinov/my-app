@@ -1,7 +1,14 @@
 import React from 'react';
 import * as S from './volumeblock.style'
 
- function Volumeblock(){
+ function Volumeblock({audioRef, volume, setVolume}){
+  const handleVolumeChange =(newVolume)=>{
+    setVolume(newVolume);
+    audioRef.current.volume=newVolume;    
+  }
+
+
+
     return <S.BarVolumeBlock>
     <S.VolumeContent>
       <S.VolumeImage>
@@ -14,6 +21,14 @@ import * as S from './volumeblock.style'
           className="_btn"
           type="range"
           name="range"
+          value ={volume}
+          min={0}
+          max={1}
+          step={0.1}
+          onChange={(event) => {        
+            handleVolumeChange(event.target.value);         
+            }
+          }
         />
       </S.VolumeProgress>
     </S.VolumeContent>
