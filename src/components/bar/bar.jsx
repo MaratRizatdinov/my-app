@@ -15,7 +15,8 @@ function Bar({loading , trackSelect}){
   const [isLoop, setIsLoop] = useState(false);
       
   const toggleLoop =()=>{
-    setIsLoop(!isLoop);        
+    // setIsLoop(!isLoop);        
+    setIsLoop(previsLoop =>!previsLoop);        
   }
 
 //  Блок отвечает за логику кнопки Play/Pause
@@ -41,13 +42,13 @@ function Bar({loading , trackSelect}){
   const [volume,setVolume]=useState(1);
   
   useEffect(()=>{
-
-    audioRef.current.volume=0.2;
-    setVolume(audioRef.current.volume);
+    let ref = audioRef.current;
+    ref.volume=0.2;
+    setVolume(ref.volume);
     const timeUpdate =(event)=>{
-      if(audioRef.current?.currentTime && audioRef.current.duration){
-        setCurrentTime(audioRef.current.currentTime);
-        setDuration(audioRef.current.duration);
+      if(ref.currentTime && ref.duration){
+        setCurrentTime(ref.currentTime);
+        setDuration(ref.duration);
       } else{
         setCurrentTime(0);
         setDuration(0);
@@ -55,17 +56,17 @@ function Bar({loading , trackSelect}){
       }
     }
 
-    audioRef.current.addEventListener('timeupdate', timeUpdate);
+    ref.addEventListener('timeupdate', timeUpdate);
 
     return ()=>{
-      audioRef.current?.removeEventListener('timeupdate', timeUpdate);
+      ref.removeEventListener('timeupdate', timeUpdate);
     }
   },[])
 
   // Блок отвечает за запуск трека при смене трека
 
-  useEffect(()=>{
-    audioRef.current.load();    
+  useEffect(()=>{    
+    audioRef.current.load();        
   },[trackSelect])
 
   //Блок визуализирует таймер

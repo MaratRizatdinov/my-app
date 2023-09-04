@@ -9,7 +9,7 @@ export const LoginPage = ({props}) =>{
     return (
         <>
             <Authpage isLoginMode={true}></Authpage>
-            {/* <div>
+            <div>
                 <h1>Страница входа</h1>
                 <button className='login_button' onClick={props.func}>
                     {props.token ? 'Log Out': 'Log In'}
@@ -25,7 +25,7 @@ export const LoginPage = ({props}) =>{
                     Переход на страницу регистрации 
                 </Link>
                 
-            </div> */}
+            </div>
         </>
         );
 }

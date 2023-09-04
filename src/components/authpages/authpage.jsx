@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import * as S from "./authpage.style";
 import { useEffect, useState } from "react";
+import { getRegisterInSite } from '..//..//api';
 
 export default function AuthPage({ isLoginMode = false }) {
   const [error, setError] = useState(null);
@@ -8,6 +9,7 @@ export default function AuthPage({ isLoginMode = false }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [waitApiResponse,setWaitApiResponse] =useState(false);
 
   const handleLogin = async ({ email, password }) => {
     alert(`Выполняется вход: ${email} ${password}`);
@@ -26,10 +28,20 @@ export default function AuthPage({ isLoginMode = false }) {
     if (repeatPassword != password){
       alert('Неправильно введен повторный пароль');
       return;
-    }
-    alert(`Выполняется регистрация: ${email} ${password}`);
+    }   
+    
+    
+    setWaitApiResponse(true);
+    getRegisterInSite(email, password)
+
+    .then((json) => {
+      console.log(json);
+      setWaitApiResponse(false);
+    });
     setError("Неизвестная ошибка регистрации");
   };
+
+
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
@@ -109,7 +121,10 @@ export default function AuthPage({ isLoginMode = false }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
+              <S.PrimaryButton
+                onClick={handleRegister}
+                disabled ={waitApiResponse}
+                >
                 Зарегистрироваться
               </S.PrimaryButton>
             </S.Buttons>
