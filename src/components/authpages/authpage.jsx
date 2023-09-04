@@ -15,6 +15,18 @@ export default function AuthPage({ isLoginMode = false }) {
   };
 
   const handleRegister = async () => {
+    if (email == ''){
+      alert('Поле Email не заполнено');
+      return;
+    }
+    if (password == ''){
+      alert('Поле password не заполнено');
+      return;
+    }
+    if (repeatPassword != password){
+      alert('Неправильно введен повторный пароль');
+      return;
+    }
     alert(`Выполняется регистрация: ${email} ${password}`);
     setError("Неизвестная ошибка регистрации");
   };
