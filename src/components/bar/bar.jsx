@@ -66,7 +66,8 @@ function Bar({loading , trackSelect}){
   // Блок отвечает за запуск трека при смене трека
 
   useEffect(()=>{    
-    audioRef.current.load();        
+    audioRef.current.load(); 
+    setIsPlaying(true);        
   },[trackSelect])
 
   //Блок визуализирует таймер

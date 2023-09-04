@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as S from "./authpage.style";
 import { useEffect, useState } from "react";
 import { getRegisterInSite } from '..//..//api';
@@ -10,6 +10,7 @@ export default function AuthPage({ isLoginMode = false }) {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [waitApiResponse,setWaitApiResponse] =useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async ({ email, password }) => {
     alert(`Выполняется вход: ${email} ${password}`);
@@ -37,6 +38,8 @@ export default function AuthPage({ isLoginMode = false }) {
     .then((json) => {
       console.log(json);
       setWaitApiResponse(false);
+      navigate('/login');
+
     });
     setError("Неизвестная ошибка регистрации");
   };
