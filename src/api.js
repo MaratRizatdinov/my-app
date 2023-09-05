@@ -50,17 +50,3 @@ export async function getLoginInSite(email, password){
     const data = await response.json();         
     return data;     
 }
-
-// fetch("https://painassasin.online/user/login/", {
-//   method: "POST",
-//   body: JSON.stringify({
-//     email: "gleb@fokin.ru",
-//     password: "gleb@fokin.ru",
-//   }),
-//   headers: {
-//     // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
-//     "content-type": "application/json",
-//   },
-// })
-//   .then((response) => response.json())
-//   .then((json) => console.log(json));

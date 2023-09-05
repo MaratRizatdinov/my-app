@@ -5,7 +5,7 @@ import Navitem from './navitem/navitem';
 
 
 
-function Navmenu({isActive}){
+function Navmenu({isActive,setIsUser}){
     
     
 
@@ -14,7 +14,7 @@ function Navmenu({isActive}){
         
         <Navitem address = '/' content='Главное'/>
         <Navitem address = '/favorites' content='Мой плейлист'/>
-        <Navitem address = '/login' content='Войти'  />
+        <Navitem address = '/login' content='Войти' setIsUser={setIsUser}  />
         
       </S.MenuList>
     </S.NavMenu> :"";  

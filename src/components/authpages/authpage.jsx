@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./authpage.style";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getRegisterInSite, getLoginInSite } from '..//..//api';
+import { UserContext } from "../../context";
 
-export default function AuthPage({ isLoginMode = false }) {
+
+export default function AuthPage({ isLoginMode = false}) {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ export default function AuthPage({ isLoginMode = false }) {
   const [waitApiResponse,setWaitApiResponse] =useState(false);
   const [waitApiLoginResponse,setWaitApiLoginResponse] =useState(false);
   const navigate = useNavigate();
+  const [isUser, setIsUser] = useContext(UserContext);
 
   const handleLogin = async ({ email, password }) => {
     if (email == ''){      
@@ -29,7 +32,9 @@ export default function AuthPage({ isLoginMode = false }) {
         console.log(data);
         setError(null);
         setWaitApiLoginResponse(false);
-        navigate('/login');
+        window.localStorage.setItem('user',data.username);
+        setIsUser(data.username);
+        navigate('/');
       } else{
         console.log(data);
         const message = data.detail;
@@ -67,7 +72,9 @@ export default function AuthPage({ isLoginMode = false }) {
       if(data.id){
         setError(null);              
         setWaitApiResponse(false);
-        navigate('/login');
+        window.localStorage.setItem('user',data.username);
+        setIsUser(data.username);        
+        navigate('/');
       } else{
         const message = data.email || data.username || data.password[0]|| data.password[1]|| data.password[2];
         setError(message);

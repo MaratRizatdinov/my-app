@@ -4,7 +4,7 @@ import Authpage from '..//..//components/authpages/authpage'
 
 export const RegistrationPage = () =>{
     return (
-        <Authpage isLoginMode={false}></Authpage>
-        );
+            <Authpage isLoginMode={false} ></Authpage>
+            );
 }
 

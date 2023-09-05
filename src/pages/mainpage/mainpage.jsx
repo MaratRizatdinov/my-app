@@ -7,7 +7,7 @@ import { workArray } from '../../workarray';
 import { getAllTracks} from '../../api';
 
 
-export const MainPage = () =>{
+export const MainPage = ({setIsUser}) =>{
 
     const [ loading, setLoading ] = useState(true);
     const [ trackList, setTrackList] =useState(workArray);
@@ -34,7 +34,13 @@ export const MainPage = () =>{
     return (
         <Wrapper>
             <Container>            
-              <Main loading={loading} tracks={trackList} setTrackSelect={setTrackSelect} addError={addError} />        
+              <Main 
+                loading={loading} 
+                tracks={trackList}
+                setTrackSelect={setTrackSelect}
+                addError={addError} 
+                setIsUser={setIsUser}
+                />        
               {trackSelect ? <Bar loading={loading} trackSelect={trackSelect} /> : null}
               <Footer/>                    
             </Container>

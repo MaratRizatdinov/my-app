@@ -10,19 +10,19 @@ import {ProtectedRoute} from './components/protectedroute/protectedroute'
 
 
 
-export const AppRoutes = ({...props}) => {
+export const AppRoutes = ({isUser, setIsUser}) => {
   
   
   
   
     return (
       <Routes>
-        <Route path="/login" element={<LoginPage props={props} />} />
-        <Route path="/registration" element={<RegistrationPage props={props} />} />        
-        <Route element={<ProtectedRoute isAllowed={props.token} />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />        
+        <Route element={<ProtectedRoute isAllowed={isUser} />}>
             <Route path="/categories/:id" element={<CategoriesPage />} />        
             <Route path="/favorites" element={<FavoritesPage />} />        
-            <Route path="/" element={<MainPage/>} />    
+            <Route path="/" element={<MainPage setIsUser={setIsUser}/>} />    
         </Route>        
         <Route path="*" element={<NotFoundPage />} />    
       </Routes>
