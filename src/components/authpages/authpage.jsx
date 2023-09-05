@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./authpage.style";
 import { useEffect, useState } from "react";
-import { getRegisterInSite } from '..//..//api';
+import { getRegisterInSite, getLoginInSite } from '..//..//api';
 
 export default function AuthPage({ isLoginMode = false }) {
   const [error, setError] = useState(null);
@@ -10,24 +10,52 @@ export default function AuthPage({ isLoginMode = false }) {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [waitApiResponse,setWaitApiResponse] =useState(false);
+  const [waitApiLoginResponse,setWaitApiLoginResponse] =useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async ({ email, password }) => {
-    alert(`Выполняется вход: ${email} ${password}`);
-    setError("Неизвестная ошибка входа");
+    if (email == ''){      
+      setError('Поле Email не заполнено');
+      return;
+    }
+    if (password == ''){      
+      setError('Поле password не заполнено');
+      return;
+    }
+    setWaitApiLoginResponse(true);
+    getLoginInSite(email,password)
+    .then((data)=>{
+      if(data.id){
+        console.log(data);
+        setError(null);
+        setWaitApiLoginResponse(false);
+        navigate('/login');
+      } else{
+        console.log(data);
+        const message = data.detail;
+        setError(message);
+        setWaitApiLoginResponse(false);
+      }   
+
+    })
+    .catch((error)=>{
+      setError(`${error.message}`);
+      setWaitApiResponse(false);
+    })
+    
   };
 
   const handleRegister = async () => {
-    if (email == ''){
-      alert('Поле Email не заполнено');
+    if (email == ''){      
+      setError('Поле Email не заполнено');
       return;
     }
-    if (password == ''){
-      alert('Поле password не заполнено');
+    if (password == ''){      
+      setError('Поле password не заполнено');
       return;
     }
     if (repeatPassword != password){
-      alert('Неправильно введен повторный пароль');
+      setError('Неправильно введен повторный пароль');
       return;
     }   
     
@@ -35,13 +63,23 @@ export default function AuthPage({ isLoginMode = false }) {
     setWaitApiResponse(true);
     getRegisterInSite(email, password)
 
-    .then((json) => {
-      console.log(json);
-      setWaitApiResponse(false);
-      navigate('/login');
+    .then((data) => {
+      if(data.id){
+        setError(null);              
+        setWaitApiResponse(false);
+        navigate('/login');
+      } else{
+        const message = data.email || data.username || data.password[0]|| data.password[1]|| data.password[2];
+        setError(message);
+        setWaitApiResponse(false);
+      }      
 
+    })
+    .catch((error)=>{      
+      setError(`${error.message}`);
+      setWaitApiResponse(false);
     });
-    setError("Неизвестная ошибка регистрации");
+    
   };
 
 
@@ -83,7 +121,10 @@ export default function AuthPage({ isLoginMode = false }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
+              <S.PrimaryButton 
+                onClick={() => handleLogin({ email, password })}
+                disabled ={waitApiLoginResponse}
+              >
                 Войти
               </S.PrimaryButton>
               <Link to="/registration">
@@ -130,6 +171,9 @@ export default function AuthPage({ isLoginMode = false }) {
                 >
                 Зарегистрироваться
               </S.PrimaryButton>
+              <Link to="/login">
+                <S.SecondaryButton>Авторизоваться</S.SecondaryButton>
+              </Link>
             </S.Buttons>
           </>
         )}

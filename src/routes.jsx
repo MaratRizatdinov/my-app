@@ -18,7 +18,7 @@ export const AppRoutes = ({...props}) => {
     return (
       <Routes>
         <Route path="/login" element={<LoginPage props={props} />} />
-        <Route path="/registration" element={<RegistrationPage />} />        
+        <Route path="/registration" element={<RegistrationPage props={props} />} />        
         <Route element={<ProtectedRoute isAllowed={props.token} />}>
             <Route path="/categories/:id" element={<CategoriesPage />} />        
             <Route path="/favorites" element={<FavoritesPage />} />        

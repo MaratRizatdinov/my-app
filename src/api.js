@@ -23,10 +23,44 @@ export async function getRegisterInSite(email, password){
           // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
           "content-type": "application/json",
         },
-      })
-    
-      const data =response.json();
+      });
+      if(response.status ==500){
+        throw new Error('Сервер сломан');
+      }
+      const data = await response.json();         
       return data;     
-
 }
 
+export async function getLoginInSite(email, password){
+  const response =await fetch("https://painassasin.online/user/login/", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        
+      }),
+      headers: {
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+        "content-type": "application/json",
+      },
+    });
+    if(response.status ==500){
+      throw new Error('Сервер сломан');
+    }
+    const data = await response.json();         
+    return data;     
+}
+
+// fetch("https://painassasin.online/user/login/", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     email: "gleb@fokin.ru",
+//     password: "gleb@fokin.ru",
+//   }),
+//   headers: {
+//     // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+//     "content-type": "application/json",
+//   },
+// })
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
