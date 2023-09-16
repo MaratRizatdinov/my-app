@@ -89,8 +89,7 @@ export default function AuthPage({ isLoginMode = false}) {
     .catch((error)=>{      
       setError(`${error.message}`);
       setWaitApiResponse(false);
-    });
-    
+    });    
   };
 
 
