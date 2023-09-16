@@ -2,15 +2,21 @@ import React from 'react';
 import Navigation from './navigation/navigation';
 import Centerblock from './centerblock/centerblock';
 import Sidebar from './sidebar/sidebar';
-import './main.css';
 
-function Main(){
-return <main className="main">
-          <Navigation/>          
-          <Centerblock/>          
-          <Sidebar/>
-          
-</main>;
+import * as S from './main.style'
+
+function Main({loading, tracks, setTrackSelect , addError,setIsUser}){
+  
+return <S.Main>
+          <Navigation setIsUser={setIsUser}/>          
+          <Centerblock 
+            loading ={loading}
+            tracks={tracks}
+            setTrackSelect={setTrackSelect}
+            addError={addError}             
+            />          
+          <Sidebar loading ={loading}/>          
+        </S.Main>;
 }
 
 export default Main;

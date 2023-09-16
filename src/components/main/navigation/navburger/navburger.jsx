@@ -1,12 +1,20 @@
 import React from 'react';
-import './navburger.css';
+import * as S from './navburger.style'
 
-function Navburger(){
-    return <div className="nav__burger burger">
-    <span className="burger__line"></span>
-    <span className="burger__line"></span>
-    <span className="burger__line"></span>
-  </div>;
+
+
+
+function Navburger({clickBurger}){
+  
+    
+    return <S.NavBurger onClick={clickBurger}>
+              <S.BurgerLine />
+              <S.BurgerLine />
+              <S.BurgerLine />
+            </S.NavBurger>;
 }
+
+
+
 
 export default Navburger;

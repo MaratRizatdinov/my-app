@@ -1,23 +1,24 @@
 import React from 'react';
-import './trackplaylikediz.css';
+import * as S from './trackplaylikediz.style';
+
 
 function TrackPlayLikeDiz(){
-    return <div className="track-play__like-dis">
+    return <S.TrackPlayLikeDis>
     
-    <div className="track-play__like _btn-icon">
-      <svg className="track-play__like-svg" alt="like">
+    <S.TrackPlayLike className="_btn-icon">
+      <S.TrackPlayLikeSvg alt="like">
         <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-      </svg>
-    </div>
+      </S.TrackPlayLikeSvg>
+    </S.TrackPlayLike>
     
-    <div className="track-play__dislike _btn-icon">
-      <svg className="track-play__dislike-svg" alt="dislike">
+    <S.TrackPlayDis className="_btn-icon">
+      <S.TrackPlayDisSvg alt="dislike">
         <use
           xlinkHref="img/icon/sprite.svg#icon-dislike"
         ></use>
-      </svg>
-    </div>
-  </div>;
+      </S.TrackPlayDisSvg>
+    </S.TrackPlayDis>
+  </S.TrackPlayLikeDis>;
 }
 
 export default TrackPlayLikeDiz;

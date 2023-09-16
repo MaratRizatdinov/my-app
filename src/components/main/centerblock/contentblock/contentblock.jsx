@@ -1,15 +1,15 @@
 import React from 'react';
-import './contentblock.css';
+import * as S from './contentblock.style';
 import Titleblock from './titleblock/titleblock';
 import Trackblock from './trackblock/trackblock';
 
-function Contentblock(){
 
-return <div className="centerblock__content">
-              <Titleblock/>
-              <Trackblock/>             
-              
-            </div>;
-          }
 
-          export default Contentblock;
+function Contentblock({loading, tracks, setTrackSelect}){
+
+return  <S.CenterBlockContent>
+          <Titleblock/>
+          <Trackblock loading={loading} tracks={tracks} setTrackSelect={setTrackSelect}/>             
+        </S.CenterBlockContent>;}
+
+export default Contentblock;

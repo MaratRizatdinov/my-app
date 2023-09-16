@@ -1,20 +1,21 @@
 import React from 'react';
 import SidebarPerson from './sidebarperson/sidebarperson';
 import SidebarItem from './sidebarItem/sidebarItem';
-import './sidebar.css';
+import * as S from './sidebar.style'
 
-function Sidebar(){
 
-return <div className="main__sidebar sidebar">
+function Sidebar({loading}){
+
+return <S.MainSidebar>
             <SidebarPerson/>
             
-            <div className="sidebar__block">
-              <div className="sidebar__list">                
-                <SidebarItem url="img/playlist01.png"/>
-                <SidebarItem url="img/playlist02.png"/>
-                <SidebarItem url="img/playlist03.png"/>                
-              </div>
-            </div>
-          </div>;
+            <S.SidebarBlock>
+              <S.SidebarList>                
+                <SidebarItem id ='1' url="img/playlist01.png" loading={loading}/>
+                <SidebarItem id ='2' url="img/playlist02.png" loading={loading}/>
+                <SidebarItem id ='3' url="img/playlist03.png" loading={loading}/>                
+              </S.SidebarList>
+            </S.SidebarBlock>
+          </S.MainSidebar>;
         }
-        export default Sidebar;
+export default Sidebar;

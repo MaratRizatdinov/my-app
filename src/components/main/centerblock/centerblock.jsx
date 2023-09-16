@@ -2,15 +2,19 @@ import React from 'react';
 import Searchblock from './searchblock/searchblock';
 import Filterblock from './filterblock/filterblock';
 import Contentblock from './contentblock/contentblock';
-import "./centerblock.css"
+import * as S from './centerblock.style'
 
-function Centerblock(){
 
-return <div className="main__centerblock centerblock">
+
+function Centerblock({loading, tracks, setTrackSelect,addError}){
+
+return <S.MainCenterBlock>
             <Searchblock/>  
             <Filterblock/>    
-            <Contentblock/>                  
+            {!addError ?
+            <Contentblock loading={loading} tracks={tracks} setTrackSelect={setTrackSelect}/> 
+            : <p>Извините, сервис временно недоступен</p>}            
             
-          </div>;
+          </S.MainCenterBlock>;
           }
 export default Centerblock;

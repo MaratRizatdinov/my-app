@@ -1,17 +1,21 @@
 import React from 'react';
-import './sidebarItem.css';
+import * as S from './sidebarItem.style';
+import Skeleton from '../../../skeleton/skeleton';
 
 function SidebarItem(props){
-    return <div className="sidebar__item">
-    <a className="sidebar__link" href="#">
-      <img
-        className="sidebar__img"
-        src={props.url}
-        alt="day's playlist"
-      />
-    </a>
-  </div>;
+    return <S.SidebarItem>
+      { props.loading ? <Skeleton width='250px' height='150px' /> : 
+      <S.SidebarLink to={`/categories/${props.id}`}>
+        <S.SidebarImg
+          src={props.url}
+          alt="day's playlist"
+        />
+      </S.SidebarLink>}
+
+    
+  </S.SidebarItem>;
 }
 
 export default SidebarItem;
+
 

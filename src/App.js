@@ -1,24 +1,25 @@
-//import logo from './logo.svg';
-import React from 'react';
-import "./App.css";
-import Main from './components/main/main'
-import Bar from './components/bar/bar';
-import Footer from './components/footer/footer';
+import React,{useState, useContext} from 'react';
+import {GlobalStyle} from './App.style';
+import {AppRoutes} from './routes'; 
+import { UserContext } from './context';
 
 function App() {
+  
+  
+  const [isUser, setIsUser] = useState(window.localStorage.getItem('user')||'Empty');
+  
+  
+  
+
   return (
     <div className="App">
-     <div className="wrapper">
-      <div className="container">
-        <Main/>        
-        <Bar/>    
-        <Footer/>          
-        
-      </div>
-    </div>
+      <GlobalStyle />
+      <UserContext.Provider value={[isUser, setIsUser]}>
+        <AppRoutes  isUser={isUser} setIsUser={setIsUser}/>      
+      </UserContext.Provider>
+
       
     </div>
   );
 }
-
 export default App;

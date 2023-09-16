@@ -1,16 +1,30 @@
+ import React,{ useContext } from 'react';
+ import * as S from './sidebarperson.style';
+ import { UserContext } from '../../../../context';
+ import { useNavigate } from "react-router-dom";
  
- import React from 'react';
- import './sidebarperson.css';
+
+ 
  
  function SidebarPerson(){
-    return <div className="sidebar__personal">
-    <p className="sidebar__personal-name">Sergey.Ivanov</p>
-    <div className="sidebar__icon">
-      <svg alt="logout">
+
+    const [isUser, setIsUser] = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const buttonClick=()=>{
+      window.localStorage.removeItem('user');
+      setIsUser(window.localStorage.getItem('user'));
+      navigate('/login');
+    }
+
+    return <S.SidebarPersonal> 
+    <S.SidebarPersonalName>{isUser}</S.SidebarPersonalName>
+    <S.SidebarIcon >
+      <svg alt="logout" onClick={buttonClick}>
         <use xlinkHref="img/icon/sprite.svg#logout"></use>
       </svg>
-    </div>
-  </div>;
+    </S.SidebarIcon>
+  </S.SidebarPersonal>;
  }
  
  export default SidebarPerson;

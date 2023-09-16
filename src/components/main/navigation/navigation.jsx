@@ -1,15 +1,22 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Logotype from './logotype/logotype';
 import Navburger from './navburger/navburger';
 import Navmenu from './navmenu/navmenu';
-import './navigation.css';
+import * as S from './navigation.style'
 
-function Navigation(){
 
-return <nav className="main__nav nav">
+
+function Navigation({setIsUser}){
+
+  const [activeIndex, setActiveIndex] = useState(true);
+
+
+
+return <S.MainNav>
+
             <Logotype/>  
-            <Navburger/>    
-            <Navmenu/>                                        
-          </nav>;
+            <Navburger isActive ={activeIndex} clickBurger ={()=>setActiveIndex(!activeIndex)} />    
+            <Navmenu isActive ={activeIndex} setIsUser={setIsUser}/>                                        
+          </S.MainNav>;
 }
 export default Navigation;

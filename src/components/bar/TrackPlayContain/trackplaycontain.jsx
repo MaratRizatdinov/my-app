@@ -1,22 +1,27 @@
 import React from 'react';
-import './trackplaycontain.css';
+import Skeleton from '../../skeleton/skeleton';
+import * as S from './trackplaycontain.style';
 
-function TrackPlayContain(){
-    return <div className="track-play__contain">
-    <div className="track-play__image">
-      <svg className="track-play__svg" alt="music">
-        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-      </svg>
-    </div>
-    <div className="track-play__author">
-      <a className="track-play__author-link" href="http://"
-        >Ты та...</a
-      >
-    </div>
-    <div className="track-play__album">
-      <a className="track-play__album-link" href="http://">Баста</a>
-    </div>
-  </div>;
-}
 
+function TrackPlayContain({loading, trackSelect}){
+    
+    
+
+
+    return  <S.TrackPlayContain>
+              <S.TrackPlayImage>
+                <S.TrackPlaySvg alt="music">
+                  <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                </S.TrackPlaySvg>
+              </S.TrackPlayImage>
+              <S.TrackPlayAuthor>
+                 {loading ? <Skeleton width='59px' height='15px' /> :
+                  <S.TrackPlayAuthorLink href="http://">{trackSelect.name}</S.TrackPlayAuthorLink>}                
+              </S.TrackPlayAuthor>
+              <S.TrackPlayAlbum>
+                 { loading ? <Skeleton width='59px' height='15px' /> :
+                 <S.TrackPlayAlbumLink href="http://">{trackSelect.author}</S.TrackPlayAlbumLink>}                
+              </S.TrackPlayAlbum>
+            </S.TrackPlayContain>
+          }
 export default TrackPlayContain;
