@@ -27,16 +27,16 @@ export default function AuthPage({ isLoginMode = false}) {
     }
     setWaitApiLoginResponse(true);
     getLoginInSite(email,password)
-    .then((data)=>{
-      if(data.id){
-        console.log(data);
+    .then((obj)=>{
+      const status =obj.status;
+      const data=obj.data;      
+      if(status !==401){
         setError(null);
         setWaitApiLoginResponse(false);
         window.localStorage.setItem('user',data.username);
         setIsUser(data.username);
         navigate('/');
       } else{
-        console.log(data);
         const message = data.detail;
         setError(message);
         setWaitApiLoginResponse(false);
@@ -45,7 +45,7 @@ export default function AuthPage({ isLoginMode = false}) {
     })
     .catch((error)=>{
       setError(`${error.message}`);
-      setWaitApiResponse(false);
+      setWaitApiLoginResponse(false);
     })
     
   };
@@ -68,8 +68,12 @@ export default function AuthPage({ isLoginMode = false}) {
     setWaitApiResponse(true);
     getRegisterInSite(email, password)
 
-    .then((data) => {
-      if(data.id){
+    .then((obj) => {
+      const status =obj.status;
+      const data=obj.data;
+      console.log(status);
+      console.log(data);
+      if(status !==400){
         setError(null);              
         setWaitApiResponse(false);
         window.localStorage.setItem('user',data.username);

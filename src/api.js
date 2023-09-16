@@ -1,18 +1,17 @@
 export async function getAllTracks(){
     
-        const response = await fetch( 'https://painassasin.online/catalog/track/all/');
+        const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/track/all/');
 
-        if(!response.ok){
-            
+        if(!response.ok){            
             throw new Error('Ошибка сервера');
         }
-        const data = response.json();
+        const data = await response.json();      
         return data;   
     
 }
 
 export async function getRegisterInSite(email, password){
-    const response =await fetch("https://painassasin.online/user/signup/", {
+    const response =await fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
         method: "POST",
         body: JSON.stringify({
           email: email,
@@ -24,20 +23,23 @@ export async function getRegisterInSite(email, password){
           "content-type": "application/json",
         },
       });
+      
       if(response.status ==500){
         throw new Error('Сервер сломан');
       }
+      const status=response.status;
       const data = await response.json();         
-      return data;     
+      const obj = await {status:status, data:data};
+      
+      return obj;     
 }
 
 export async function getLoginInSite(email, password){
-  const response =await fetch("https://painassasin.online/user/login/", {
+  const response =await fetch("https://skypro-music-api.skyeng.tech/user/login/", {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        password: password,
-        
+        password: password,        
       }),
       headers: {
         // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
@@ -47,6 +49,10 @@ export async function getLoginInSite(email, password){
     if(response.status ==500){
       throw new Error('Сервер сломан');
     }
-    const data = await response.json();         
-    return data;     
+    const status=response.status;
+    const data = await response.json();
+    const obj = await {status:status, data:data};
+    return obj;   
+    
+    
 }
