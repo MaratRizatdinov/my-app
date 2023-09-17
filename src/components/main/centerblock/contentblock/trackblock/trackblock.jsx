@@ -2,32 +2,36 @@ import React from 'react'
 import * as S from './trackblock.style'
 import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectTrack } from '../../../../../store/actions/creators/selectTrack'
+import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 
 function Trackblock({ loading, tracks, setTrackSelect }) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const handleClickToTrack = (elem) => {
-        setTrackSelect(elem);
-        dispatch(selectTrack(elem));
+        setTrackSelect(elem)
+        dispatch(setCurrentTrack(elem))
     }
 
-    const currentTrack = useSelector((s) => s.state.currentTrack);
-    const isPlaying = useSelector((s) => s.state.isPlaying);
+    const currentTrack = useSelector((s) => s.state.currentTrack)
+    const isPlaying = useSelector((s) => s.state.isPlaying)
 
     const listItems = tracks.map((elem) => (
         <S.PlayListItem key={elem.id}>
             <S.PlayListTrack>
                 <S.TrackTitle>
                     <S.TrackTitleImage id={elem.id}>
-                    {currentTrack?.id !== elem.id ? (
-                        <S.TrackTitleSvg alt="music" >
-                            <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                        </S.TrackTitleSvg>) : (
-                        <S.TrackTitleSvgActive alt="music" isPlaying={isPlaying}>
-                            <use xlinkHref="img/icon/sprite.svg#icon-colorcircle"></use>
-                        </S.TrackTitleSvgActive>
-                        )}                                
+                        {currentTrack?.id !== elem.id ? (
+                            <S.TrackTitleSvg alt="music">
+                                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                            </S.TrackTitleSvg>
+                        ) : (
+                            <S.TrackTitleSvgActive
+                                alt="music"
+                                $isPlaying={isPlaying}
+                            >
+                                <use xlinkHref="img/icon/sprite.svg#icon-colorcircle"></use>
+                            </S.TrackTitleSvgActive>
+                        )}
                     </S.TrackTitleImage>
                     <div>
                         {loading ? (

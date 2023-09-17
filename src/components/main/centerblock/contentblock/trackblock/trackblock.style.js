@@ -50,12 +50,11 @@ export const TrackTitleImage = styled.div`
     margin-right: 17px;
 `
 
-
 export const TrackTitleSvg = styled.svg`
     width: 18px;
     height: 17px;
     fill: transparent;
-    stroke: #4e4e4e;    
+    stroke: #4e4e4e;
 `
 const active = keyframes`  
   0%,
@@ -66,8 +65,9 @@ const active = keyframes`
     transform: scale(1);
   }
 `
- const animationCode = css`${active} 0.6s ease-in-out infinite both`;
-
+const animationCode = css`
+    ${active} 0.6s ease-in-out infinite both
+`
 
 export const TrackTitleSvgActive = styled.svg`
     width: 16px;
@@ -75,13 +75,11 @@ export const TrackTitleSvgActive = styled.svg`
     background-color: #b672ff;
     border-radius: 8px;
     display: block;
-    animation: ${props => props.isPlaying ? animationCode : "none"};
+    animation: ${(props) => (props.$isPlaying ? animationCode : 'none')};
 `
 // export const TrackTitleSvgActivePlay = styled(TrackTitleSvgActive)`
 //     animation: {active} 0.6s ease-in-out infinite both;
 // `
-
-
 
 export const TrackTitleLink = styled.div`
     font-style: normal;

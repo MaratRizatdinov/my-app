@@ -1,5 +1,5 @@
 import {
-    SELECT_TRACK,
+    SET_CURRENT_TRACK,
     STOP_TRACK,
     PLAY_TRACK,
     SET_PLAYLIST,
@@ -15,8 +15,12 @@ const initialState = {
 
 export function TrackReducer(state = initialState, action) {
     switch (action.type) {
-        case SELECT_TRACK: {
+        case SET_CURRENT_TRACK: {
             return { ...state, isPlaying: true, currentTrack: action.track }
+        }
+
+        case SET_PLAYLIST: {
+            return { ...state, playlist: action.playlist }
         }
 
         case STOP_TRACK: {
@@ -25,10 +29,6 @@ export function TrackReducer(state = initialState, action) {
 
         case PLAY_TRACK: {
             return { ...state, isPlaying: true }
-        }
-
-        case SET_PLAYLIST: {
-            return { ...state, playlist: action.playlist }
         }
 
         default:
