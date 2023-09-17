@@ -5,10 +5,14 @@ import TrackPlayContain from './TrackPlayContain/trackplaycontain';
 import TrackPlayLikeDiz from './TrackPlayLikeDiz/trackplaylikediz';
 import Volumeblock from './Volumeblock/volumeblock';
 import * as S from './bar.style'
+import { useDispatch } from 'react-redux';
+import { stopTrack } from '../../store/actions/creators/stopTrack';
+import { playTrack } from '../../store/actions/creators/playTrack';
 
 function Bar({loading , trackSelect}){
   
   const audioRef = useRef(null);
+  const dispatch = useDispatch();
 
   // Блок отвечает за логику Loop
 
@@ -25,12 +29,14 @@ function Bar({loading , trackSelect}){
 
   const handleStart = () => {
     audioRef.current.play();
-    setIsPlaying(true);        
+    setIsPlaying(true);  
+    dispatch (playTrack());      
   }
 
   const handleStop = () => {
     audioRef.current.pause();
-    setIsPlaying(false);        
+    setIsPlaying(false); 
+    dispatch(stopTrack());       
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;  
