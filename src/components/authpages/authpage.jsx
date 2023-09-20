@@ -65,8 +65,7 @@ export default function AuthPage({ isLoginMode = false }) {
             .then((obj) => {
                 const status = obj.status
                 const data = obj.data
-                console.log(status)
-                console.log(data)
+                
                 if (status !== 400) {
                     setError(null)
                     setWaitApiResponse(false)

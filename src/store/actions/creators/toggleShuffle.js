@@ -1,7 +1,8 @@
 import { TOGGLE_SHUFFLE } from '../types/types'
 
-export function toggleShuffle() {
+export function toggleShuffle(list) {
     return {
         type: TOGGLE_SHUFFLE,
+        shuffleList: list,
     }
 }

@@ -18,6 +18,8 @@ function Bar({ loading }) {
     const playlist = useSelector((s) => s.state.playlist)
     const playingStatus = useSelector((s) => s.state.isPlaying)
     const loopStatus = useSelector((s) => s.state.isLoop)
+    const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
+    const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
 
     // Блок отвечает за логику Loop
 
@@ -70,7 +72,7 @@ function Bar({ loading }) {
     // Блок отвечает за запуск трека при смене трека
 
     useEffect(() => {
-        audioRef.current.load()        
+        audioRef.current.load()
     }, [currentTrack])
 
     //Блок визуализирует таймер
@@ -86,13 +88,17 @@ function Bar({ loading }) {
     //Блок запуска следующего трека
 
     const playNextTrack = () => {
-        
-        const nextID = playlist.indexOf(currentTrack) + 1
-        if (nextID === playlist.length) {
-            dispatch(stopTrack())
-            return
+        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        let nextID = activeList.indexOf(currentTrack) + 1
+        if (nextID === activeList.length) {
+            if (!shuffleStatus) {
+                dispatch(stopTrack())
+                return
+            }
+            nextID = 0
         }
-        const nextTrack = playlist[nextID]
+        const nextTrack = activeList[nextID]
+
         dispatch(setCurrentTrack(nextTrack))
     }
 
@@ -101,7 +107,7 @@ function Bar({ loading }) {
     const setPlayingTime = () => {
         if (audioRef.current.currentTime > 5) {
             return (audioRef.current.currentTime = 0)
-        } else return "track playback time is less than five seconds"
+        } else return 'track playback time is less than five seconds'
     }
 
     return (
@@ -131,15 +137,13 @@ function Bar({ loading }) {
                 </S.BarPlayerProgress>
                 <S.BarPlayerBlock>
                     <S.BarPlayer>
-                        <ControlPanel                            
+                        <ControlPanel
                             handleLoop={handleLoop}
                             togglePlay={togglePlay}
                             setPlayingTime={setPlayingTime}
                         />
                         <S.PlayerTrackPlay>
-                            <TrackPlayContain
-                                loading={loading}                                
-                            />
+                            <TrackPlayContain loading={loading} />
                             <TrackPlayLikeDiz />
                         </S.PlayerTrackPlay>
                     </S.BarPlayer>

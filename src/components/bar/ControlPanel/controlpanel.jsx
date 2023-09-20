@@ -10,40 +10,46 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const playingStatus = useSelector((s) => s.state.isPlaying)
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
+    const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
     const dispatch = useDispatch()
-
-    // Алерт на нереализованные участки
-
-    const alertMessage = () => {
-        alert('не реализован')
-    }
 
     //  Логика кнопки Next
 
     const handleNextTrack = () => {
-        const nextID = playlist.indexOf(currentTrack) + 1
-        if (nextID === playlist.length) {
-            return
+        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        let nextID = activeList.indexOf(currentTrack) + 1
+        if (nextID === activeList.length) {
+            if (!shuffleStatus) return
+            nextID = 0
         }
-        const nextTrack = playlist[nextID]
+        const nextTrack = activeList[nextID]
         dispatch(setCurrentTrack(nextTrack))
     }
 
     //  Логика кнопки Prev
 
     const handlePrevTrack = () => {
-        const prevID = playlist.indexOf(currentTrack) - 1
+        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        let prevID = activeList.indexOf(currentTrack) - 1
+        
         if (prevID === -1) {
-            return
+            if (!shuffleStatus) return
+            prevID = activeList.length - 1
         }
-        const prevTrack = playlist[prevID]
+        const prevTrack = activeList[prevID]
         setPlayingTime() ? dispatch(setCurrentTrack(prevTrack)) : null
     }
 
     // Логика кнопки Shuffle
 
-    const handleShuffleTrack = () => {        
-        dispatch(toggleShuffle())
+    const handleShuffleTrack = () => {
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5)
+        }
+
+        shufflePlaylist.length !== 0
+            ? dispatch(toggleShuffle([]))
+            : dispatch(toggleShuffle(shuffle([...playlist])))
     }
 
     return (
