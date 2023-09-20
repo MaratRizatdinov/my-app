@@ -3,6 +3,8 @@ import {
     STOP_TRACK,
     PLAY_TRACK,
     SET_PLAYLIST,
+    TOGGLE_LOOP,
+    TOGGLE_SHUFFLE
 } from '../actions/types/types'
 
 const initialState = {
@@ -11,6 +13,9 @@ const initialState = {
     prevTrack: null,
     nextTrack: null,
     playlist: [],
+    isShuffleMode: false,
+    shufflePlayList: [],
+    isLoop: false,
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -29,6 +34,12 @@ export function TrackReducer(state = initialState, action) {
 
         case PLAY_TRACK: {
             return { ...state, isPlaying: true }
+        }
+        case TOGGLE_LOOP: {
+            return { ...state, isLoop: !state.isLoop }
+        }
+        case TOGGLE_SHUFFLE: {
+            return { ...state, isShuffleMode: !state.isShuffleMode }
         }
 
         default:

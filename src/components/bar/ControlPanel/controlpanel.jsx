@@ -2,18 +2,25 @@ import { React } from 'react'
 import * as S from './controlpanel.style'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../store/actions/creators/setCurrentTrack'
+import { toggleShuffle } from '../../../store/actions/creators/toggleShuffle'
 
-function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
+function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const playlist = useSelector((s) => s.state.playlist)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const playingStatus = useSelector((s) => s.state.isPlaying)
+    const loopStatus = useSelector((s) => s.state.isLoop)
+    const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const dispatch = useDispatch()
+
+    // Алерт на нереализованные участки
 
     const alertMessage = () => {
         alert('не реализован')
     }
 
-    const nextTrack = () => {
+    //  Логика кнопки Next
+
+    const handleNextTrack = () => {
         const nextID = playlist.indexOf(currentTrack) + 1
         if (nextID === playlist.length) {
             return
@@ -22,14 +29,22 @@ function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
         dispatch(setCurrentTrack(nextTrack))
     }
 
-    const prevTrack = () => {
-      const prevID = playlist.indexOf(currentTrack) - 1
-      if (prevID === -1) {
-          return
-      }
-      const prevTrack = playlist[prevID];
-      setPlayingTime() ? dispatch(setCurrentTrack(prevTrack)) : null;      
-  }
+    //  Логика кнопки Prev
+
+    const handlePrevTrack = () => {
+        const prevID = playlist.indexOf(currentTrack) - 1
+        if (prevID === -1) {
+            return
+        }
+        const prevTrack = playlist[prevID]
+        setPlayingTime() ? dispatch(setCurrentTrack(prevTrack)) : null
+    }
+
+    // Логика кнопки Shuffle
+
+    const handleShuffleTrack = () => {        
+        dispatch(toggleShuffle())
+    }
 
     return (
         <S.PlayerControls>
@@ -39,7 +54,7 @@ function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
                 svg="player__btn-prev-svg"
                 alt="prev"
                 img="img/icon/sprite.svg#icon-prev"
-                click={prevTrack}
+                click={handlePrevTrack}
             />
             <ControlButton
                 component="player__btn-play"
@@ -59,7 +74,7 @@ function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
                 svg="player__btn-next-svg"
                 alt="next"
                 img="img/icon/sprite.svg#icon-next"
-                click={nextTrack}
+                click={handleNextTrack}
             />
             <ControlButton
                 component="player__btn-repeat"
@@ -67,8 +82,8 @@ function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
                 svg="player__btn-repeat-svg"
                 alt="repeat"
                 img="img/icon/sprite.svg#icon-repeat"
-                click={toggleLoop}
-                button_color={isLoop ? 'white' : 'grey'}
+                click={handleLoop}
+                button_color={loopStatus ? 'white' : 'grey'}
             />
 
             <ControlButton
@@ -77,7 +92,8 @@ function ControlPanel({ toggleLoop, isLoop, togglePlay, setPlayingTime }) {
                 svg="player__btn-shuffle-svg"
                 alt="shuffle"
                 img="img/icon/sprite.svg#icon-shuffle"
-                click={alertMessage}
+                button_color={shuffleStatus ? 'white' : 'grey'}
+                click={handleShuffleTrack}
             />
         </S.PlayerControls>
     )

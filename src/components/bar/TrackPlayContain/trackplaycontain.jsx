@@ -1,8 +1,12 @@
 import React from 'react'
 import Skeleton from '../../skeleton/skeleton'
 import * as S from './trackplaycontain.style'
+import { useSelector } from 'react-redux'
 
-function TrackPlayContain({ loading, trackSelect }) {
+function TrackPlayContain({ loading }) {
+    
+    const currentTrack = useSelector((s) => s.state.currentTrack)
+
     return (
         <S.TrackPlayContain>
             <S.TrackPlayImage>
@@ -15,7 +19,7 @@ function TrackPlayContain({ loading, trackSelect }) {
                     <Skeleton width="59px" height="15px" />
                 ) : (
                     <S.TrackPlayAuthorLink href="http://">
-                        {trackSelect.name}
+                        {currentTrack.name}
                     </S.TrackPlayAuthorLink>
                 )}
             </S.TrackPlayAuthor>
@@ -24,7 +28,7 @@ function TrackPlayContain({ loading, trackSelect }) {
                     <Skeleton width="59px" height="15px" />
                 ) : (
                     <S.TrackPlayAlbumLink href="http://">
-                        {trackSelect.author}
+                        {currentTrack.author}
                     </S.TrackPlayAlbumLink>
                 )}
             </S.TrackPlayAlbum>

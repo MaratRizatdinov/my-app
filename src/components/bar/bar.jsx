@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { stopTrack } from '../../store/actions/creators/stopTrack'
 import { playTrack } from '../../store/actions/creators/playTrack'
 import { setCurrentTrack } from '../../store/actions/creators/setCurrentTrack'
+import { toggleLoop } from '../../store/actions/creators/toggleLoop'
 
 function Bar({ loading }) {
     const audioRef = useRef(null)
@@ -16,29 +17,24 @@ function Bar({ loading }) {
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const playlist = useSelector((s) => s.state.playlist)
     const playingStatus = useSelector((s) => s.state.isPlaying)
+    const loopStatus = useSelector((s) => s.state.isLoop)
 
     // Блок отвечает за логику Loop
 
-    const [isLoop, setIsLoop] = useState(false)
-
-    const toggleLoop = () => {
-        // setIsLoop(!isLoop);
-        setIsLoop((previsLoop) => !previsLoop)
+    const handleLoop = () => {
+        dispatch(toggleLoop())
     }
 
     //  Блок отвечает за логику кнопки Play/Pause
 
-    // const [isPlaying, setIsPlaying] = useState(true)
-
     const handleStart = () => {
         audioRef.current.play()
-        // setIsPlaying(true)
+
         dispatch(playTrack())
     }
 
     const handleStop = () => {
         audioRef.current.pause()
-        // setIsPlaying(false)
         dispatch(stopTrack())
     }
 
@@ -74,9 +70,7 @@ function Bar({ loading }) {
     // Блок отвечает за запуск трека при смене трека
 
     useEffect(() => {
-        audioRef.current.load()
-        // dispatch(playTrack())
-        // setIsPlaying(true)
+        audioRef.current.load()        
     }, [currentTrack])
 
     //Блок визуализирует таймер
@@ -92,7 +86,7 @@ function Bar({ loading }) {
     //Блок запуска следующего трека
 
     const playNextTrack = () => {
-        // console.log('hi');
+        
         const nextID = playlist.indexOf(currentTrack) + 1
         if (nextID === playlist.length) {
             dispatch(stopTrack())
@@ -102,10 +96,12 @@ function Bar({ loading }) {
         dispatch(setCurrentTrack(nextTrack))
     }
 
+    // Блок проверяет время проигрывания текущего трека.
+
     const setPlayingTime = () => {
-        if (audioRef.current.currentTime < 5) {
+        if (audioRef.current.currentTime > 5) {
             return (audioRef.current.currentTime = 0)
-        } else return 1;
+        } else return "track playback time is less than five seconds"
     }
 
     return (
@@ -114,7 +110,7 @@ function Bar({ loading }) {
                 style={{ display: 'none' }}
                 controls
                 ref={audioRef}
-                loop={isLoop}
+                loop={loopStatus}
                 onEnded={playNextTrack}
                 autoPlay
             >
@@ -135,16 +131,14 @@ function Bar({ loading }) {
                 </S.BarPlayerProgress>
                 <S.BarPlayerBlock>
                     <S.BarPlayer>
-                        <ControlPanel
-                            isLoop={isLoop}
-                            toggleLoop={toggleLoop}
+                        <ControlPanel                            
+                            handleLoop={handleLoop}
                             togglePlay={togglePlay}
                             setPlayingTime={setPlayingTime}
                         />
                         <S.PlayerTrackPlay>
                             <TrackPlayContain
-                                loading={loading}
-                                trackSelect={currentTrack}
+                                loading={loading}                                
                             />
                             <TrackPlayLikeDiz />
                         </S.PlayerTrackPlay>
