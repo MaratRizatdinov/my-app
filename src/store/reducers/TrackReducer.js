@@ -8,10 +8,12 @@ import {
     EXIT_FROM_TRACKS_PAGE,
 } from '../actions/types/types'
 
+import { workArray } from '../../workarray'
+
 const initialState = {
     isPlaying: false,
     currentTrack: null,
-    playlist: [],
+    playlist: workArray(),
     isShuffleMode: false,
     shufflePlayList: [],
     isLoop: false,

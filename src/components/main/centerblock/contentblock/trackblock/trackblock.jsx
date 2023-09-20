@@ -4,18 +4,23 @@ import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 
-function Trackblock({ loading, tracks, setTrackSelect }) {
-    const dispatch = useDispatch()
 
-    const handleClickToTrack = (elem) => {
-        setTrackSelect(elem)
+
+function Trackblock({ loading }) {
+    const dispatch = useDispatch()
+    
+
+    const handleClickToTrack = (elem) => {        
         dispatch(setCurrentTrack(elem))
     }
 
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const isPlaying = useSelector((s) => s.state.isPlaying)
+    const tracklist = useSelector((s) => s.state.playlist)
 
-    const listItems = tracks.map((elem) => (
+    
+
+    const listItems = tracklist.map((elem) => (
         <S.PlayListItem key={elem.id}>
             <S.PlayListTrack>
                 <S.TrackTitle>
