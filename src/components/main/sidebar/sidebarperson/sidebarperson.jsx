@@ -2,6 +2,8 @@
  import * as S from './sidebarperson.style';
  import { UserContext } from '../../../../context';
  import { useNavigate } from "react-router-dom";
+ import { useDispatch } from 'react-redux'
+ import { exitFromTracksPage } from '../../../../store/actions/creators/exitFromTracksPage';
  
 
  
@@ -10,10 +12,12 @@
 
     const [isUser, setIsUser] = useContext(UserContext);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const buttonClick=()=>{
       window.localStorage.removeItem('user');
       setIsUser(window.localStorage.getItem('user'));
+      dispatch(exitFromTracksPage())
       navigate('/login');
     }
 

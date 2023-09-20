@@ -4,7 +4,6 @@ import * as S from './trackplaycontain.style'
 import { useSelector } from 'react-redux'
 
 function TrackPlayContain({ loading }) {
-    
     const currentTrack = useSelector((s) => s.state.currentTrack)
 
     return (

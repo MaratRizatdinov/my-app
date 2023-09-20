@@ -31,7 +31,6 @@ function Bar({ loading }) {
 
     const handleStart = () => {
         audioRef.current.play()
-
         dispatch(playTrack())
     }
 
@@ -98,7 +97,6 @@ function Bar({ loading }) {
             nextID = 0
         }
         const nextTrack = activeList[nextID]
-
         dispatch(setCurrentTrack(nextTrack))
     }
 
