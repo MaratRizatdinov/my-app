@@ -5,10 +5,10 @@ import Footer from '../../components/footer/footer'
 import { Wrapper, Container } from '../../App.style'
 import { getAllTracks } from '../../api'
 import { setPlaylist } from '../../store/actions/creators/setPlaylist'
+import { toggleLoadingMode } from '../../store/actions/creators/toggleLoadingMode'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const MainPage = ({ setIsUser }) => {
-    const [loading, setLoading] = useState(true)
     const [addError, setAddError] = useState(false)
     const dispatch = useDispatch()
     const currentTrack = useSelector((s) => s.state.currentTrack)
@@ -16,8 +16,8 @@ export const MainPage = ({ setIsUser }) => {
     useEffect(() => {
         getAllTracks()
             .then((tracks) => {
-                setLoading(false)
                 dispatch(setPlaylist(tracks))
+                dispatch(toggleLoadingMode())
             })
             .catch(() => {
                 setAddError(true)
@@ -27,14 +27,8 @@ export const MainPage = ({ setIsUser }) => {
     return (
         <Wrapper>
             <Container>
-                <Main
-                    loading={loading}                                        
-                    addError={addError}
-                    setIsUser={setIsUser}
-                />
-                {currentTrack ? (
-                    <Bar loading={loading}  />
-                ) : null}
+                <Main addError={addError} setIsUser={setIsUser} />
+                {currentTrack ? <Bar /> : null}
                 <Footer />
             </Container>
         </Wrapper>

@@ -3,11 +3,12 @@ import * as S from './sidebarItem.style'
 import Skeleton from '../../../skeleton/skeleton'
 import { useNavigate } from 'react-router-dom'
 import { exitFromTracksPage } from '../../../../store/actions/creators/exitFromTracksPage'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function SidebarItem(props) {
     let navigate = useNavigate()
     const dispatch = useDispatch()
+    const loadingMode = useSelector((s) => s.state.loadingMode)
 
     const handleClick = (event) => {
         event.preventDefault()
@@ -17,7 +18,7 @@ function SidebarItem(props) {
 
     return (
         <S.SidebarItem>
-            {props.loading ? (
+            {loadingMode ? (
                 <Skeleton width="250px" height="150px" />
             ) : (
                 <S.SidebarLink onClick={handleClick}>

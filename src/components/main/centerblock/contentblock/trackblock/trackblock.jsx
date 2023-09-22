@@ -6,10 +6,9 @@ import { setCurrentTrack } from '../../../../../store/actions/creators/setCurren
 
 
 
-function Trackblock({ loading }) {
-    const dispatch = useDispatch()
+function Trackblock() {
     
-
+    const dispatch = useDispatch()
     const handleClickToTrack = (elem) => {        
         dispatch(setCurrentTrack(elem))
     }
@@ -17,6 +16,7 @@ function Trackblock({ loading }) {
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const tracklist = useSelector((s) => s.state.playlist)
+    const loadingMode = useSelector((s) => s.state.loadingMode)
 
     
 
@@ -39,7 +39,7 @@ function Trackblock({ loading }) {
                         )}
                     </S.TrackTitleImage>
                     <div>
-                        {loading ? (
+                        {loadingMode ? (
                             <Skeleton width="356px" height="19px" />
                         ) : (
                             <S.TrackTitleLink
@@ -51,7 +51,7 @@ function Trackblock({ loading }) {
                     </div>
                 </S.TrackTitle>
                 <S.TrackAuthor>
-                    {loading ? (
+                    {loadingMode ? (
                         <Skeleton width="271px" height="19px" />
                     ) : (
                         <S.TrackAuthorLink href="http://">
@@ -60,7 +60,7 @@ function Trackblock({ loading }) {
                     )}
                 </S.TrackAuthor>
                 <S.TrackAlbum>
-                    {loading ? (
+                    {loadingMode ? (
                         <Skeleton width="205px" height="19px" />
                     ) : (
                         <S.TrackAlbumLink href="http://">
@@ -72,7 +72,7 @@ function Trackblock({ loading }) {
                     <S.TrackTimeSvg alt="time">
                         <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                     </S.TrackTimeSvg>
-                    {loading ? (
+                    {loadingMode ? (
                         <S.TrackTimeText>0:00</S.TrackTimeText>
                     ) : (
                         <S.TrackTimeText>

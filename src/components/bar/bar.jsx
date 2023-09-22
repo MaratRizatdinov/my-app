@@ -11,7 +11,7 @@ import { playTrack } from '../../store/actions/creators/playTrack'
 import { setCurrentTrack } from '../../store/actions/creators/setCurrentTrack'
 import { toggleLoop } from '../../store/actions/creators/toggleLoop'
 
-function Bar({ loading }) {
+function Bar() {
     const audioRef = useRef(null)
     const dispatch = useDispatch()
     const currentTrack = useSelector((s) => s.state.currentTrack)
@@ -141,7 +141,7 @@ function Bar({ loading }) {
                             setPlayingTime={setPlayingTime}
                         />
                         <S.PlayerTrackPlay>
-                            <TrackPlayContain loading={loading} />
+                            <TrackPlayContain />
                             <TrackPlayLikeDiz />
                         </S.PlayerTrackPlay>
                     </S.BarPlayer>

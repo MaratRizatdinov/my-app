@@ -6,13 +6,13 @@ import * as S from './centerblock.style'
 
 
 
-function Centerblock({loading,addError}){
+function Centerblock({addError}){
 
 return <S.MainCenterBlock>
             <Searchblock/>  
             <Filterblock/>    
             {!addError ?
-            <Contentblock loading={loading}/> 
+            <Contentblock/> 
             : <p>Извините, сервис временно недоступен</p>}            
             
           </S.MainCenterBlock>;

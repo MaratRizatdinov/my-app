@@ -5,12 +5,12 @@ import Sidebar from './sidebar/sidebar'
 
 import * as S from './main.style'
 
-function Main({ loading, addError, setIsUser }) {
+function Main({addError, setIsUser }) {
     return (
         <S.Main>
             <Navigation setIsUser={setIsUser} />
-            <Centerblock loading={loading} addError={addError} />
-            <Sidebar loading={loading} />
+            <Centerblock addError={addError} />
+            <Sidebar />
         </S.Main>
     )
 }

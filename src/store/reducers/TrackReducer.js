@@ -6,6 +6,7 @@ import {
     TOGGLE_LOOP,
     TOGGLE_SHUFFLE,
     EXIT_FROM_TRACKS_PAGE,
+    TOGGLE_LOADING_MODE,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -17,6 +18,7 @@ const initialState = {
     isShuffleMode: false,
     shufflePlayList: [],
     isLoop: false,
+    loadingMode: true,
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -55,6 +57,9 @@ export function TrackReducer(state = initialState, action) {
                 shufflePlayList: [],
                 isLoop: false,
             }
+        }
+        case TOGGLE_LOADING_MODE: {
+            return { ...state, loadingMode: false }
         }
 
         default:
