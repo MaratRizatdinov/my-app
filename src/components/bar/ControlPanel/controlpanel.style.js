@@ -69,4 +69,5 @@ export const PlayerButtonShuffleSvg =styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+  stroke:${props=> props.button_color=='white' ? '#ffffff' : "#696969"}
 `

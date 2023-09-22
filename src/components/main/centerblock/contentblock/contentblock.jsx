@@ -5,11 +5,11 @@ import Trackblock from './trackblock/trackblock';
 
 
 
-function Contentblock({loading, tracks, setTrackSelect}){
+function Contentblock(){
 
 return  <S.CenterBlockContent>
           <Titleblock/>
-          <Trackblock loading={loading} tracks={tracks} setTrackSelect={setTrackSelect}/>             
+          <Trackblock />             
         </S.CenterBlockContent>;}
 
 export default Contentblock;
