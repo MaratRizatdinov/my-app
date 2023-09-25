@@ -8,10 +8,10 @@ function FilterByYear({ isActive, onShow }) {
         if (key['release_date'] == null) return 'Дата неизвестна'
         return key['release_date'].slice(0, 4)
     })
-    const UniqueArrayOfAuthor = [...new Set(newArr.sort())]
-    console.log(UniqueArrayOfAuthor)
+    
+    const UniqueArrayOfYear = [...new Set(newArr.sort())]
 
-    const listOfItems = UniqueArrayOfAuthor.map((key) => {
+    const listOfItems = UniqueArrayOfYear.map((key) => {
         return (
             <S.FilerYearItems href="#" key={key}>
                 {key}
@@ -28,9 +28,7 @@ function FilterByYear({ isActive, onShow }) {
                 ''
             ) : (
                 <S.FilerYearList>
-                    <S.FilerYearContainer>
-                        {listOfItems}                        
-                    </S.FilerYearContainer>
+                    <S.FilerYearContainer>{listOfItems}</S.FilerYearContainer>
                 </S.FilerYearList>
             )}
         </S.FilerYearBlock>

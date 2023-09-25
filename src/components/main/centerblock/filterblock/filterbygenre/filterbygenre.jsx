@@ -1,21 +1,32 @@
 import React from 'react';
 import * as S from './filterbygenre.style'
+import { useSelector } from 'react-redux'
 
 
 
 function FilterByGenre({isActive, onShow }){
+    const array = useSelector((s) => s.state.playlist)    
+    const newArr = array.map((key) => {
+        return key.genre
+    })
+    const UniqueArrayOfGenre = [...new Set(newArr.sort())]
+    console.log(UniqueArrayOfGenre)
+    const listOfItems = UniqueArrayOfGenre.map((key) => {
+        return (
+            <S.FilterGenreItems href="#" key={key}>
+                {key}
+            </S.FilterGenreItems>
+        )
+    })
     
-    // const openClass = isActive===3 ? "filter__button button-genre _btn-text _btn-text-open  " : "filter__button button-genre _btn-text";
+    
     return   <S.FilterGenreBlock>
                 <S.FilterButtonGenre primary={isActive} onClick={onShow}>
                  жанру
                 </S.FilterButtonGenre>
                 { isActive!==3 ? "": <S.FilterGenreList>
                     <S.FilterGenreContainer>
-                        <S.FilterGenreItems href='#'>Хип-Хоп</S.FilterGenreItems>
-                        <S.FilterGenreItems href='#'>Техно</S.FilterGenreItems>
-                        <S.FilterGenreItems href='#'>Поп-музыка</S.FilterGenreItems>
-                        <S.FilterGenreItems href='#'>Инди</S.FilterGenreItems>                                                
+                        {listOfItems}                        
                     </S.FilterGenreContainer>                    
                 </S.FilterGenreList>}                
             </S.FilterGenreBlock>
