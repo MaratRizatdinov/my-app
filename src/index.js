@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import store from './store/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-delete localStorage.token
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>

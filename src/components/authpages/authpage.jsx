@@ -7,6 +7,7 @@ import { UserContext } from '../../context'
 export default function AuthPage({ isLoginMode = false }) {
     const [error, setError] = useState(null)
     const [email, setEmail] = useState('')
+    const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
     const [waitApiResponse, setWaitApiResponse] = useState(false)
@@ -47,6 +48,10 @@ export default function AuthPage({ isLoginMode = false }) {
     }
 
     const handleRegister = async () => {
+        if (userName == '') {
+            setError('Имя пользователя не заполнено')
+            return
+        }
         if (email == '') {
             setError('Поле Email не заполнено')
             return
@@ -61,11 +66,11 @@ export default function AuthPage({ isLoginMode = false }) {
         }
 
         setWaitApiResponse(true)
-        getRegisterInSite(email, password)
+        getRegisterInSite(email, password, userName)
             .then((obj) => {
                 const status = obj.status
                 const data = obj.data
-                
+
                 if (status !== 400) {
                     setError(null)
                     setWaitApiResponse(false)
@@ -117,6 +122,7 @@ export default function AuthPage({ isLoginMode = false }) {
                                     setEmail(event.target.value)
                                 }}
                             />
+
                             <S.ModalInput
                                 type="password"
                                 name="password"
@@ -128,7 +134,7 @@ export default function AuthPage({ isLoginMode = false }) {
                             />
                         </S.Inputs>
                         {error && <S.Error>{error}</S.Error>}
-                        
+
                         <S.Buttons>
                             <S.PrimaryButton
                                 onClick={() => handleLogin({ email, password })}
@@ -146,6 +152,16 @@ export default function AuthPage({ isLoginMode = false }) {
                 ) : (
                     <>
                         <S.Inputs>
+                            <S.ModalInput
+                                type="text"
+                                name="userName"
+                                placeholder="Имя пользователя"
+                                value={userName}
+                                onChange={(event) => {
+                                    setUserName(event.target.value)
+                                    console.log(userName)
+                                }}
+                            />
                             <S.ModalInput
                                 type="text"
                                 name="login"

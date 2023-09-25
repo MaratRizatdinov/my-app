@@ -4,7 +4,7 @@ import Navburger from './navburger/navburger'
 import Navmenu from './navmenu/navmenu'
 import * as S from './navigation.style'
 
-function Navigation({ setIsUser }) {
+function Navigation() {
     const [activeIndex, setActiveIndex] = useState(true)
     const clickBurger = () =>
         setActiveIndex((prevActiveIndex) => !prevActiveIndex)
@@ -13,7 +13,7 @@ function Navigation({ setIsUser }) {
         <S.MainNav>
             <Logotype />
             <Navburger isActive={activeIndex} clickBurger={clickBurger} />
-            <Navmenu isActive={activeIndex} setIsUser={setIsUser} />
+            <Navmenu isActive={activeIndex} />
         </S.MainNav>
     )
 }

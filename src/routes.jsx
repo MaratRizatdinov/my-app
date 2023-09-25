@@ -10,7 +10,7 @@ import {ProtectedRoute} from './components/protectedroute/protectedroute'
 
 
 
-export const AppRoutes = ({isUser, setIsUser}) => {
+export const AppRoutes = ({isUser}) => {
   
   
   
@@ -22,7 +22,7 @@ export const AppRoutes = ({isUser, setIsUser}) => {
         <Route element={<ProtectedRoute isAllowed={isUser} />}>
             <Route path="/categories/:id" element={<CategoriesPage />} />        
             <Route path="/favorites" element={<FavoritesPage />} />        
-            <Route path="/" element={<MainPage setIsUser={setIsUser}/>} />    
+            <Route path="/" element={<MainPage />} />    
         </Route>        
         <Route path="*" element={<NotFoundPage />} />    
       </Routes>

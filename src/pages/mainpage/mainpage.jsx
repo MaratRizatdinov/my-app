@@ -8,7 +8,7 @@ import { setPlaylist } from '../../store/actions/creators/setPlaylist'
 import { toggleLoadingMode } from '../../store/actions/creators/toggleLoadingMode'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const MainPage = ({ setIsUser }) => {
+export const MainPage = () => {
     const [addError, setAddError] = useState(false)
     const dispatch = useDispatch()
     const currentTrack = useSelector((s) => s.state.currentTrack)
@@ -27,7 +27,7 @@ export const MainPage = ({ setIsUser }) => {
     return (
         <Wrapper>
             <Container>
-                <Main addError={addError} setIsUser={setIsUser} />
+                <Main addError={addError} />
                 {currentTrack ? <Bar /> : null}
                 <Footer />
             </Container>

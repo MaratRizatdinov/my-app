@@ -10,13 +10,13 @@ export async function getAllTracks(){
     
 }
 
-export async function getRegisterInSite(email, password){
+export async function getRegisterInSite(email, password, userName){
     const response =await fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
         method: "POST",
         body: JSON.stringify({
           email: email,
           password: password,
-          username: email,
+          username: userName,
         }),
         headers: {
           // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
@@ -29,7 +29,7 @@ export async function getRegisterInSite(email, password){
       }
       const status=response.status;
       const data = await response.json();         
-      const obj = await {status:status, data:data};   
+      const obj = {status, data};   
       return obj;     
 }
 
