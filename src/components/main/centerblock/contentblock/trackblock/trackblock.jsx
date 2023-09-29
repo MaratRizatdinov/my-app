@@ -3,22 +3,21 @@ import * as S from './trackblock.style'
 import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
-
-
+import { useLocation } from 'react-router-dom'
+import { workArray } from '../../../../../workarray'
 
 function Trackblock() {
-    
     const dispatch = useDispatch()
-    const handleClickToTrack = (elem) => {        
+    const handleClickToTrack = (elem) => {
         dispatch(setCurrentTrack(elem))
     }
-
+    const location = useLocation()
+    const pageName = location.pathname == '/' ? 'Main' : 'Favorites'
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const isPlaying = useSelector((s) => s.state.isPlaying)
-    const tracklist = useSelector((s) => s.state.playlist)
+    const tracklist =
+        pageName == 'Main' ? useSelector((s) => s.state.playlist) : workArray()
     const loadingMode = useSelector((s) => s.state.loadingMode)
-
-    
 
     const listItems = tracklist.map((elem) => (
         <S.PlayListItem key={elem.id}>

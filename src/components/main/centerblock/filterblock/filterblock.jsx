@@ -4,7 +4,7 @@ import FilterByYear from './filterbyyear/filterbyyear'
 import FilterByGenre from './filterbygenre/filterbygenre'
 import * as S from './filterblock.style'
 import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+
 
 function Filterblock() {
     const [activeIndex, setActiveIndex] = useState(0)
