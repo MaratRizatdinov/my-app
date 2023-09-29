@@ -79,8 +79,8 @@ export default function AuthPage({ isLoginMode = false }) {
                     navigate('/')
                 } else {
                     const message =
-                        data.email ||
                         data.username ||
+                        data.email ||
                         data.password[0] ||
                         data.password[1] ||
                         data.password[2]
@@ -97,7 +97,7 @@ export default function AuthPage({ isLoginMode = false }) {
     // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
     useEffect(() => {
         setError(null)
-    }, [isLoginMode, email, password, repeatPassword])
+    }, [isLoginMode, email, password, repeatPassword, userName])
 
     return (
         <S.PageContainer>

@@ -13,7 +13,7 @@ return <S.MainCenterBlock>
             <Filterblock/>    
             {!addError ?
             <Contentblock/> 
-            : <p>Извините, сервис временно недоступен</p>}            
+            : <p>Извините, сервис временно недоступен</p>}             
             
           </S.MainCenterBlock>;
           }

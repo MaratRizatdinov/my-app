@@ -1,15 +1,16 @@
 import React from 'react';
 import * as S from './contentblock.style';
 import Titleblock from './titleblock/titleblock';
-import Trackblock from './trackblock/trackblock';
+import { Outlet } from 'react-router-dom';
 
 
 
-function Contentblock(){
+
+export default function Contentblock(){
+  
 
 return  <S.CenterBlockContent>
           <Titleblock/>
-          <Trackblock />             
+          <Outlet/>
         </S.CenterBlockContent>;}
 
-export default Contentblock;

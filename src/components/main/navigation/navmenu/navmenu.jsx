@@ -12,7 +12,7 @@ function Navmenu({ isActive }) {
                 <Navitem address="/favorites" content="Мой плейлист" />
                 <Navitem
                     address="/login"
-                    content="Войти"
+                    content="Выйти"
                     setIsUser={setIsUser}
                 />
             </S.MenuList>

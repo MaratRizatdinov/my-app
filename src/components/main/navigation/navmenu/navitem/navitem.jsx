@@ -13,7 +13,7 @@ function Navitem(props) {
             window.localStorage.removeItem('user')
             props.setIsUser(window.localStorage.getItem('user'))
         }
-        if (props.content != 'Главное') {
+        if (props.content == 'Выйти') {
             dispatch(exitFromTracksPage())
         }
         navigate(props.address)
