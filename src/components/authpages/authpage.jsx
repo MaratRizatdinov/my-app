@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import * as S from './authpage.style'
 import { useEffect, useState, useContext } from 'react'
-import { getRegisterInSite, getLoginInSite } from '..//..//api'
+import { getRegisterInSite, getLoginInSite, getAllTokens } from '..//..//api'
 import { UserContext } from '../../context'
 
 export default function AuthPage({ isLoginMode = false }) {
@@ -35,12 +35,14 @@ export default function AuthPage({ isLoginMode = false }) {
                     window.localStorage.setItem('user', data.username)
                     setIsUser(data.username)
                     navigate('/')
+                    getAllTokens(email,password).then((data)=>console.log(data))
                 } else {
                     const message = data.detail
                     setError(message)
                     setWaitApiLoginResponse(false)
                 }
             })
+            
             .catch((error) => {
                 setError(`${error.message}`)
                 setWaitApiLoginResponse(false)

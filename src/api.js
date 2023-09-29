@@ -1,3 +1,5 @@
+// Запрос на получение треков
+
 export async function getAllTracks() {
     const response = await fetch(
         'https://skypro-music-api.skyeng.tech/catalog/track/all/'
@@ -9,6 +11,8 @@ export async function getAllTracks() {
     const data = await response.json()
     return data
 }
+
+// Запрос на регистрацию
 
 export async function getRegisterInSite(email, password, userName) {
     const response = await fetch(
@@ -35,6 +39,8 @@ export async function getRegisterInSite(email, password, userName) {
     return obj
 }
 
+// Запрос на авторизацию
+
 export async function getLoginInSite(email, password) {
     const response = await fetch(
         'https://skypro-music-api.skyeng.tech/user/login/',
@@ -56,4 +62,24 @@ export async function getLoginInSite(email, password) {
     const data = await response.json()
     const obj = { status: status, data: data }
     return obj
+}
+
+// Запрос на получение Access и Refresh токена
+
+export async function getAllTokens(email, password) {
+    const response = await fetch(
+        'https://skypro-music-api.skyeng.tech/user/token/',
+        {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        }
+    )
+    const data = await response.json()
+    return data
 }
