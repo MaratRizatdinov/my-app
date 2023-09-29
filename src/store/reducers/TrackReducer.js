@@ -7,6 +7,9 @@ import {
     TOGGLE_SHUFFLE,
     EXIT_FROM_TRACKS_PAGE,
     TOGGLE_LOADING_MODE,
+    FETCH_FAVORITES_STARTED,
+    FETCH_FAVORITES_SUCCESS,
+    FETCH_FAVORITES_FAILURE,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -19,6 +22,9 @@ const initialState = {
     shufflePlayList: [],
     isLoop: false,
     loadingMode: true,
+    loading: false,
+    error: null,
+    favoritePlaylist: [],
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -60,6 +66,20 @@ export function TrackReducer(state = initialState, action) {
         }
         case TOGGLE_LOADING_MODE: {
             return { ...state, loadingMode: false }
+        }
+        case FETCH_FAVORITES_STARTED: {
+            return { ...state, loading: true }
+        }
+        case FETCH_FAVORITES_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                favoritePlaylist: action.favoriteTracks,
+            }
+        }
+        case FETCH_FAVORITES_FAILURE: {
+            return { ...state, loading: false, error: action.payload.error }
         }
 
         default:
