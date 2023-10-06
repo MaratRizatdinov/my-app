@@ -4,7 +4,9 @@ import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { useLocation } from 'react-router-dom'
-// import { workArray } from '../../../../../workarray'
+import { favoriteModeOn } from '../../../../../store/actions/creators/favoriteModeOn'
+import { favoriteModeOff } from '../../../../../store/actions/creators/favoriteModeOff'
+
 import {
     useGetAllFavoritesQuery,
     useAddFavoriteTrackMutation,
@@ -31,6 +33,9 @@ function Trackblock() {
 
     const handleClickToTrack = (elem) => {
         dispatch(setCurrentTrack(elem))
+        pageName === 'Favorites'
+            ? dispatch(favoriteModeOn())
+            : dispatch(favoriteModeOff())
     }
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })

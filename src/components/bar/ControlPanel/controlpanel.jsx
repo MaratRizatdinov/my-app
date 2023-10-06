@@ -3,6 +3,7 @@ import * as S from './controlpanel.style'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../store/actions/creators/setCurrentTrack'
 import { toggleShuffle } from '../../../store/actions/creators/toggleShuffle'
+import { useGetAllFavoritesQuery } from '../../../store/services/favorite'
 
 function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const playlist = useSelector((s) => s.state.playlist)
@@ -11,12 +12,20 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
+    const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
     const dispatch = useDispatch()
+    const token = useSelector((s) => s.state.accessToken)
+    const favoritesObject = useGetAllFavoritesQuery(token)
+    const favoritesPlaylist = favoritesObject.data
 
     //  Логика кнопки Next
 
     const handleNextTrack = () => {
-        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        const activeList = favoriteStatus
+            ? favoritesPlaylist
+            : shuffleStatus
+            ? shufflePlaylist
+            : playlist
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) return
@@ -29,9 +38,13 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     //  Логика кнопки Prev
 
     const handlePrevTrack = () => {
-        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        const activeList = favoriteStatus
+            ? favoritesPlaylist
+            : shuffleStatus
+            ? shufflePlaylist
+            : playlist
         let prevID = activeList.indexOf(currentTrack) - 1
-        
+
         if (prevID === -1) {
             if (!shuffleStatus) return
             prevID = activeList.length - 1
@@ -51,6 +64,8 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
             ? dispatch(toggleShuffle([]))
             : dispatch(toggleShuffle(shuffle([...playlist])))
     }
+
+    // Разметка
 
     return (
         <S.PlayerControls>
@@ -105,6 +120,8 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     )
 }
 export default ControlPanel
+
+// Вспомогательные функции
 
 function ControlButton({ ...props }) {
     const buttonCollection = {
