@@ -2,7 +2,10 @@ import React from 'react'
 import * as S from './navitem.style'
 import { useNavigate } from 'react-router-dom'
 import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
-import { useDispatch } from 'react-redux'
+import { useDispatch} from 'react-redux'
+
+
+
 
 function Navitem(props) {
     let navigate = useNavigate()
@@ -13,9 +16,9 @@ function Navitem(props) {
             window.localStorage.removeItem('user')
             props.setIsUser(window.localStorage.getItem('user'))
         }
-        if (props.content == 'Выйти') {
+        if (props.content == 'Выйти') {            
             dispatch(exitFromTracksPage())
-        }
+        }        
         navigate(props.address)
     }
 

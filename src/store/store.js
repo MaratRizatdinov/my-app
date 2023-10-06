@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TrackReducer } from './reducers/TrackReducer'
-import thunk from 'redux-thunk';
+import { favoriteApi } from './services/favorite'
+
 
 const store = configureStore({
     reducer: {
         state: TrackReducer,
+        [favoriteApi.reducerPath]: favoriteApi.reducer,
     },
-    middleware:[thunk],
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(favoriteApi.middleware),
 })
 
-export default store;
+export default store

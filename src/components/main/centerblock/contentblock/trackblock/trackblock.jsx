@@ -4,20 +4,40 @@ import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { useLocation } from 'react-router-dom'
-import { workArray } from '../../../../../workarray'
+// import { workArray } from '../../../../../workarray'
+import {
+    useGetAllFavoritesQuery,
+    useAddFavoriteTrackMutation,
+    useDeleteFavoriteTrackMutation,
+} from '../../../../../store/services/favorite'
 
 function Trackblock() {
     const dispatch = useDispatch()
+    const token = useSelector((s) => s.state.accessToken)
+    const playlist = useSelector((s) => s.state.playlist)
+    const isPlaying = useSelector((s) => s.state.isPlaying)
+    const currentTrack = useSelector((s) => s.state.currentTrack)
+    const loadingMode = useSelector((s) => s.state.loadingMode)
+
+    const favoritesObject = useGetAllFavoritesQuery(token)
+    const favoritesPlaylist = favoritesObject.data
+    const [addFavorite] = useAddFavoriteTrackMutation()
+    const [deleteFavorite] = useDeleteFavoriteTrackMutation()
+
+    const location = useLocation()
+
+    const pageName = location.pathname == '/' ? 'Main' : 'Favorites'
+    const tracklist = pageName == 'Main' ? playlist : favoritesPlaylist || []
+
     const handleClickToTrack = (elem) => {
         dispatch(setCurrentTrack(elem))
     }
-    const location = useLocation()
-    const pageName = location.pathname == '/' ? 'Main' : 'Favorites'
-    const currentTrack = useSelector((s) => s.state.currentTrack)
-    const isPlaying = useSelector((s) => s.state.isPlaying)
-    const tracklist =
-        pageName == 'Main' ? useSelector((s) => s.state.playlist) : workArray()
-    const loadingMode = useSelector((s) => s.state.loadingMode)
+    const handleClickToLike = (elem) => {
+        addFavorite({ id: elem.id, accessToken: token })
+    }
+    const handleClickToDizLike = (elem) => {
+        deleteFavorite({ id: elem.id, accessToken: token })
+    }
 
     const listItems = tracklist.map((elem) => (
         <S.PlayListItem key={elem.id}>
@@ -68,9 +88,20 @@ function Trackblock() {
                     )}
                 </S.TrackAlbum>
                 <div>
-                    <S.TrackTimeSvg alt="time">
-                        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                    </S.TrackTimeSvg>
+                    <S.TrackLikeSvg
+                        alt="like"
+                        onClick={() => {
+                            likeStatus(favoritesPlaylist, elem) === 'like'
+                                ? handleClickToDizLike(elem)
+                                : handleClickToLike(elem)
+                        }}
+                    >
+                        {likeStatus(favoritesPlaylist, elem) === 'like' ? (
+                            <use xlinkHref="img/icon/sprite.svg#icon-likeclicked"></use>
+                        ) : (
+                            <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                        )}
+                    </S.TrackLikeSvg>
                     {loadingMode ? (
                         <S.TrackTimeText>0:00</S.TrackTimeText>
                     ) : (
@@ -82,8 +113,15 @@ function Trackblock() {
             </S.PlayListTrack>
         </S.PlayListItem>
     ))
+    const emptyList = (
+        <S.FavoritesEmpty>В этом плейлисте нет треков</S.FavoritesEmpty>
+    )
 
-    return <S.ContentPlaylist>{listItems}</S.ContentPlaylist>
+    return (
+        <S.ContentPlaylist>
+            {tracklist.length !== 0 ? listItems : emptyList}
+        </S.ContentPlaylist>
+    )
 }
 
 export default Trackblock
@@ -91,6 +129,13 @@ export default Trackblock
 function durationInMinutes(seconds) {
     let min = Math.floor(+seconds / 60)
     let sec = +seconds % 60
-    let str = String(min) + ':' + String(sec)
+    let zero = sec < 10 ? '0' : ''
+    let str = String(min) + ':' + zero + String(sec)
     return str
+}
+
+function likeStatus(arr, item) {
+    if (arr == undefined) return 'nolike'
+    const newArr = arr.map((elem) => elem.id)
+    return newArr.includes(item.id) ? 'like' : 'nolike'
 }

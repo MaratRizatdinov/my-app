@@ -131,6 +131,13 @@ export const TrackTimeSvg = styled.svg`
     fill: transparent;
     stroke: #696969;
 `
+export const TrackLikeSvg = styled.svg`
+    width: 14px;
+    height: 12px;
+    margin-right: 17px;
+    fill: transparent;
+    stroke: #696969;
+`
 export const TrackTimeText = styled.span`
     font-style: normal;
     font-weight: 400;
@@ -148,4 +155,11 @@ export const ContentPlaylist = styled.div`
     -ms-flex-direction: column;
     flex-direction: column;
     overflow-y: auto;
+`
+export const FavoritesEmpty =styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;  
+  color: #ffffff;  
 `
