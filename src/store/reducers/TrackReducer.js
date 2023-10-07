@@ -65,6 +65,7 @@ export function TrackReducer(state = initialState, action) {
                 isShuffleMode: false,
                 shufflePlayList: [],
                 isLoop: false,
+                isFavoriteMode: false,
             }
         }
         case TOGGLE_LOADING_MODE: {

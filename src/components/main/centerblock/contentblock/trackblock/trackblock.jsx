@@ -1,12 +1,13 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import * as S from './trackblock.style'
-import Skeleton from '../../../../skeleton/skeleton'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
+import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Skeleton from '../../../../skeleton/skeleton'
+import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { favoriteModeOn } from '../../../../../store/actions/creators/favoriteModeOn'
 import { favoriteModeOff } from '../../../../../store/actions/creators/favoriteModeOff'
+import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
 
 import {
     useGetAllFavoritesQuery,
@@ -46,12 +47,18 @@ function Trackblock() {
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })
             .unwrap()
-            .catch((error) => navigate('/login'))
+            .catch((error) => {
+                dispatch(exitFromTracksPage())
+                navigate('/login')   
+            })
     }
     const handleClickToDizLike = (elem) => {
         deleteFavorite({ id: elem.id, accessToken: token })
             .unwrap()
-            .catch((error) => navigate('/login'))
+            .catch((error) => {
+                dispatch(exitFromTracksPage())
+                navigate('/login')   
+            })
     }
 
     // Разметка
