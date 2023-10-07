@@ -119,6 +119,8 @@ function Bar() {
         } else return 'track playback time is less than five seconds'
     }
 
+    // Разметка
+    
     return (
         <S.Bar>
             <audio

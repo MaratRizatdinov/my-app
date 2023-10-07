@@ -16,22 +16,23 @@ import {
 
 function Trackblock() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+
     const token = useSelector((s) => s.state.accessToken)
     const playlist = useSelector((s) => s.state.playlist)
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const loadingMode = useSelector((s) => s.state.loadingMode)
-    const navigate=useNavigate()
 
-    
-    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
+    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
 
-    const location = useLocation()
-
     const pageName = location.pathname == '/' ? 'Main' : 'Favorites'
     const tracklist = pageName == 'Main' ? playlist : favoritesPlaylist || []
+
+    // Логика обработки клика на трек в плейлисте
 
     const handleClickToTrack = (elem) => {
         dispatch(setCurrentTrack(elem))
@@ -39,16 +40,21 @@ function Trackblock() {
             ? dispatch(favoriteModeOn())
             : dispatch(favoriteModeOff())
     }
+
+    // Логика клика на сердечко(лайк/дизлайк)
+
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })
-        .unwrap()
-        .catch((error)=>navigate('/login'))        
+            .unwrap()
+            .catch((error) => navigate('/login'))
     }
     const handleClickToDizLike = (elem) => {
         deleteFavorite({ id: elem.id, accessToken: token })
-        .unwrap()
-        .catch((error)=>navigate('/login'))        
+            .unwrap()
+            .catch((error) => navigate('/login'))
     }
+
+    // Разметка
 
     const listItems = tracklist.map((elem) => (
         <S.PlayListItem key={elem.id}>
@@ -136,6 +142,8 @@ function Trackblock() {
 }
 
 export default Trackblock
+
+// Вспомогательные функции
 
 function durationInMinutes(seconds) {
     let min = Math.floor(+seconds / 60)

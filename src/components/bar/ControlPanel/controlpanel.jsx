@@ -6,8 +6,8 @@ import { toggleShuffle } from '../../../store/actions/creators/toggleShuffle'
 import { useGetAllFavoritesQuery } from '../../../store/services/favorite'
 
 function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
+    
     const dispatch = useDispatch()
-
     const playlist = useSelector((s) => s.state.playlist)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const playingStatus = useSelector((s) => s.state.isPlaying)
@@ -16,7 +16,6 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
     const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
     const token = useSelector((s) => s.state.accessToken)
-
     const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
     
 

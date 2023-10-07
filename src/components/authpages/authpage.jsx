@@ -3,12 +3,11 @@ import * as S from './authpage.style'
 import { useEffect, useState, useContext } from 'react'
 import { getRegisterInSite, getLoginInSite, getAllTokens } from '..//..//api'
 import { UserContext } from '../../context'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
     fetchAccessToken,
     fetchRefreshToken,
 } from '../../store/actions/creators/fetchToken'
-
 
 export default function AuthPage({ isLoginMode = false }) {
     const [error, setError] = useState(null)
@@ -20,9 +19,7 @@ export default function AuthPage({ isLoginMode = false }) {
     const [waitApiLoginResponse, setWaitApiLoginResponse] = useState(false)
     const navigate = useNavigate()
     const [isUser, setIsUser] = useContext(UserContext)
-    const dispatch = useDispatch()    
-
-
+    const dispatch = useDispatch()
 
     const handleLogin = async ({ email, password }) => {
         if (!email) {
@@ -44,11 +41,10 @@ export default function AuthPage({ isLoginMode = false }) {
                     window.localStorage.setItem('user', data.username)
                     setIsUser(data.username)
                     navigate('/')
-                    getAllTokens(email, password)
-                    .then((data) => {
+                    getAllTokens(email, password).then((data) => {
                         dispatch(fetchAccessToken(data.access))
-                        dispatch(fetchRefreshToken(data.refresh))                        
-                    })                    
+                        dispatch(fetchRefreshToken(data.refresh))
+                    })
                 } else {
                     const message = data.detail
                     setError(message)
@@ -110,11 +106,10 @@ export default function AuthPage({ isLoginMode = false }) {
     }
 
     // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
+
     useEffect(() => {
         setError(null)
     }, [isLoginMode, email, password, repeatPassword, userName])
-
-    
 
     return (
         <S.PageContainer>
