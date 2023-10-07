@@ -10,6 +10,8 @@ import { stopTrack } from '../../store/actions/creators/stopTrack'
 import { playTrack } from '../../store/actions/creators/playTrack'
 import { setCurrentTrack } from '../../store/actions/creators/setCurrentTrack'
 import { toggleLoop } from '../../store/actions/creators/toggleLoop'
+import { useGetAllFavoritesQuery } from '../../store/services/favorite'
+
 
 function Bar() {
     const audioRef = useRef(null)
@@ -20,6 +22,11 @@ function Bar() {
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
+    
+    const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
+    const token = useSelector((s) => s.state.accessToken)
+    const favoritesObject = useGetAllFavoritesQuery(token)
+    const favoritesPlaylist = favoritesObject.data
 
     // Блок отвечает за логику Loop
 
@@ -87,7 +94,11 @@ function Bar() {
     //Блок запуска следующего трека
 
     const playNextTrack = () => {
-        const activeList = shuffleStatus ? shufflePlaylist : playlist
+        const activeList = favoriteStatus
+            ? favoritesPlaylist
+            : shuffleStatus
+            ? shufflePlaylist
+            : playlist
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) {
