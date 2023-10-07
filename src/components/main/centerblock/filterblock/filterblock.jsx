@@ -5,19 +5,26 @@ import FilterByGenre from './filterbygenre/filterbygenre'
 import * as S from './filterblock.style'
 import { useLocation } from 'react-router-dom'
 
-
 function Filterblock() {
     const [activeIndex, setActiveIndex] = useState(0)
-    const location = useLocation()    
-    const pageTitle = location.pathname == '/' ? 'Треки' : 'Мои треки'
-    const displayFilter=location.pathname == '/' ? 'flex' : 'none'
+    const location = useLocation()
+    const pageTitle =
+        location.pathname == '/'
+            ? 'Треки'
+            : location.pathname == '/favorites'
+            ? 'Мои треки'
+            : location.pathname == '/categories/1'
+            ? 'Классическая музыка'
+            : location.pathname == '/categories/2'
+            ? 'Электронная музыка'
+            : 'Рок-музыка'
 
-    
+    const displayFilter = location.pathname == '/' ? 'flex' : 'none'
 
     return (
         <>
             <S.CenterBlockH2>{pageTitle}</S.CenterBlockH2>
-            <S.CenterBlockFilter style={{display:displayFilter}}>
+            <S.CenterBlockFilter style={{ display: displayFilter }}>
                 <S.CenterBlockTitle>Искать по:</S.CenterBlockTitle>
                 <FilterByAuthor
                     isActive={activeIndex}

@@ -35,15 +35,12 @@ export function TrackReducer(state = initialState, action) {
         case SET_CURRENT_TRACK: {
             return { ...state, isPlaying: true, currentTrack: action.track }
         }
-
         case SET_PLAYLIST: {
             return { ...state, playlist: action.playlist }
         }
-
         case STOP_TRACK: {
             return { ...state, isPlaying: false }
         }
-
         case PLAY_TRACK: {
             return { ...state, isPlaying: true }
         }
