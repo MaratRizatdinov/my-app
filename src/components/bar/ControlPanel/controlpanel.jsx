@@ -16,9 +16,9 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
     const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
     const token = useSelector((s) => s.state.accessToken)
+
+    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
     
-    const favoritesObject = useGetAllFavoritesQuery(token)
-    const favoritesPlaylist = favoritesObject.data
 
     //  Логика кнопки Next
 

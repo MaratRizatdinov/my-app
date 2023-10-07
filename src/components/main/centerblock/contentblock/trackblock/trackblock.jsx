@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as S from './trackblock.style'
 import Skeleton from '../../../../skeleton/skeleton'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,9 +21,10 @@ function Trackblock() {
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const loadingMode = useSelector((s) => s.state.loadingMode)
+    const navigate=useNavigate()
 
-    const favoritesObject = useGetAllFavoritesQuery(token)
-    const favoritesPlaylist = favoritesObject.data
+    
+    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
 
@@ -39,9 +41,13 @@ function Trackblock() {
     }
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })
+        .unwrap()
+        .catch((error)=>navigate('/login'))        
     }
     const handleClickToDizLike = (elem) => {
         deleteFavorite({ id: elem.id, accessToken: token })
+        .unwrap()
+        .catch((error)=>navigate('/login'))        
     }
 
     const listItems = tracklist.map((elem) => (

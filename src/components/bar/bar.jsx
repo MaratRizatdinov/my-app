@@ -25,8 +25,8 @@ function Bar() {
     
     const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
     const token = useSelector((s) => s.state.accessToken)
-    const favoritesObject = useGetAllFavoritesQuery(token)
-    const favoritesPlaylist = favoritesObject.data
+    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
+    
 
     // Блок отвечает за логику Loop
 
