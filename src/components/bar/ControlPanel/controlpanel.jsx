@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack } from '../../../store/actions/creators/setCurrentTrack'
 import { toggleShuffle } from '../../../store/actions/creators/toggleShuffle'
 import { useGetAllFavoritesQuery } from '../../../store/services/favorite'
+import { useGetSelectionQuery } from '../../../store/services/selection'
 
 function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
-    
     const dispatch = useDispatch()
     const playlist = useSelector((s) => s.state.playlist)
     const currentTrack = useSelector((s) => s.state.currentTrack)
@@ -14,19 +14,30 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
-    const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
-    const token = useSelector((s) => s.state.accessToken)
-    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
     
+    const modeName = useSelector((s) => s.state.modeName)
+    const token = useSelector((s) => s.state.accessToken)
 
+    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
+    const { data: selectionPlaylist } = useGetSelectionQuery()
+
+    // 'Favorites'
     //  Логика кнопки Next
 
     const handleNextTrack = () => {
-        const activeList = favoriteStatus
-            ? favoritesPlaylist
-            : shuffleStatus
-            ? shufflePlaylist
-            : playlist
+        const activeList =
+            modeName === 'Favorites'
+                ? favoritesPlaylist
+                : shuffleStatus
+                ? shufflePlaylist
+                : modeName === 'Classic'
+                ? selectionPlaylist[0].items
+                : modeName === 'Electro'
+                ? selectionPlaylist[1].items
+                : modeName === 'Rok'
+                ? selectionPlaylist[2].items
+                : playlist
+                
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) return
@@ -39,11 +50,19 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     //  Логика кнопки Prev
 
     const handlePrevTrack = () => {
-        const activeList = favoriteStatus
-            ? favoritesPlaylist
-            : shuffleStatus
-            ? shufflePlaylist
-            : playlist
+        const activeList =
+            modeName === 'Favorites'
+                ? favoritesPlaylist
+                : shuffleStatus
+                ? shufflePlaylist
+                : modeName === 'Classic'
+                ? selectionPlaylist[0].items
+                : modeName === 'Electro'
+                ? selectionPlaylist[1].items
+                : modeName === 'Rok'
+                ? selectionPlaylist[2].items
+                : playlist
+
         let prevID = activeList.indexOf(currentTrack) - 1
 
         if (prevID === -1) {

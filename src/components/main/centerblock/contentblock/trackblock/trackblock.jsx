@@ -5,9 +5,8 @@ import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from '../../../../skeleton/skeleton'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
-import { favoriteModeOn } from '../../../../../store/actions/creators/favoriteModeOn'
-import { favoriteModeOff } from '../../../../../store/actions/creators/favoriteModeOff'
 import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
+import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
 
 import {
     useGetAllFavoritesQuery,
@@ -59,11 +58,9 @@ function Trackblock(props) {
 
     // Логика обработки клика на трек в плейлисте
 
-    const handleClickToTrack = (elem) => {        
-        dispatch(setCurrentTrack(elem))
-        pageName === 'Favorites'
-            ? dispatch(favoriteModeOn())
-            : dispatch(favoriteModeOff())
+    const handleClickToTrack = (elem) => {
+        dispatch(setCurrentTrack(elem))        
+        dispatch(changeModeName(pageName))
     }
 
     // Логика клика на сердечко(лайк/дизлайк)

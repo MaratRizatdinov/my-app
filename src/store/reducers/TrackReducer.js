@@ -9,8 +9,7 @@ import {
     TOGGLE_LOADING_MODE,
     FETCH_ACCESS_TOKEN,
     FETCH_REFRESH_TOKEN,
-    FAVORITE_MODE_ON,
-    FAVORITE_MODE_OFF,
+    CHANGE_MODE_NAME,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -27,7 +26,7 @@ const initialState = {
     error: null,
     accessToken: null,
     refreshToken: null,
-    isFavoriteMode: false,
+    modeName: 'Main',
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -62,7 +61,6 @@ export function TrackReducer(state = initialState, action) {
                 isShuffleMode: false,
                 shufflePlayList: [],
                 isLoop: false,
-                isFavoriteMode: false,
             }
         }
         case TOGGLE_LOADING_MODE: {
@@ -75,11 +73,8 @@ export function TrackReducer(state = initialState, action) {
         case FETCH_REFRESH_TOKEN: {
             return { ...state, refreshToken: action.refreshToken }
         }
-        case FAVORITE_MODE_ON: {
-            return { ...state, isFavoriteMode: true }
-        }
-        case FAVORITE_MODE_OFF: {
-            return { ...state, isFavoriteMode: false }
+        case CHANGE_MODE_NAME: {
+            return { ...state, modeName: action.mode }
         }
 
         default:

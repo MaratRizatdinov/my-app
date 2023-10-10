@@ -11,6 +11,7 @@ import { playTrack } from '../../store/actions/creators/playTrack'
 import { setCurrentTrack } from '../../store/actions/creators/setCurrentTrack'
 import { toggleLoop } from '../../store/actions/creators/toggleLoop'
 import { useGetAllFavoritesQuery } from '../../store/services/favorite'
+import { useGetSelectionQuery } from '../../store/services/selection'
 
 
 function Bar() {
@@ -22,10 +23,11 @@ function Bar() {
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
-    
-    const favoriteStatus = useSelector((s) => s.state.isFavoriteMode)
+    const modeName = useSelector((s) => s.state.modeName)    
     const token = useSelector((s) => s.state.accessToken)
+    
     const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
+    const { data: selectionPlaylist } = useGetSelectionQuery()
     
 
     // Блок отвечает за логику Loop
@@ -94,11 +96,19 @@ function Bar() {
     //Блок запуска следующего трека
 
     const playNextTrack = () => {
-        const activeList = favoriteStatus
-            ? favoritesPlaylist
-            : shuffleStatus
-            ? shufflePlaylist
-            : playlist
+        const activeList =
+            modeName === 'Favorites'
+                ? favoritesPlaylist
+                : shuffleStatus
+                ? shufflePlaylist
+                : modeName === 'Classic'
+                ? selectionPlaylist[0].items
+                : modeName === 'Electro'
+                ? selectionPlaylist[1].items
+                : modeName === 'Rok'
+                ? selectionPlaylist[2].items
+                : playlist
+
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) {
