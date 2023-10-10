@@ -26,6 +26,7 @@ function Trackblock(props) {
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const loadingMode = useSelector((s) => s.state.loadingMode)
+    const filterAuthors  = useSelector((s) => s.state.filterAuthors)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
@@ -42,10 +43,17 @@ function Trackblock(props) {
             : location.pathname == '/categories/2'
             ? 'Electro'
             : 'Rok'
+    const filteredPlaylist= playlist.filter((elem)=>{
+        if(filterAuthors.length==0) return elem
+        return filterAuthors.includes(elem.author)
+    })
+
+
+
 
     const tracklist =
         pageName == 'Main'
-            ? playlist
+            ? filteredPlaylist
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'

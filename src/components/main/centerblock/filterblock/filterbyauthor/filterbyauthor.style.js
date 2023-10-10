@@ -37,7 +37,7 @@ export const FilterAuthorItems = styled.span`
     }    
 `
 export const FilterAuthorItemsActive = styled(FilterAuthorItems)`    
-    color: #B672FF;
+    color: blue;
 `
 
 

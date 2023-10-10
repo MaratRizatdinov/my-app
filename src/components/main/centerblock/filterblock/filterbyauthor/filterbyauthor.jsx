@@ -7,6 +7,7 @@ function FilterByAuthor({ isActive, onShow }) {
     const dispatch = useDispatch()
     const array = useSelector((s) => s.state.playlist)
     const authorArray = useSelector((s) => s.state.filterAuthors)
+    
     const newArr = array.map((key) => {
         return key.author
     })
