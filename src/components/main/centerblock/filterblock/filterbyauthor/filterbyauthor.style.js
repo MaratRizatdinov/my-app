@@ -39,8 +39,22 @@ export const FilterAuthorItems = styled.span`
 export const FilterAuthorItemsActive = styled(FilterAuthorItems)`    
     color: blue;
 `
-
-
+export const FilterAuthorCircle = styled.div`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    top:-10px;
+    left:120px;
+    width: 26px;
+    height: 26px;
+    background-color: #AD61FF;
+    border-radius: 25px;    
+`
+export const FilterAuthorCounter = styled.div`
+    color: #fff;
+    font-size: 13px;
+`
 
 
 
