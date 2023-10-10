@@ -1,25 +1,26 @@
 import React from 'react'
 import * as S from './filterbyauthor.style'
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setFilterByAuthor } from '../../../../../store/actions/creators/filterByAuthor'
 
 function FilterByAuthor({ isActive, onShow }) {
+    const dispatch = useDispatch()
     const array = useSelector((s) => s.state.playlist)
+    const authorArray = useSelector((s) => s.state.filterAuthors)
     const newArr = array.map((key) => {
         return key.author
     })
 
     const UniqueArrayOfAuthor = [...new Set(newArr.sort())]
 
-    const [authorArr, setAuthorArr] = useState([])
-
     function handleClick(key) {
-        if (authorArr.includes(key)) {
-            setAuthorArr(authorArr.filter((item) => item != key))
+        if (authorArray.includes(key)) {
+            dispatch(
+                setFilterByAuthor(authorArray.filter((item) => item != key))
+            )
         } else {
-            setAuthorArr([...authorArr, key])
+            dispatch(setFilterByAuthor([...authorArray, key]))
         }
-        console.log(authorArr)
     }
 
     const listOfItems = UniqueArrayOfAuthor.map((key) => {
@@ -29,7 +30,7 @@ function FilterByAuthor({ isActive, onShow }) {
                 key={key}
                 onClick={() => handleClick(key)}
             >
-                {authorArr.includes(key) ? (
+                {authorArray.includes(key) ? (
                     <S.FilterAuthorItemsActive>{key}</S.FilterAuthorItemsActive>
                 ) : (
                     <span>{key}</span>

@@ -10,6 +10,7 @@ import {
     FETCH_ACCESS_TOKEN,
     FETCH_REFRESH_TOKEN,
     CHANGE_MODE_NAME,
+    FILTER_BY_AUTHOR,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -27,6 +28,7 @@ const initialState = {
     accessToken: null,
     refreshToken: null,
     modeName: 'Main',
+    filterAuthors: [],
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -76,7 +78,9 @@ export function TrackReducer(state = initialState, action) {
         case CHANGE_MODE_NAME: {
             return { ...state, modeName: action.mode }
         }
-
+        case FILTER_BY_AUTHOR: {
+            return { ...state, filterAuthors: action.filterAuthors }
+        }
         default:
             return state
     }
