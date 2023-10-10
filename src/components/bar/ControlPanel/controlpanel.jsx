@@ -21,7 +21,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
 
-    // 'Favorites'
+    
     //  Логика кнопки Next
 
     const handleNextTrack = () => {

@@ -27,7 +27,7 @@ export const FilterAuthorContainer = styled.div`
     flex-direction: column;
     gap: 24px;
 `
-export const FilterAuthorItems = styled.a`
+export const FilterAuthorItems = styled.span`
     text-decoration: none;
     color: #fff;
     font-size: 20px;
@@ -36,6 +36,14 @@ export const FilterAuthorItems = styled.a`
         color: #B672FF;
     }    
 `
+export const FilterAuthorItemsActive = styled(FilterAuthorItems)`    
+    color: #B672FF;
+`
+
+
+
+
+
 export const FilterButtonAuthor=styled(FilterButton)`
     border-color: ${(props)=>props.primary===1 ? '#ad61ff' :'#fff' };
     color: ${(props)=>props.primary===1 ? '#ad61ff' :'#fff' };
