@@ -1,12 +1,11 @@
-import { useParams } from 'react-router-dom';
-import React from 'react';
+import React from 'react'
+import { CategoriesBlock } from '../../components/main/centerblock/contentblock/categoriesblock/categoriesblock'
 
-export const CategoriesPage = () =>{
-    const params= useParams();
+export const CategoriesPage = () => {
+    // const params = useParams()
     return (
         <div>
-            <h1>Страница категорий {params.id}</h1>
+            <CategoriesBlock/>            
         </div>
-        );
+    )
 }
-

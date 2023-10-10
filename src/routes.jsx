@@ -19,7 +19,7 @@ export const AppRoutes = ({ isUser }) => {
                     <Route index element={<Trackblock />} />
                     <Route path="favorites" element={<FavoritesPage />} />
                     <Route
-                        path="categories/:id"
+                        path="categories/:pageId"
                         element={<CategoriesPage />}
                     />
                 </Route>

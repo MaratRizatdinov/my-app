@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function SidebarItem(props) {
     let navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const loadingMode = useSelector((s) => s.state.loadingMode)
 
     const handleClick = (event) => {

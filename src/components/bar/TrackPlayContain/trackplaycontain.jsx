@@ -11,7 +11,7 @@ function TrackPlayContain() {
         <S.TrackPlayContain>
             <S.TrackPlayImage>
                 <S.TrackPlaySvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    <use xlinkHref="../img/icon/sprite.svg#icon-note"></use>
                 </S.TrackPlaySvg>
             </S.TrackPlayImage>
             <S.TrackPlayAuthor>

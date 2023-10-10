@@ -75,7 +75,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
                 class=" _btn"
                 svg="player__btn-prev-svg"
                 alt="prev"
-                img="img/icon/sprite.svg#icon-prev"
+                img="../img/icon/sprite.svg#icon-prev"
                 click={handlePrevTrack}
             />
             <ControlButton
@@ -85,8 +85,8 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
                 alt="play"
                 img={
                     !playingStatus
-                        ? 'img/icon/sprite.svg#icon-play'
-                        : 'img/icon/sprite.svg#icon-pause'
+                        ? '../img/icon/sprite.svg#icon-play'
+                        : '../img/icon/sprite.svg#icon-pause'
                 }
                 click={togglePlay}
             />
@@ -95,7 +95,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
                 class="_btn"
                 svg="player__btn-next-svg"
                 alt="next"
-                img="img/icon/sprite.svg#icon-next"
+                img="../img/icon/sprite.svg#icon-next"
                 click={handleNextTrack}
             />
             <ControlButton
@@ -103,7 +103,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
                 class="_btn-icon"
                 svg="player__btn-repeat-svg"
                 alt="repeat"
-                img="img/icon/sprite.svg#icon-repeat"
+                img="../img/icon/sprite.svg#icon-repeat"
                 click={handleLoop}
                 button_color={loopStatus ? 'white' : 'grey'}
             />
@@ -113,7 +113,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
                 class="_btn-icon"
                 svg="player__btn-shuffle-svg"
                 alt="shuffle"
-                img="img/icon/sprite.svg#icon-shuffle"
+                img="../img/icon/sprite.svg#icon-shuffle"
                 button_color={shuffleStatus ? 'white' : 'grey'}
                 click={handleShuffleTrack}
             />

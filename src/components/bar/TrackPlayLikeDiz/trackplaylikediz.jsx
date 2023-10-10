@@ -7,14 +7,14 @@ function TrackPlayLikeDiz(){
     
     <S.TrackPlayLike className="_btn-icon">
       <S.TrackPlayLikeSvg alt="like">
-        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+        <use xlinkHref="../img/icon/sprite.svg#icon-like"></use>
       </S.TrackPlayLikeSvg>
     </S.TrackPlayLike>
     
     <S.TrackPlayDis className="_btn-icon">
       <S.TrackPlayDisSvg alt="dislike">
         <use
-          xlinkHref="img/icon/sprite.svg#icon-dislike"
+          xlinkHref="../img/icon/sprite.svg#icon-dislike"
         ></use>
       </S.TrackPlayDisSvg>
     </S.TrackPlayDis>

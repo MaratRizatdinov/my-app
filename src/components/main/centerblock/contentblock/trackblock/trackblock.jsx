@@ -15,7 +15,9 @@ import {
     useDeleteFavoriteTrackMutation,
 } from '../../../../../store/services/favorite'
 
-function Trackblock() {
+import { useGetSelectionQuery } from '../../../../../store/services/selection'
+
+function Trackblock(props) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
@@ -27,15 +29,37 @@ function Trackblock() {
     const loadingMode = useSelector((s) => s.state.loadingMode)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
+    const { data: selectionPlaylist } = useGetSelectionQuery()
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
 
-    const pageName = location.pathname == '/' ? 'Main' : 'Favorites'
-    const tracklist = pageName == 'Main' ? playlist : favoritesPlaylist || []
+    const pageName =
+        location.pathname == '/'
+            ? 'Main'
+            : location.pathname == '/favorites'
+            ? 'Favorites'
+            : location.pathname == '/categories/1'
+            ? 'Classic'
+            : location.pathname == '/categories/2'
+            ? 'Electro'
+            : 'Rok'
+
+    const tracklist =
+        pageName == 'Main'
+            ? playlist
+            : pageName == 'Favorites'
+            ? favoritesPlaylist || []
+            : pageName == 'Classic'
+            ? selectionPlaylist[0].items || []
+            : pageName == 'Electro'
+            ? selectionPlaylist[1].items || []
+            : pageName == 'Rok'
+            ? selectionPlaylist[2].items || []
+            : []
 
     // Логика обработки клика на трек в плейлисте
 
-    const handleClickToTrack = (elem) => {
+    const handleClickToTrack = (elem) => {        
         dispatch(setCurrentTrack(elem))
         pageName === 'Favorites'
             ? dispatch(favoriteModeOn())
@@ -49,7 +73,7 @@ function Trackblock() {
             .unwrap()
             .catch((error) => {
                 dispatch(exitFromTracksPage())
-                navigate('/login')   
+                navigate('/login')
             })
     }
     const handleClickToDizLike = (elem) => {
@@ -57,7 +81,7 @@ function Trackblock() {
             .unwrap()
             .catch((error) => {
                 dispatch(exitFromTracksPage())
-                navigate('/login')   
+                navigate('/login')
             })
     }
 
@@ -70,14 +94,14 @@ function Trackblock() {
                     <S.TrackTitleImage id={elem.id}>
                         {currentTrack?.id !== elem.id ? (
                             <S.TrackTitleSvg alt="music">
-                                <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                                <use xlinkHref="../img/icon/sprite.svg#icon-note"></use>
                             </S.TrackTitleSvg>
                         ) : (
                             <S.TrackTitleSvgActive
                                 alt="music"
                                 $isPlaying={isPlaying}
                             >
-                                <use xlinkHref="img/icon/sprite.svg#icon-colorcircle"></use>
+                                <use xlinkHref="../img/icon/sprite.svg#icon-colorcircle"></use>
                             </S.TrackTitleSvgActive>
                         )}
                     </S.TrackTitleImage>
@@ -121,9 +145,9 @@ function Trackblock() {
                         }}
                     >
                         {likeStatus(favoritesPlaylist, elem) === 'like' ? (
-                            <use xlinkHref="img/icon/sprite.svg#icon-likeclicked"></use>
+                            <use xlinkHref="../img/icon/sprite.svg#icon-likeclicked"></use>
                         ) : (
-                            <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                            <use xlinkHref="../img/icon/sprite.svg#icon-like"></use>
                         )}
                     </S.TrackLikeSvg>
                     {loadingMode ? (

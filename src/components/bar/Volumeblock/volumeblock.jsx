@@ -14,7 +14,7 @@ import * as S from './volumeblock.style'
     <S.VolumeContent>
       <S.VolumeImage>
         <S.VolumeSvg alt="volume">
-          <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+          <use xlinkHref="../img/icon/sprite.svg#icon-volume"></use>
         </S.VolumeSvg>
       </S.VolumeImage>
       <S.VolumeProgress className="_btn">

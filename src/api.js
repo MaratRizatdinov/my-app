@@ -2,7 +2,8 @@
 
 export async function getAllTracks() {
     const response = await fetch(
-        'https://skypro-music-api.skyeng.tech/catalog/track/all/'
+         'https://skypro-music-api.skyeng.tech/catalog/track/all/'
+        // 'https://skypro-music-api.skyeng.tech/catalog/selection/3'
     )
 
     if (!response.ok) {

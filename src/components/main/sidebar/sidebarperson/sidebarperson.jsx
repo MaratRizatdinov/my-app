@@ -25,7 +25,7 @@
     <S.SidebarPersonalName>{isUser}</S.SidebarPersonalName>
     <S.SidebarIcon >
       <svg alt="logout" onClick={buttonClick}>
-        <use xlinkHref="img/icon/sprite.svg#logout"></use>
+        <use xlinkHref="../img/icon/sprite.svg#logout"></use>
       </svg>
     </S.SidebarIcon>
   </S.SidebarPersonal>;
