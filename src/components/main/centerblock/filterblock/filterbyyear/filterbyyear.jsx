@@ -34,8 +34,8 @@ function FilterByYear({ isActive, onShow }) {
                 <S.FilterYearCircle>
                     <S.FilterYearContent>
                         {typeOfSorting == 'Сначала новые'
-                            ? String.fromCodePoint(8593)
-                            : String.fromCodePoint(8595)}
+                            ? String.fromCodePoint(8595)
+                            : String.fromCodePoint(8593)}
                     </S.FilterYearContent>
                 </S.FilterYearCircle>
             ) : null}

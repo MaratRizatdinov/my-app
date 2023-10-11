@@ -13,6 +13,7 @@ import {
     FILTER_BY_AUTHOR,
     FILTER_BY_GENRE,
     FILTER_BY_YEAR,
+    FILTER_BY_SUBSTRING,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -31,8 +32,9 @@ const initialState = {
     refreshToken: null,
     modeName: 'Main',
     filterAuthors: [],
-    filterGenre:[],
-    filterYear:'По умолчанию',
+    filterGenre: [],
+    filterYear: 'По умолчанию',
+    filterSubstring: '',
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -90,6 +92,9 @@ export function TrackReducer(state = initialState, action) {
         }
         case FILTER_BY_YEAR: {
             return { ...state, filterYear: action.filterYear }
+        }
+        case FILTER_BY_SUBSTRING: {
+            return { ...state, filterSubstring: action.filterSubstring }
         }
         default:
             return state
