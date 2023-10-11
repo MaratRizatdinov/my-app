@@ -28,6 +28,7 @@ function Trackblock() {
     const loadingMode = useSelector((s) => s.state.loadingMode)
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
+    const filterByYear = useSelector((s) => s.state.filterYear)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
@@ -55,9 +56,24 @@ function Trackblock() {
         return filterGenre.includes(elem.genre)
     })
 
+    const sortedAndFilteredPlaylist =
+        filterByYear == 'По умолчанию'
+            ? filteredByGenreAndAuthor
+            : filteredByGenreAndAuthor.sort(function (a, b) {
+                  if (filterByYear == 'Сначала новые') [a, b] = [b, a]
+                  if (a['release_date'] > b['release_date']) {
+                      return 1
+                  }
+                  if (a['release_date'] < b['release_date']) {
+                      return -1
+                  }
+                  return 0
+              })
+    
+
     const tracklist =
         pageName == 'Main'
-            ? filteredByGenreAndAuthor
+            ? sortedAndFilteredPlaylist
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'
