@@ -36,6 +36,8 @@ function Trackblock() {
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
 
+    // Блок определяет текущую страницу
+
     const pageName =
         location.pathname == '/'
             ? 'Main'
@@ -46,6 +48,8 @@ function Trackblock() {
             : location.pathname == '/categories/2'
             ? 'Electro'
             : 'Rok'
+
+    // Блок отвечает за сортировку и фильтрацию
 
     const filteredByAuthor = playlist.filter((elem) => {
         if (filterAuthors.length == 0) return elem
@@ -79,6 +83,8 @@ function Trackblock() {
                       .toLowerCase()
                       .includes(filterBySubstring.toLowerCase())
               )
+
+    // Логика выбора показывемого списка
 
     const tracklist =
         pageName == 'Main'
