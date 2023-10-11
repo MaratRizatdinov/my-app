@@ -8,7 +8,7 @@ export const FilterAuthorBlock = styled.div`
 export const FilterAuthorList = styled.div`
     position: absolute;
     top: 50px;
-    width: 448px;
+    width: 270px;
     height: 305px;
     background-color: #313131;
     z-index: 1;
@@ -18,7 +18,7 @@ export const FilterAuthorList = styled.div`
     justify-content: center;
 `
 export const FilterAuthorContainer = styled.div`
-    width: 380px;
+    width: 230px;
     height: 237px;
     background-color: #313131;
     overflow-y: scroll;

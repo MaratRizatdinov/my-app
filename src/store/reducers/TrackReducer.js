@@ -12,6 +12,7 @@ import {
     CHANGE_MODE_NAME,
     FILTER_BY_AUTHOR,
     FILTER_BY_GENRE,
+    FILTER_BY_YEAR,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -31,6 +32,7 @@ const initialState = {
     modeName: 'Main',
     filterAuthors: [],
     filterGenre:[],
+    filterYear:'По умолчанию',
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -85,6 +87,9 @@ export function TrackReducer(state = initialState, action) {
         }
         case FILTER_BY_GENRE: {
             return { ...state, filterGenre: action.filterGenre }
+        }
+        case FILTER_BY_YEAR: {
+            return { ...state, filterYear: action.filterYear }
         }
         default:
             return state
