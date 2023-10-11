@@ -5,14 +5,14 @@ import { setFilterBySubstring } from '../../../../store/actions/creators/filterB
 import { useState, useEffect } from 'react'
 
 function Searchblock() {
+
     const [value, setValue] = useState('')
     const dispatch = useDispatch()
 
     function onChangeValue(event) {
         setValue(event.target.value)
     }
-    useEffect(() => {
-        console.log(value)
+    useEffect(() => {        
         dispatch(setFilterBySubstring(value))
     }, [value])
 

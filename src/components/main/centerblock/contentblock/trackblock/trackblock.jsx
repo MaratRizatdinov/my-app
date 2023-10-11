@@ -29,6 +29,7 @@ function Trackblock() {
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
+    const filterBySubstring = useSelector((s) => s.state.filterSubstring)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
@@ -70,9 +71,18 @@ function Trackblock() {
                   return 0
               })
 
+    const finallyFilteredPlaylist =
+        filterBySubstring == ''
+            ? sortedAndFilteredPlaylist
+            : sortedAndFilteredPlaylist.filter((elem) =>
+                  elem['name']
+                      .toLowerCase()
+                      .includes(filterBySubstring.toLowerCase())
+              )
+
     const tracklist =
         pageName == 'Main'
-            ? sortedAndFilteredPlaylist
+            ? finallyFilteredPlaylist
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'
