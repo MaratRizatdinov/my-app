@@ -1,11 +1,11 @@
-import {styled} from 'styled-components';
-import {FilterButton} from '../filterblock.style'
+import { styled } from 'styled-components'
+import { FilterButton } from '../filterblock.style'
 
-export const FilterGenreBlock=styled.div`
+export const FilterGenreBlock = styled.div`
     position: relative;
     margin-right: 10px;
 `
-export const FilterGenreList=styled.div`
+export const FilterGenreList = styled.div`
     position: absolute;
     top: 50px;
     width: 248px;
@@ -13,11 +13,11 @@ export const FilterGenreList=styled.div`
     background-color: #313131;
     z-index: 1;
     border-radius: 12px;
-    display: flex;      
+    display: flex;
     align-items: center;
     justify-content: center;
 `
-export const FilterGenreContainer=styled.div`
+export const FilterGenreContainer = styled.div`
     width: 180px;
     height: 237px;
     background-color: #313131;
@@ -27,17 +27,37 @@ export const FilterGenreContainer=styled.div`
     flex-direction: column;
     gap: 24px;
 `
-export const FilterGenreItems=styled.a`
+export const FilterGenreItems = styled.span`
     text-decoration: none;
     color: #fff;
     font-size: 20px;
-    &:hover{
+    &:hover {
         text-decoration: underline;
-        color: #B672FF;
+        color: #b672ff;
     }
 `
-export const FilterButtonGenre=styled(FilterButton)`
-    border-color: ${(props)=>props.primary===3 ? '#ad61ff' :'#fff' };
-    color: ${(props)=>props.primary===3 ? '#ad61ff' :'#fff' };
+export const FilterGenreItemsActive = styled(FilterGenreItems)`
+    color: blue;
+`
+
+export const FilterButtonGenre = styled(FilterButton)`
+    border-color: ${(props) => (props.primary === 3 ? '#ad61ff' : '#fff')};
+    color: ${(props) => (props.primary === 3 ? '#ad61ff' : '#fff')};
     cursor: pointer;
+`
+export const FilterGenreCircle = styled.div`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    top:-10px;
+    left:70px;
+    width: 26px;
+    height: 26px;
+    background-color: #AD61FF;
+    border-radius: 25px;    
+`
+export const FilterGenreCounter = styled.div`
+    color: #fff;
+    font-size: 13px;
 `

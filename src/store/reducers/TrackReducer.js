@@ -11,6 +11,7 @@ import {
     FETCH_REFRESH_TOKEN,
     CHANGE_MODE_NAME,
     FILTER_BY_AUTHOR,
+    FILTER_BY_GENRE,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -29,6 +30,7 @@ const initialState = {
     refreshToken: null,
     modeName: 'Main',
     filterAuthors: [],
+    filterGenre:[],
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -80,6 +82,9 @@ export function TrackReducer(state = initialState, action) {
         }
         case FILTER_BY_AUTHOR: {
             return { ...state, filterAuthors: action.filterAuthors }
+        }
+        case FILTER_BY_GENRE: {
+            return { ...state, filterGenre: action.filterGenre }
         }
         default:
             return state
