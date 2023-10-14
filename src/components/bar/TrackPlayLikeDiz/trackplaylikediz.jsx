@@ -14,8 +14,8 @@ function TrackPlayLikeDiz() {
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
 
-    const favoriteArrayByID = favoritesPlaylist.map((elem) => elem.id)
-    const likedStatus = favoriteArrayByID.includes(currentTrack.id)
+    const favoriteArrayByID = favoritesPlaylist?.map((elem) => elem.id)
+    const likedStatus = favoriteArrayByID?.includes(currentTrack.id)
 
     function handleClick() {
         likedStatus

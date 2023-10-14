@@ -14,30 +14,31 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
-    
+    const modifiedPlaylist = useSelector((s) => s.state.modifiedPlaylist)
+
     const modeName = useSelector((s) => s.state.modeName)
     const token = useSelector((s) => s.state.accessToken)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
 
-    
     //  Логика кнопки Next
 
     const handleNextTrack = () => {
         const activeList =
             modeName === 'Favorites'
                 ? favoritesPlaylist
-                : shuffleStatus
-                ? shufflePlaylist
                 : modeName === 'Classic'
                 ? selectionPlaylist[0].items
                 : modeName === 'Electro'
                 ? selectionPlaylist[1].items
                 : modeName === 'Rok'
                 ? selectionPlaylist[2].items
-                : playlist
+                : shuffleStatus
+                ? shufflePlaylist
+                : modifiedPlaylist
                 
+
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) return
@@ -53,15 +54,15 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime }) {
         const activeList =
             modeName === 'Favorites'
                 ? favoritesPlaylist
-                : shuffleStatus
-                ? shufflePlaylist
                 : modeName === 'Classic'
                 ? selectionPlaylist[0].items
                 : modeName === 'Electro'
                 ? selectionPlaylist[1].items
                 : modeName === 'Rok'
                 ? selectionPlaylist[2].items
-                : playlist
+                : shuffleStatus
+                ? shufflePlaylist
+                : modifiedPlaylist
 
         let prevID = activeList.indexOf(currentTrack) - 1
 

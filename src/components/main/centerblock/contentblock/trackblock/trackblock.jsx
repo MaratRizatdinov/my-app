@@ -7,6 +7,7 @@ import Skeleton from '../../../../skeleton/skeleton'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
 import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
+import { modifiedPlaylist } from '../../../../../store/actions/creators/modifiedPlaylist'
 import { getNewAccessToken } from '../../../../../api'
 import { setAccessToken } from '../../../../../store/actions/creators/fetchToken'
 
@@ -87,6 +88,18 @@ function Trackblock() {
                       .includes(filterBySubstring.toLowerCase())
               )
 
+    // Определяем применён ли фильтр(сортировка)
+
+    function isEqual(array1, array2) {
+        return JSON.stringify(array1) === JSON.stringify(array2)
+    }
+
+    if (isEqual(finallyFilteredPlaylist, playlist)) {        
+        dispatch(modifiedPlaylist(playlist))
+    } else {
+        dispatch(modifiedPlaylist(finallyFilteredPlaylist))        
+    }
+
     // Логика выбора показывемого списка
 
     const tracklist =
@@ -114,15 +127,16 @@ function Trackblock() {
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })
             .unwrap()
-            .catch((error) => {                
+            .catch((error) => {
                 getNewAccessToken(refreshToken)
-                .then((data) =>{
-                    dispatch(setAccessToken(data.access))
-                    addFavorite({ id: elem.id, accessToken: data.access })                    
-                }).catch((error)=>{                    
-                    dispatch(exitFromTracksPage())
-                    navigate('/login')    
-                })                
+                    .then((data) => {
+                        dispatch(setAccessToken(data.access))
+                        addFavorite({ id: elem.id, accessToken: data.access })
+                    })
+                    .catch((error) => {
+                        dispatch(exitFromTracksPage())
+                        navigate('/login')
+                    })
             })
     }
     const handleClickToDizLike = (elem) => {
@@ -130,13 +144,17 @@ function Trackblock() {
             .unwrap()
             .catch((error) => {
                 getNewAccessToken(refreshToken)
-                .then((data) =>{
-                    dispatch(setAccessToken(data.access))
-                    deleteFavorite({ id: elem.id, accessToken: data.access })                    
-                }).catch((error)=>{                    
-                    dispatch(exitFromTracksPage())
-                    navigate('/login')    
-                })                
+                    .then((data) => {
+                        dispatch(setAccessToken(data.access))
+                        deleteFavorite({
+                            id: elem.id,
+                            accessToken: data.access,
+                        })
+                    })
+                    .catch((error) => {
+                        dispatch(exitFromTracksPage())
+                        navigate('/login')
+                    })
             })
     }
 
@@ -176,9 +194,7 @@ function Trackblock() {
                     {loadingMode ? (
                         <Skeleton width="271px" height="19px" />
                     ) : (
-                        <S.TrackAuthorLink >
-                            {elem.author}
-                        </S.TrackAuthorLink>
+                        <S.TrackAuthorLink>{elem.author}</S.TrackAuthorLink>
                     )}
                 </S.TrackAuthor>
                 <S.TrackAlbum>

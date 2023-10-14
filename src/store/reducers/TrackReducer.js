@@ -14,6 +14,7 @@ import {
     FILTER_BY_GENRE,
     FILTER_BY_YEAR,
     FILTER_BY_SUBSTRING,
+    MODIFIED_PLAYLIST,
 } from '../actions/types/types'
 
 import { workArray } from '../../workarray'
@@ -35,6 +36,7 @@ const initialState = {
     filterGenre: [],
     filterYear: 'По умолчанию',
     filterSubstring: '',
+    modifiedPlaylist:[],
 }
 
 export function TrackReducer(state = initialState, action) {
@@ -94,6 +96,9 @@ export function TrackReducer(state = initialState, action) {
         }
         case FILTER_BY_SUBSTRING: {
             return { ...state, filterSubstring: action.filterSubstring }
+        }
+        case MODIFIED_PLAYLIST: {
+            return { ...state, modifiedPlaylist: action.modifiedPlaylist }
         }
         default:
             return state

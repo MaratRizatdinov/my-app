@@ -25,6 +25,7 @@ function Bar() {
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
     const modeName = useSelector((s) => s.state.modeName)    
     const token = useSelector((s) => s.state.accessToken)
+    const modifiedPlaylist = useSelector((s) => s.state.modifiedPlaylist)
     
     const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
