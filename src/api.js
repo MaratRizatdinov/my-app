@@ -2,8 +2,7 @@
 
 export async function getAllTracks() {
     const response = await fetch(
-         'https://skypro-music-api.skyeng.tech/catalog/track/all/'
-        // 'https://skypro-music-api.skyeng.tech/catalog/selection/3'
+        'https://skypro-music-api.skyeng.tech/catalog/track/all/'
     )
 
     if (!response.ok) {
@@ -81,6 +80,28 @@ export async function getAllTokens(email, password) {
             },
         }
     )
+    const data = await response.json()
+    return data
+}
+
+// Запрос на обновление Access токена
+
+export async function getNewAccessToken(refreshToken) {
+    const response = await fetch(
+        'https://skypro-music-api.skyeng.tech/user/token/refresh/',
+        {
+            method: 'POST',
+            body: JSON.stringify({
+                refresh: refreshToken,
+            }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        }
+    )
+    if (response.status == "400" || response.status == "401") {
+        throw new Error('Ошибка получения токена')
+    }
     const data = await response.json()
     return data
 }

@@ -106,7 +106,7 @@ export const TrackAuthor = styled.div`
     -ms-flex-pack: start;
     justify-content: flex-start;
 `
-export const TrackAuthorLink = styled.a`
+export const TrackAuthorLink = styled.span`
     font-style: normal;
     font-weight: 400;
     font-size: 16px;

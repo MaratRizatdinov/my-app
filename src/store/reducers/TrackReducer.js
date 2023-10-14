@@ -7,8 +7,8 @@ import {
     TOGGLE_SHUFFLE,
     EXIT_FROM_TRACKS_PAGE,
     TOGGLE_LOADING_MODE,
-    FETCH_ACCESS_TOKEN,
-    FETCH_REFRESH_TOKEN,
+    SET_ACCESS_TOKEN,
+    SET_REFRESH_TOKEN,
     CHANGE_MODE_NAME,
     FILTER_BY_AUTHOR,
     FILTER_BY_GENRE,
@@ -74,11 +74,10 @@ export function TrackReducer(state = initialState, action) {
         case TOGGLE_LOADING_MODE: {
             return { ...state, loadingMode: false }
         }
-
-        case FETCH_ACCESS_TOKEN: {
+        case SET_ACCESS_TOKEN: {
             return { ...state, accessToken: action.accessToken }
         }
-        case FETCH_REFRESH_TOKEN: {
+        case SET_REFRESH_TOKEN: {
             return { ...state, refreshToken: action.refreshToken }
         }
         case CHANGE_MODE_NAME: {

@@ -5,8 +5,8 @@ import { getRegisterInSite, getLoginInSite, getAllTokens } from '..//..//api'
 import { UserContext } from '../../context'
 import { useDispatch } from 'react-redux'
 import {
-    fetchAccessToken,
-    fetchRefreshToken,
+    setAccessToken,
+    setRefreshToken,
 } from '../../store/actions/creators/fetchToken'
 
 export default function AuthPage({ isLoginMode = false }) {
@@ -26,7 +26,7 @@ export default function AuthPage({ isLoginMode = false }) {
             setError('Поле Email не заполнено')
             return
         }
-        if (password == '') {
+        if (!password) {
             setError('Поле password не заполнено')
             return
         }
@@ -42,8 +42,8 @@ export default function AuthPage({ isLoginMode = false }) {
                     setIsUser(data.username)
                     navigate('/')
                     getAllTokens(email, password).then((data) => {
-                        dispatch(fetchAccessToken(data.access))
-                        dispatch(fetchRefreshToken(data.refresh))
+                        dispatch(setAccessToken(data.access))
+                        dispatch(setRefreshToken(data.refresh))
                     })
                 } else {
                     const message = data.detail

@@ -7,6 +7,8 @@ import Skeleton from '../../../../skeleton/skeleton'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
 import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
+import { getNewAccessToken } from '../../../../../api'
+import { setAccessToken } from '../../../../../store/actions/creators/fetchToken'
 
 import {
     useGetAllFavoritesQuery,
@@ -17,7 +19,6 @@ import {
 import { useGetSelectionQuery } from '../../../../../store/services/selection'
 
 function Trackblock() {
-    
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
@@ -31,6 +32,7 @@ function Trackblock() {
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
     const filterBySubstring = useSelector((s) => s.state.filterSubstring)
+    const refreshToken = useSelector((s) => s.state.refreshToken)
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
@@ -112,17 +114,29 @@ function Trackblock() {
     const handleClickToLike = (elem) => {
         addFavorite({ id: elem.id, accessToken: token })
             .unwrap()
-            .catch((error) => {
-                dispatch(exitFromTracksPage())
-                navigate('/login')
+            .catch((error) => {                
+                getNewAccessToken(refreshToken)
+                .then((data) =>{
+                    dispatch(setAccessToken(data.access))
+                    addFavorite({ id: elem.id, accessToken: data.access })                    
+                }).catch((error)=>{                    
+                    dispatch(exitFromTracksPage())
+                    navigate('/login')    
+                })                
             })
     }
     const handleClickToDizLike = (elem) => {
         deleteFavorite({ id: elem.id, accessToken: token })
             .unwrap()
             .catch((error) => {
-                dispatch(exitFromTracksPage())
-                navigate('/login')
+                getNewAccessToken(refreshToken)
+                .then((data) =>{
+                    dispatch(setAccessToken(data.access))
+                    deleteFavorite({ id: elem.id, accessToken: data.access })                    
+                }).catch((error)=>{                    
+                    dispatch(exitFromTracksPage())
+                    navigate('/login')    
+                })                
             })
     }
 
@@ -162,7 +176,7 @@ function Trackblock() {
                     {loadingMode ? (
                         <Skeleton width="271px" height="19px" />
                     ) : (
-                        <S.TrackAuthorLink href="http://">
+                        <S.TrackAuthorLink >
                             {elem.author}
                         </S.TrackAuthorLink>
                     )}

@@ -1,18 +1,18 @@
 import {
-    FETCH_ACCESS_TOKEN,
-    FETCH_REFRESH_TOKEN,
+    SET_ACCESS_TOKEN,
+    SET_REFRESH_TOKEN,
     
 } from '../types/types'
 
-export function fetchAccessToken(accessToken) {
+export function setAccessToken(accessToken) {
     return {
-        type: FETCH_ACCESS_TOKEN,
+        type: SET_ACCESS_TOKEN,
         accessToken: accessToken,
     }
 }
-export function fetchRefreshToken(refreshToken) {
+export function setRefreshToken(refreshToken) {
     return {
-        type: FETCH_REFRESH_TOKEN,
+        type: SET_REFRESH_TOKEN,
         refreshToken: refreshToken,
     }
 }
