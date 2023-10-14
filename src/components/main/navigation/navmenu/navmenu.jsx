@@ -1,10 +1,10 @@
-import React, { useContext }  from 'react'
+import React, { useContext } from 'react'
 import * as S from './navmenu.style'
 import Navitem from './navitem/navitem'
 import { UserContext } from '../../../../context'
 
 function Navmenu({ isActive }) {
-    const [ isUser, setIsUser] = useContext(UserContext);
+    const [isUser, setIsUser] = useContext(UserContext)
     return isActive ? (
         <S.NavMenu>
             <S.MenuList>

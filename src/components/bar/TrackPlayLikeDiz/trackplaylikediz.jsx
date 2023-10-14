@@ -27,7 +27,6 @@ function TrackPlayLikeDiz() {
         <S.TrackPlayLikeDis>
             <S.TrackPlayLike className="_btn-icon" onClick={handleClick}>
                 <S.TrackPlayLikeSvg alt="like">
-                    <use xlinkHref="../img/icon/sprite.svg#icon-like"></use>
                     {likedStatus ? (
                         <use xlinkHref="../img/icon/sprite.svg#icon-likeclicked"></use>
                     ) : (
