@@ -29,8 +29,7 @@ export async function getRegisterInSite(email, password){
       }
       const status=response.status;
       const data = await response.json();         
-      const obj = await {status:status, data:data};
-      
+      const obj = await {status:status, data:data};   
       return obj;     
 }
 
@@ -52,7 +51,5 @@ export async function getLoginInSite(email, password){
     const status=response.status;
     const data = await response.json();
     const obj = await {status:status, data:data};
-    return obj;   
-    
-    
+    return obj;       
 }
