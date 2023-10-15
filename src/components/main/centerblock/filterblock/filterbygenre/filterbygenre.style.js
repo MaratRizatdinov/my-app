@@ -16,6 +16,7 @@ export const FilterGenreList = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 `
 export const FilterGenreContainer = styled.div`
     width: 180px;
@@ -26,6 +27,21 @@ export const FilterGenreContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
+`
+
+
+export const FilterGenreButton = styled.button`
+    width: 130px;
+    height: 30px;
+    background-color: #313131;    
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    color: #B672FF;
+    border-radius: 15px;
+    margin-bottom:10px;
 `
 export const FilterGenreItems = styled.span`
     text-decoration: none;

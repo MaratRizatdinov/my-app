@@ -19,6 +19,9 @@ function FilterByGenre({ isActive, onShow }) {
             dispatch(setFilterByGenre([...genreArray, key]))
         }
     }
+    function clearFilter() {
+        dispatch(setFilterByGenre([]))
+    }
 
     const listOfItems = UniqueArrayOfGenre.map((key) => {
         return (
@@ -51,6 +54,9 @@ function FilterByGenre({ isActive, onShow }) {
             </S.FilterButtonGenre>
             {isActive !== 3 ? null : (
                 <S.FilterGenreList>
+                    <S.FilterGenreButton onClick={clearFilter}>
+                        Очистить
+                    </S.FilterGenreButton>
                     <S.FilterGenreContainer>
                         {listOfItems}
                     </S.FilterGenreContainer>

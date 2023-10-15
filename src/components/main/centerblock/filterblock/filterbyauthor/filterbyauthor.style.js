@@ -39,6 +39,7 @@ export const FilterAuthorButton = styled.button`
     justify-content: center;
     color: #B672FF;
     border-radius: 15px;
+    margin-bottom:10px;
 `
 export const FilterAuthorItems = styled.span`
     text-decoration: none;
