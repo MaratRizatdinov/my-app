@@ -150,11 +150,12 @@ export const ContentPlaylist = styled.div`
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    height: 60vh;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: auto;    
 `
 export const FavoritesEmpty =styled.div`
   font-style: normal;

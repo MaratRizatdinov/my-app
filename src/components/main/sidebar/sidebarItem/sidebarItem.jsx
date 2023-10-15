@@ -1,21 +1,20 @@
 import React from 'react'
 import * as S from './sidebarItem.style'
 import Skeleton from '../../../skeleton/skeleton'
-import { useNavigate } from 'react-router-dom'
-// import { exitFromTracksPage } from '../../../../store/actions/creators/exitFromTracksPage'
-import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function SidebarItem(props) {
     let navigate = useNavigate()
-    // const dispatch = useDispatch()
+    
     const loadingMode = useSelector((s) => s.state.loadingMode)
 
     const handleClick = (event) => {
-        event.preventDefault()
-        // dispatch(exitFromTracksPage())
+        event.preventDefault()        
         navigate(`/categories/${props.id}`)
+    
     }
-
+    
     return (
         <S.SidebarItem>
             {loadingMode ? (

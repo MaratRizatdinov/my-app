@@ -23,10 +23,9 @@ function Trackblock() {
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
     const filterBySubstring = useSelector((s) => s.state.filterSubstring)
-   
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-    const { data: selectionPlaylist } = useGetSelectionQuery()    
+    const { data: selectionPlaylist } = useGetSelectionQuery()
     const [handleClickToLike, handleClickToDizLike] = useLike()
 
     // Блок определяет текущую страницу
@@ -77,25 +76,25 @@ function Trackblock() {
                       .includes(filterBySubstring.toLowerCase())
               )
 
+    // Проверяем применен ли фильтр. 
+
     const compareArrays = (a, b) => {
         return JSON.stringify(a) === JSON.stringify(b)
     }
 
     const isFiltered = !compareArrays(playlist, finallyFilteredPlaylist)
-    
-    console.log(isFiltered)
-    if(isFiltered){
+
+    if (isFiltered) {
         dispatch(modifiedPlaylist(finallyFilteredPlaylist))
-    }
-    else {
-        dispatch(modifiedPlaylist(playlist))
+    } else {
+        dispatch(modifiedPlaylist([]))
     }
 
     // Логика выбора показывемого списка
 
     const tracklist =
         pageName == 'Main'
-            ? finallyFilteredPlaylist
+            ? finallyFilteredPlaylist            
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'

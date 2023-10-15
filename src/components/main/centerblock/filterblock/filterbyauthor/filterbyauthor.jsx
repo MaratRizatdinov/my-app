@@ -57,7 +57,7 @@ function FilterByAuthor({ isActive, onShow }) {
                 исполнителю
             </S.FilterButtonAuthor>
             {isActive !== 1 ? (
-                ''
+                null
             ) : (
                 <S.FilterAuthorList>
                     <S.FilterAuthorButton onClick={clearFilter}>Oчистить</S.FilterAuthorButton>

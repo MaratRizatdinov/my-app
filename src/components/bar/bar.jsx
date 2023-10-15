@@ -17,6 +17,7 @@ function Bar() {
     const audioRef = useRef(null)
     const dispatch = useDispatch()
     const currentTrack = useSelector((s) => s.state.currentTrack)    
+    const playlist = useSelector((s) => s.state.playlist)    
     const playingStatus = useSelector((s) => s.state.isPlaying)
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
@@ -29,6 +30,7 @@ function Bar() {
     const { data: selectionPlaylist } = useGetSelectionQuery()
 
     // Блок отвечает за выбор активного плейлиста
+    
     const activeList =
         modeName === 'Favorites'
             ? favoritesPlaylist
@@ -38,9 +40,11 @@ function Bar() {
             ? selectionPlaylist[1].items
             : modeName === 'Rok'
             ? selectionPlaylist[2].items
+            : modifiedPlaylist.length !==0
+            ? modifiedPlaylist
             : shuffleStatus
             ? shufflePlaylist
-            : modifiedPlaylist
+            : playlist
 
     // Блок отвечает за логику Loop
 

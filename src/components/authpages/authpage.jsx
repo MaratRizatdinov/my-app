@@ -87,7 +87,7 @@ export default function AuthPage({ isLoginMode = false }) {
                     setWaitApiResponse(false)
                     window.localStorage.setItem('user', data.username)
                     setIsUser(data.username)
-                    navigate('/')
+                    navigate('/login')
                 } else {
                     const message =
                         data.username ||
