@@ -19,10 +19,7 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime, activeList }) {
     const handleNextTrack = (activeList) => {
     
         let nextID = activeList.indexOf(currentTrack) + 1
-        if (nextID === activeList.length) {
-            if (!shuffleStatus) return
-            nextID = 0
-        }
+        if (nextID === activeList.length) return        
         const nextTrack = activeList[nextID]
         dispatch(setCurrentTrack(nextTrack))
     }
@@ -33,10 +30,8 @@ function ControlPanel({ handleLoop, togglePlay, setPlayingTime, activeList }) {
     
         let prevID = activeList.indexOf(currentTrack) - 1
 
-        if (prevID === -1) {
-            if (!shuffleStatus) return
-            prevID = activeList.length - 1
-        }
+        if (prevID === -1) return            
+        
         const prevTrack = activeList[prevID]
         setPlayingTime() ? dispatch(setCurrentTrack(prevTrack)) : null
     }

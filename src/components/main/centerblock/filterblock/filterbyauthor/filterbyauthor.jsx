@@ -23,6 +23,9 @@ function FilterByAuthor({ isActive, onShow }) {
             dispatch(setFilterByAuthor([...authorArray, key]))
         }
     }
+    function clearFilter(){
+        dispatch(setFilterByAuthor([]))
+    }
 
     const listOfItems = UniqueArrayOfAuthor.map((key) => {
         return (
@@ -57,6 +60,7 @@ function FilterByAuthor({ isActive, onShow }) {
                 ''
             ) : (
                 <S.FilterAuthorList>
+                    <S.FilterAuthorButton onClick={clearFilter}>Oчистить</S.FilterAuthorButton>
                     <S.FilterAuthorContainer>
                         {listOfItems}
                     </S.FilterAuthorContainer>

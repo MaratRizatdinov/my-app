@@ -22,11 +22,12 @@ function Trackblock() {
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
-    const filterBySubstring = useSelector((s) => s.state.filterSubstring)    
+    const filterBySubstring = useSelector((s) => s.state.filterSubstring)
+   
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()    
-    const [handleClickToLike,handleClickToDizLike] = useLike()
+    const [handleClickToLike, handleClickToDizLike] = useLike()
 
     // Блок определяет текущую страницу
 
@@ -76,7 +77,19 @@ function Trackblock() {
                       .includes(filterBySubstring.toLowerCase())
               )
 
-    dispatch(modifiedPlaylist(finallyFilteredPlaylist))
+    const compareArrays = (a, b) => {
+        return JSON.stringify(a) === JSON.stringify(b)
+    }
+
+    const isFiltered = !compareArrays(playlist, finallyFilteredPlaylist)
+    
+    console.log(isFiltered)
+    if(isFiltered){
+        dispatch(modifiedPlaylist(finallyFilteredPlaylist))
+    }
+    else {
+        dispatch(modifiedPlaylist(playlist))
+    }
 
     // Логика выбора показывемого списка
 
@@ -100,7 +113,6 @@ function Trackblock() {
         dispatch(changeModeName(pageName))
     }
 
-    
     // Разметка
 
     const listItems = tracklist.map((elem) => (
@@ -155,7 +167,7 @@ function Trackblock() {
                         onClick={() => {
                             likeStatus(favoritesPlaylist, elem) === 'like'
                                 ? handleClickToDizLike(elem)
-                                : handleClickToLike(elem)                                
+                                : handleClickToLike(elem)
                         }}
                     >
                         {likeStatus(favoritesPlaylist, elem) === 'like' ? (
@@ -203,4 +215,3 @@ function likeStatus(arr, item) {
     const newArr = arr.map((elem) => elem.id)
     return newArr.includes(item.id) ? 'like' : 'nolike'
 }
-

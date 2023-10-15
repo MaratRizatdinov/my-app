@@ -32,14 +32,14 @@ function Bar() {
     const activeList =
         modeName === 'Favorites'
             ? favoritesPlaylist
-            : shuffleStatus
-            ? shufflePlaylist
             : modeName === 'Classic'
             ? selectionPlaylist[0].items
             : modeName === 'Electro'
             ? selectionPlaylist[1].items
             : modeName === 'Rok'
             ? selectionPlaylist[2].items
+            : shuffleStatus
+            ? shufflePlaylist
             : modifiedPlaylist
 
     // Блок отвечает за логику Loop
