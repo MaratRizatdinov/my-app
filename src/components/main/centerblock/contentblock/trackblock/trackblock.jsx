@@ -1,27 +1,17 @@
 import React from 'react'
 import * as S from './trackblock.style'
-import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from '../../../../skeleton/skeleton'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
-import { exitFromTracksPage } from '../../../../../store/actions/creators/exitFromTracksPage'
 import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
 import { modifiedPlaylist } from '../../../../../store/actions/creators/modifiedPlaylist'
-import { getNewAccessToken } from '../../../../../api'
-import { setAccessToken } from '../../../../../store/actions/creators/fetchToken'
-
-import {
-    useGetAllFavoritesQuery,
-    useAddFavoriteTrackMutation,
-    useDeleteFavoriteTrackMutation,
-} from '../../../../../store/services/favorite'
-
+import { useLike } from '../../../../../hooks/useLike'
+import { useGetAllFavoritesQuery } from '../../../../../store/services/favorite'
 import { useGetSelectionQuery } from '../../../../../store/services/selection'
 
 function Trackblock() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const location = useLocation()
 
     const token = useSelector((s) => s.state.accessToken)
@@ -32,13 +22,11 @@ function Trackblock() {
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
-    const filterBySubstring = useSelector((s) => s.state.filterSubstring)
-    const refreshToken = useSelector((s) => s.state.refreshToken)
+    const filterBySubstring = useSelector((s) => s.state.filterSubstring)    
 
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-    const { data: selectionPlaylist } = useGetSelectionQuery()
-    const [addFavorite] = useAddFavoriteTrackMutation()
-    const [deleteFavorite] = useDeleteFavoriteTrackMutation()
+    const { data: selectionPlaylist } = useGetSelectionQuery()    
+    const [handleClickToLike,handleClickToDizLike] = useLike()
 
     // Блок определяет текущую страницу
 
@@ -88,17 +76,7 @@ function Trackblock() {
                       .includes(filterBySubstring.toLowerCase())
               )
 
-    // Определяем применён ли фильтр(сортировка)
-
-    function isEqual(array1, array2) {
-        return JSON.stringify(array1) === JSON.stringify(array2)
-    }
-
-    if (isEqual(finallyFilteredPlaylist, playlist)) {        
-        dispatch(modifiedPlaylist(playlist))
-    } else {
-        dispatch(modifiedPlaylist(finallyFilteredPlaylist))        
-    }
+    dispatch(modifiedPlaylist(finallyFilteredPlaylist))
 
     // Логика выбора показывемого списка
 
@@ -122,42 +100,7 @@ function Trackblock() {
         dispatch(changeModeName(pageName))
     }
 
-    // Логика клика на сердечко(лайк/дизлайк)
-
-    const handleClickToLike = (elem) => {
-        addFavorite({ id: elem.id, accessToken: token })
-            .unwrap()
-            .catch((error) => {
-                getNewAccessToken(refreshToken)
-                    .then((data) => {
-                        dispatch(setAccessToken(data.access))
-                        addFavorite({ id: elem.id, accessToken: data.access })
-                    })
-                    .catch((error) => {
-                        dispatch(exitFromTracksPage())
-                        navigate('/login')
-                    })
-            })
-    }
-    const handleClickToDizLike = (elem) => {
-        deleteFavorite({ id: elem.id, accessToken: token })
-            .unwrap()
-            .catch((error) => {
-                getNewAccessToken(refreshToken)
-                    .then((data) => {
-                        dispatch(setAccessToken(data.access))
-                        deleteFavorite({
-                            id: elem.id,
-                            accessToken: data.access,
-                        })
-                    })
-                    .catch((error) => {
-                        dispatch(exitFromTracksPage())
-                        navigate('/login')
-                    })
-            })
-    }
-
+    
     // Разметка
 
     const listItems = tracklist.map((elem) => (
@@ -212,7 +155,7 @@ function Trackblock() {
                         onClick={() => {
                             likeStatus(favoritesPlaylist, elem) === 'like'
                                 ? handleClickToDizLike(elem)
-                                : handleClickToLike(elem)
+                                : handleClickToLike(elem)                                
                         }}
                     >
                         {likeStatus(favoritesPlaylist, elem) === 'like' ? (
@@ -260,3 +203,4 @@ function likeStatus(arr, item) {
     const newArr = arr.map((elem) => elem.id)
     return newArr.includes(item.id) ? 'like' : 'nolike'
 }
+

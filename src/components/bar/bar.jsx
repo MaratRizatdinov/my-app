@@ -108,7 +108,7 @@ function Bar() {
                 ? selectionPlaylist[1].items
                 : modeName === 'Rok'
                 ? selectionPlaylist[2].items
-                : playlist
+                : modifiedPlaylist
 
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
