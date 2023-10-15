@@ -13,23 +13,34 @@ import { toggleLoop } from '../../store/actions/creators/toggleLoop'
 import { useGetAllFavoritesQuery } from '../../store/services/favorite'
 import { useGetSelectionQuery } from '../../store/services/selection'
 
-
 function Bar() {
     const audioRef = useRef(null)
     const dispatch = useDispatch()
-    const currentTrack = useSelector((s) => s.state.currentTrack)
-    const playlist = useSelector((s) => s.state.playlist)
+    const currentTrack = useSelector((s) => s.state.currentTrack)    
     const playingStatus = useSelector((s) => s.state.isPlaying)
     const loopStatus = useSelector((s) => s.state.isLoop)
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
-    const modeName = useSelector((s) => s.state.modeName)    
+    const modeName = useSelector((s) => s.state.modeName)
     const token = useSelector((s) => s.state.accessToken)
     const modifiedPlaylist = useSelector((s) => s.state.modifiedPlaylist)
-    
-    const {data: favoritesPlaylist} = useGetAllFavoritesQuery(token)
+
+    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
     const { data: selectionPlaylist } = useGetSelectionQuery()
-    
+
+    // Блок отвечает за выбор активного плейлиста
+    const activeList =
+        modeName === 'Favorites'
+            ? favoritesPlaylist
+            : shuffleStatus
+            ? shufflePlaylist
+            : modeName === 'Classic'
+            ? selectionPlaylist[0].items
+            : modeName === 'Electro'
+            ? selectionPlaylist[1].items
+            : modeName === 'Rok'
+            ? selectionPlaylist[2].items
+            : modifiedPlaylist
 
     // Блок отвечает за логику Loop
 
@@ -70,9 +81,7 @@ function Bar() {
                 setDuration(0)
             }
         }
-
         ref.addEventListener('timeupdate', timeUpdate)
-
         return () => {
             ref.removeEventListener('timeupdate', timeUpdate)
         }
@@ -96,20 +105,7 @@ function Bar() {
 
     //Блок запуска следующего трека
 
-    const playNextTrack = () => {
-        const activeList =
-            modeName === 'Favorites'
-                ? favoritesPlaylist
-                : shuffleStatus
-                ? shufflePlaylist
-                : modeName === 'Classic'
-                ? selectionPlaylist[0].items
-                : modeName === 'Electro'
-                ? selectionPlaylist[1].items
-                : modeName === 'Rok'
-                ? selectionPlaylist[2].items
-                : modifiedPlaylist
-
+    const playNextTrack = (activeList) => {
         let nextID = activeList.indexOf(currentTrack) + 1
         if (nextID === activeList.length) {
             if (!shuffleStatus) {
@@ -131,7 +127,7 @@ function Bar() {
     }
 
     // Разметка
-    
+
     return (
         <S.Bar>
             <audio
@@ -139,7 +135,7 @@ function Bar() {
                 controls
                 ref={audioRef}
                 loop={loopStatus}
-                onEnded={playNextTrack}
+                onEnded={() => playNextTrack(activeList)}
                 autoPlay
             >
                 <source src={currentTrack.track_file} type="audio/mpeg" />
@@ -163,6 +159,7 @@ function Bar() {
                             handleLoop={handleLoop}
                             togglePlay={togglePlay}
                             setPlayingTime={setPlayingTime}
+                            activeList={activeList}
                         />
                         <S.PlayerTrackPlay>
                             <TrackPlayContain />
