@@ -7,25 +7,24 @@ import { setCurrentTrack } from '../../../../../store/actions/creators/setCurren
 import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
 import { modifiedPlaylist } from '../../../../../store/actions/creators/modifiedPlaylist'
 import { useLike } from '../../../../../hooks/useLike'
-import { useGetAllFavoritesQuery } from '../../../../../store/services/favorite'
 import { useGetSelectionQuery } from '../../../../../store/services/selection'
+import { useFavorites } from '../../../../../hooks/useFavorites'
 
 function Trackblock() {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    const token = useSelector((s) => s.state.accessToken)
-        const playlist = useSelector((s) => s.state.playlist)
+    
+    const playlist = useSelector((s) => s.state.playlist)
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const loadingMode = useSelector((s) => s.state.loadingMode)
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
-    const filterBySubstring = useSelector((s) => s.state.filterSubstring)
-    
-    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-        const { data: selectionPlaylist } = useGetSelectionQuery()
+    const filterBySubstring = useSelector((s) => s.state.filterSubstring)    
+    const favoritesPlaylist  = useFavorites()
+    const { data: selectionPlaylist } = useGetSelectionQuery()
     const [handleClickToLike, handleClickToDizLike] = useLike()
 
     // Блок определяет текущую страницу
@@ -76,7 +75,7 @@ function Trackblock() {
                       .includes(filterBySubstring.toLowerCase())
               )
 
-    // Проверяем применен ли фильтр. 
+    // Проверяем применен ли фильтр.
 
     const compareArrays = (a, b) => {
         return JSON.stringify(a) === JSON.stringify(b)
@@ -94,7 +93,7 @@ function Trackblock() {
 
     const tracklist =
         pageName == 'Main'
-            ? finallyFilteredPlaylist            
+            ? finallyFilteredPlaylist
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'

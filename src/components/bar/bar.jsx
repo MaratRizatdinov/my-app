@@ -10,7 +10,7 @@ import { stopTrack } from '../../store/actions/creators/stopTrack'
 import { playTrack } from '../../store/actions/creators/playTrack'
 import { setCurrentTrack } from '../../store/actions/creators/setCurrentTrack'
 import { toggleLoop } from '../../store/actions/creators/toggleLoop'
-import { useGetAllFavoritesQuery } from '../../store/services/favorite'
+import { useFavorites } from '../../hooks/useFavorites'
 import { useGetSelectionQuery } from '../../store/services/selection'
 
 function Bar() {
@@ -23,10 +23,9 @@ function Bar() {
     const shuffleStatus = useSelector((s) => s.state.isShuffleMode)
     const shufflePlaylist = useSelector((s) => s.state.shufflePlayList)
     const modeName = useSelector((s) => s.state.modeName)
-    const token = useSelector((s) => s.state.accessToken)
     const modifiedPlaylist = useSelector((s) => s.state.modifiedPlaylist)
     
-    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
+    const favoritesPlaylist  = useFavorites()
         const { data: selectionPlaylist } = useGetSelectionQuery()
 
     // Блок отвечает за выбор активного плейлиста

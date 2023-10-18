@@ -1,30 +1,20 @@
 import React from 'react'
 import * as S from './trackplaylikediz.style'
 import { useSelector } from 'react-redux'
-import {
-    useGetAllFavoritesQuery,
-    // useAddFavoriteTrackMutation,
-    // useDeleteFavoriteTrackMutation,
-} from '../../../store/services/favorite'
 import { useLike } from '../../../hooks/useLike'
+import { useFavorites } from '../../../hooks/useFavorites'
 
 function TrackPlayLikeDiz() {
-     const token = useSelector((s) => s.state.accessToken)
-        const currentTrack = useSelector((s) => s.state.currentTrack)
-    const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-        // const [addFavorite] = useAddFavoriteTrackMutation()
-    // const [deleteFavorite] = useDeleteFavoriteTrackMutation()
-    const [handleClickToLike,handleClickToDizLike] = useLike()
-
+    const currentTrack = useSelector((s) => s.state.currentTrack)
+    const favoritesPlaylist = useFavorites()
+    const [handleClickToLike, handleClickToDizLike] = useLike()
     const favoriteArrayByID = favoritesPlaylist?.map((elem) => elem.id)
     const likedStatus = favoriteArrayByID?.includes(currentTrack.id)
 
     function handleClick() {
         likedStatus
-            // ? deleteFavorite({ id: currentTrack.id, accessToken: token })
-            // : addFavorite({ id: currentTrack.id, accessToken: token })
             ? handleClickToDizLike(currentTrack)
-            : handleClickToLike(currentTrack)  
+            : handleClickToLike(currentTrack)
     }
 
     return (
