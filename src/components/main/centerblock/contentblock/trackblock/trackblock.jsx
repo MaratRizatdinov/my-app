@@ -15,7 +15,7 @@ function Trackblock() {
     const location = useLocation()
 
     const token = useSelector((s) => s.state.accessToken)
-    const playlist = useSelector((s) => s.state.playlist)
+        const playlist = useSelector((s) => s.state.playlist)
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
     const loadingMode = useSelector((s) => s.state.loadingMode)
@@ -23,9 +23,9 @@ function Trackblock() {
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
     const filterBySubstring = useSelector((s) => s.state.filterSubstring)
-
+    
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-    const { data: selectionPlaylist } = useGetSelectionQuery()
+        const { data: selectionPlaylist } = useGetSelectionQuery()
     const [handleClickToLike, handleClickToDizLike] = useLike()
 
     // Блок определяет текущую страницу

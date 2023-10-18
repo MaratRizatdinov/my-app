@@ -9,10 +9,10 @@ import {
 import { useLike } from '../../../hooks/useLike'
 
 function TrackPlayLikeDiz() {
-    const token = useSelector((s) => s.state.accessToken)
-    const currentTrack = useSelector((s) => s.state.currentTrack)
+     const token = useSelector((s) => s.state.accessToken)
+        const currentTrack = useSelector((s) => s.state.currentTrack)
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-    // const [addFavorite] = useAddFavoriteTrackMutation()
+        // const [addFavorite] = useAddFavoriteTrackMutation()
     // const [deleteFavorite] = useDeleteFavoriteTrackMutation()
     const [handleClickToLike,handleClickToDizLike] = useLike()
 

@@ -18,6 +18,7 @@
       window.localStorage.removeItem('user');
       setIsUser(window.localStorage.getItem('user'));
       dispatch(exitFromTracksPage())
+      window.localStorage.removeItem('refresh')      
       navigate('/login');
     }
 

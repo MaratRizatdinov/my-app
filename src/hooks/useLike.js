@@ -11,10 +11,12 @@ export const useLike=(elem)=>{
     
     const dispatch= useDispatch()
     const navigate = useNavigate()
-    const refreshToken = useSelector((s) => s.state.refreshToken)
+    
+    
     const token = useSelector((s) => s.state.accessToken)
     const [addFavorite] = useAddFavoriteTrackMutation()
     const [deleteFavorite] = useDeleteFavoriteTrackMutation()
+    const refreshToken = window.localStorage.getItem('refresh')
 
 
 
@@ -29,6 +31,7 @@ export const useLike=(elem)=>{
                     })
                     .catch((error) => {
                         dispatch(exitFromTracksPage())
+                        window.localStorage.removeItem('refresh')                        
                         navigate('/login')
                     })
             })
@@ -47,6 +50,8 @@ export const useLike=(elem)=>{
                     })
                     .catch((error) => {
                         dispatch(exitFromTracksPage())
+                        window.localStorage.removeItem('refresh')
+                        // window.localStorage.removeItem('access')
                         navigate('/login')
                     })
             })

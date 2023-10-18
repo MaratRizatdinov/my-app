@@ -15,6 +15,7 @@ function Navitem(props) {
         if (props.setIsUser) {
             window.localStorage.removeItem('user')
             props.setIsUser(window.localStorage.getItem('user'))
+            window.localStorage.removeItem('refresh')            
         }
         if (props.content == 'Выйти') {            
             dispatch(exitFromTracksPage())

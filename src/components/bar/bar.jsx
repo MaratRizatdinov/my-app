@@ -25,9 +25,9 @@ function Bar() {
     const modeName = useSelector((s) => s.state.modeName)
     const token = useSelector((s) => s.state.accessToken)
     const modifiedPlaylist = useSelector((s) => s.state.modifiedPlaylist)
-
+    
     const { data: favoritesPlaylist } = useGetAllFavoritesQuery(token)
-    const { data: selectionPlaylist } = useGetSelectionQuery()
+        const { data: selectionPlaylist } = useGetSelectionQuery()
 
     // Блок отвечает за выбор активного плейлиста
     

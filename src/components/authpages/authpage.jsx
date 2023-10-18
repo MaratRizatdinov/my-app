@@ -42,8 +42,8 @@ export default function AuthPage({ isLoginMode = false }) {
                     setIsUser(data.username)
                     navigate('/')
                     getAllTokens(email, password).then((data) => {
-                        dispatch(setAccessToken(data.access))
-                        dispatch(setRefreshToken(data.refresh))
+                         dispatch(setAccessToken(data.access))                        
+                        window.localStorage.setItem('refresh', data.refresh)
                     })
                 } else {
                     const message = data.detail
