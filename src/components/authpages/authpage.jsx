@@ -4,10 +4,7 @@ import { useEffect, useState, useContext } from 'react'
 import { getRegisterInSite, getLoginInSite, getAllTokens } from '..//..//api'
 import { UserContext } from '../../context'
 import { useDispatch } from 'react-redux'
-import {
-    setAccessToken,
-    setRefreshToken,
-} from '../../store/actions/creators/fetchToken'
+import { setAccessToken } from '../../store/actions/creators/fetchToken'
 
 export default function AuthPage({ isLoginMode = false }) {
     const [error, setError] = useState(null)
@@ -42,7 +39,7 @@ export default function AuthPage({ isLoginMode = false }) {
                     setIsUser(data.username)
                     navigate('/')
                     getAllTokens(email, password).then((data) => {
-                         dispatch(setAccessToken(data.access))                        
+                        dispatch(setAccessToken(data.access))
                         window.localStorage.setItem('refresh', data.refresh)
                     })
                 } else {
