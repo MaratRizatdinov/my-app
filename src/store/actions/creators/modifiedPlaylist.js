@@ -1,6 +1,6 @@
 import { MODIFIED_PLAYLIST } from '../types/types'
 
-export function modifiedPlaylist(modifiedPlaylist) {
+export function setModifiedPlaylist(modifiedPlaylist) {
     return {
         type: MODIFIED_PLAYLIST,
         modifiedPlaylist: modifiedPlaylist,

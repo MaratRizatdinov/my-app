@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as S from './trackblock.style'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Skeleton from '../../../../skeleton/skeleton'
 import { setCurrentTrack } from '../../../../../store/actions/creators/setCurrentTrack'
 import { changeModeName } from '../../../../../store/actions/creators/changeModeName'
-import { modifiedPlaylist } from '../../../../../store/actions/creators/modifiedPlaylist'
+import { setModifiedPlaylist } from '../../../../../store/actions/creators/modifiedPlaylist'
 import { useLike } from '../../../../../hooks/useLike'
 import { useGetSelectionQuery } from '../../../../../store/services/selection'
 import { useFavorites } from '../../../../../hooks/useFavorites'
@@ -14,7 +14,6 @@ function Trackblock() {
     const dispatch = useDispatch()
     const location = useLocation()
 
-    
     const playlist = useSelector((s) => s.state.playlist)
     const isPlaying = useSelector((s) => s.state.isPlaying)
     const currentTrack = useSelector((s) => s.state.currentTrack)
@@ -22,23 +21,10 @@ function Trackblock() {
     const filterAuthors = useSelector((s) => s.state.filterAuthors)
     const filterGenre = useSelector((s) => s.state.filterGenre)
     const filterByYear = useSelector((s) => s.state.filterYear)
-    const filterBySubstring = useSelector((s) => s.state.filterSubstring)    
-    const favoritesPlaylist  = useFavorites()
+    const filterBySubstring = useSelector((s) => s.state.filterSubstring)
+    const favoritesPlaylist = useFavorites()
     const { data: selectionPlaylist } = useGetSelectionQuery()
     const [handleClickToLike, handleClickToDizLike] = useLike()
-
-    // Блок определяет текущую страницу
-
-    const pageName =
-        location.pathname == '/'
-            ? 'Main'
-            : location.pathname == '/favorites'
-            ? 'Favorites'
-            : location.pathname == '/categories/1'
-            ? 'Classic'
-            : location.pathname == '/categories/2'
-            ? 'Electro'
-            : 'Rok'
 
     // Блок отвечает за сортировку и фильтрацию
 
@@ -84,16 +70,33 @@ function Trackblock() {
     const isFiltered = !compareArrays(playlist, finallyFilteredPlaylist)
 
     if (isFiltered) {
-        dispatch(modifiedPlaylist(finallyFilteredPlaylist))
+        dispatch(setModifiedPlaylist(finallyFilteredPlaylist))
     } else {
-        dispatch(modifiedPlaylist([]))
+        dispatch(setModifiedPlaylist(playlist))
     }
 
+    // Блок определяет текущую страницу
+
+    const pageName =
+        location.pathname == '/'
+            ? !isFiltered
+                ? 'Main'
+                : 'Filtered'
+            : location.pathname == '/favorites'
+            ? 'Favorites'
+            : location.pathname == '/categories/1'
+            ? 'Classic'
+            : location.pathname == '/categories/2'
+            ? 'Electro'
+            : 'Rok'
+            
     // Логика выбора показывемого списка
 
     const tracklist =
         pageName == 'Main'
-            ? finallyFilteredPlaylist
+            ? playlist || []
+            : pageName == 'Filtered'
+            ? finallyFilteredPlaylist || []
             : pageName == 'Favorites'
             ? favoritesPlaylist || []
             : pageName == 'Classic'

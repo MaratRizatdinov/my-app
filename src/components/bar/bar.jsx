@@ -39,7 +39,7 @@ function Bar() {
             ? selectionPlaylist[1].items
             : modeName === 'Rok'
             ? selectionPlaylist[2].items
-            : modifiedPlaylist.length !==0
+            : modeName === 'Filtered'
             ? modifiedPlaylist
             : shuffleStatus
             ? shufflePlaylist
