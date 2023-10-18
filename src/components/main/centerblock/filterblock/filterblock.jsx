@@ -17,7 +17,9 @@ function Filterblock() {
             ? 'Классическая музыка'
             : location.pathname == '/categories/2'
             ? 'Электронная музыка'
-            : 'Рок-музыка'
+            : location.pathname == '/categories/3'
+            ? 'Рок-музыка'
+            : 'Страницы не существует'
 
     const displayFilter = location.pathname == '/' ? 'flex' : 'none'
 

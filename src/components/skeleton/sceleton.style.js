@@ -2,11 +2,11 @@ import { keyframes, styled, css } from 'styled-components'
 
 const shine = keyframes`
     0%{background-position-x: 0px}
-    100% {background-position-x: 200px}    
+    100% {background-position-x: 500px}    
 }
 `
 const animationCode = css`
-    ${shine} 2.0s linear infinite;
+    ${shine} 5.0s linear infinite;
 `
 
 export const SceletonContainer = styled.div`
